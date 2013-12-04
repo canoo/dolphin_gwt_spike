@@ -1,0 +1,32 @@
+buildscript {
+	repositories {
+		maven {
+			url 'https://github.com/steffenschaefer/gwt-gradle-plugin/raw/maven-repo/'
+		}
+		mavenCentral()
+	}
+	dependencies {
+		classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.1'
+	}
+}
+
+version = 0.1
+
+apply plugin: 'war'
+apply plugin: 'gwt'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile 'org.open-dolphin:dolphin-server:0.8'
+}
+
+gwt {
+	gwtVersion='2.5.1'
+	modules 'com.canoo.dolphingwtspike.mainApplication.MainApplication'
+}
+
+
+
