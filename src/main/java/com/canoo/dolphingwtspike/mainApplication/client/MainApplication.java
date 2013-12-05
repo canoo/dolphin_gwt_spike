@@ -15,8 +15,15 @@ public class MainApplication implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		TextBox textBox = new TextBox();
+		textBox.getElement().setId("textInput");
+
+		Label label = new Label("--"); label.getElement().setId("label");
+//		Label helpLabel = new Label("Drag the slider to see the label being updated."); label.getElement().setId("label");
+
 		final Button button = new Button("Click me");
-		final Label label = new Label();
+		button.getElement().setId("logActionButton");
+//		final Label label = new Label();
 
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
@@ -30,8 +37,10 @@ public class MainApplication implements EntryPoint {
 		// to hard-code IDs.  Instead, you could, for example, search for all
 		// elements with a particular CSS class and replace them with widgets.
 		//
+		RootPanel.get("slot1").add(textBox);
+		RootPanel.get("slot1").add(label);
 		RootPanel.get("slot1").add(button);
-		RootPanel.get("slot2").add(label);
+//		RootPanel.get("slot2").add(label);
 	}
 
 	public static native void hello() /*-{

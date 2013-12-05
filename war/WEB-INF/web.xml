@@ -19,6 +19,6 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>DolphinServlet</servlet-name>
-		<url-pattern>/dolphin</url-pattern>
+		<url-pattern>/dolphin/</url-pattern>
 	</servlet-mapping>
 </web-app>
