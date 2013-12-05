@@ -3,6 +3,7 @@
 
 	<!-- Inherit the core Web Toolkit stuff.                  -->
 	<inherits name='com.google.gwt.user.User'/>
+	<inherits name="com.canoo.opendolphin.OpenDolphin"/>
 
 	<!-- Specify the app entry point class.                   -->
 	<entry-point class='com.canoo.dolphingwtspike.mainApplication.client.MainApplication'/>

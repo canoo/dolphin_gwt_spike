@@ -1,5 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
+import com.canoo.opendolphin.client.OpenDolphin;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -19,7 +20,9 @@ public class MainApplication implements EntryPoint {
 		button.addClickHandler(new ClickHandler() {
 			public void onClick(ClickEvent event) {
 //					MainApplicationService.App.getInstance().getMessage("Hello, World!", new MyAsyncCallback(label));
-				hello();
+//				hello();
+//				OpenDolphin._info("canoo");
+				OpenDolphin._info2("canoo", "other");
 			}
 		});
 

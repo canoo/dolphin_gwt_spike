@@ -28,6 +28,7 @@ dependencies {
 gwt {
 	gwtVersion='2.5.1'
 	modules 'com.canoo.dolphingwtspike.mainApplication.MainApplication'
+	modules 'com.canoo.opendolphin.OpenDolphin'
 }
 
 
