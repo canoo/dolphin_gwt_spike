@@ -11,7 +11,7 @@
 	</servlet>
 	<servlet>
 		<servlet-name>DolphinServlet</servlet-name>
-		<servlet-class>org.opendolphin.server.adapter.DolphinServlet</servlet-class>
+		<servlet-class>com.canoo.dolphingwtspike.mainApplication.server.servlet.ApplicationServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>com.canoo.dolphingwtspike.mainApplication.MainApplication MainApplicationService</servlet-name>

@@ -10,6 +10,7 @@ import org.opendolphin.server.adapter.DolphinServlet;
 public class ApplicationServlet extends DolphinServlet{
 	@Override
 	protected void registerApplicationActions(ServerDolphin serverDolphin) {
+		System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
 //		new ApplicationRegistrar().registerActions(serverDolphin);
 	}
 }
