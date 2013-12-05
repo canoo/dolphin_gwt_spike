@@ -21,6 +21,7 @@ repositories {
 
 dependencies {
 	compile 'org.open-dolphin:dolphin-server:0.8'
+	compile 'com.google.gwt:gwt-servlet:2.5.1'
 }
 
 gwt {
