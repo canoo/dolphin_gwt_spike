@@ -5,3 +5,5 @@ out/
 *.iml
 classes/
 *.log
+**/WEB-INF/lib/
+war/
