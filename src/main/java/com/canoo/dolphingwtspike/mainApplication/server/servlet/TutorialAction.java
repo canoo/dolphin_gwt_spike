@@ -24,14 +24,13 @@ public class TutorialAction extends DolphinServerAction {
 	public void registerIn(ActionRegistry actionRegistry) {
 		actionRegistry.register(CMD_ECHO, new CommandHandler<Command>() {
 			public void handleCommand(Command command, List<Command> response) {
-
 				System.out.println( getServerDolphin().listPresentationModelIds());
 
 				final ServerPresentationModel presentationModel = getServerDolphin().getAt(PM_ID_MODEL);
 				System.out.println( presentationModel);
 				final ServerAttribute attribute = presentationModel.getAt(ATTR_ID);
 				System.out.println(attribute);
-				TutorialAction.this.changeValue(attribute, "Server: ${attribute.value}");
+				TutorialAction.this.changeValue(attribute, "Server: " + attribute.getValue());
 			}
 		});
 
