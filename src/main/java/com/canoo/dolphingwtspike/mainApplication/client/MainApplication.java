@@ -63,8 +63,10 @@ public class MainApplication implements EntryPoint {
 		RootPanel.get("slot1").add(listDiv);
 
 //		Canoo._info("hallo");
-//		Dolphin.newDolphin("http://127.0.0.1:8888/dolphin/");
 //		Bla.info("bla", "from init");
+		Bla.bla("bla", "from init");
+
+//		Dolphin.newDolphin("http://127.0.0.1:8888/dolphin/");
 	}
 
 	public static native void hello() /*-{

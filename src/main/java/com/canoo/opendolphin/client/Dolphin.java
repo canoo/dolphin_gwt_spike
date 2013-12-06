@@ -13,12 +13,12 @@ public final class Dolphin extends JavaScriptObject {
 
 //		new $wnd.Dolphin('http://127.0.0.1:8888/dolphin/');
 
-//		require([
-//			'Dolphin'
-//		], function (Dolphin) {
-//
-//
-//		});
+		require([
+			'Dolphin'
+		], function (Dolphin) {
+
+
+		});
 
 		-*/;
 
