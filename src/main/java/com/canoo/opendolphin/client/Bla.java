@@ -20,7 +20,7 @@ public final class Bla extends JavaScriptObject {
 			'Dolphin'
 		], function (Dolphin) {
 
-			var dolphin = new Dolphin('http://127.0.0.1:8888/dolphin/');
+//			var dolphin = new Dolphin('http://127.0.0.1:8888/dolphin/');
 
 		});
 	}-*/;
