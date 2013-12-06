@@ -1,4 +1,4 @@
-define([
+define("ValueChangedCommand", [
     'comm/Command'
 ], function (Command) {
 

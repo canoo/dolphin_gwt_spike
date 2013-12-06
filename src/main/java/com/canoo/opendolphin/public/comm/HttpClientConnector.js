@@ -1,4 +1,4 @@
-define([
+define("HttpClientConnector", [
     '$',
     'comm/Codec',
     'comm/ClientAttribute'

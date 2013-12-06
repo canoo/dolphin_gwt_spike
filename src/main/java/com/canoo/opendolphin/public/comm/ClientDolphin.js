@@ -1,4 +1,4 @@
-define([
+define("ClientDolphin", [
     'comm/NamedCommand',
     'comm/PresentationModel'
 ], function (NamedCommand, PresentationModel) {
@@ -38,7 +38,7 @@ define([
             if (arguments.length > 2) {
                 for (var i = 2; i < arguments.length; i++) {
                     var arg = arguments[i];
-                    if (arg instanceof Array) {
+                    if (arg instanceof Array){
                         arg.forEach(function(elem) {
                             model.addAttribute(elem);
                         })

@@ -2,9 +2,9 @@ package com.canoo.opendolphin.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
-public final class OpenDolphin extends JavaScriptObject {
+public final class Canoo extends JavaScriptObject {
 
-	protected OpenDolphin() {
+	protected Canoo() {
 	}
 
 	public static native void _info(String message) /*-{

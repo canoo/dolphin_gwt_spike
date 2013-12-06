@@ -1,4 +1,4 @@
-define([
+define("ClientAttribute", [
     'comm/EventBus'
 ], function(EventBus) {
 

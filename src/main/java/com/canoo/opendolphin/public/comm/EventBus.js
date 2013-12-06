@@ -1,4 +1,4 @@
-define(function () {
+define("EventBus", function () {
 
     function EventBus() {
 
