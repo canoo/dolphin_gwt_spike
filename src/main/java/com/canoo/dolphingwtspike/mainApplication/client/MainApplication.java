@@ -1,6 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.Bla;
+import com.canoo.opendolphin.client.Dolphin;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -61,10 +61,8 @@ public class MainApplication implements EntryPoint {
 		RootPanel.get("slot1").add(listDiv);
 
 //		Canoo._info("hallo");
-//		Bla.info("bla", "from init");
-		Bla.bla("bla", "from init");
 
-//		Dolphin.newDolphin("http://127.0.0.1:8888/dolphin/");
+		Dolphin.newDolphin("http://127.0.0.1:8888/dolphin/");
 	}
 
 	public static native void hello() /*-{
