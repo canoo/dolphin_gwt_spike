@@ -1,5 +1,5 @@
 define([
-    'Command'
+    'comm/Command'
 ], function (Command) {
 
     var ValueChangedCommand = function(attributeId, oldValue, newValue) {

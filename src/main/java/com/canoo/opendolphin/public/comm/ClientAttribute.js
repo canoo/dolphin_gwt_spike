@@ -1,5 +1,5 @@
 define([
-    'EventBus'
+    'comm/EventBus'
 ], function(EventBus) {
 
     function ClientAttribute(propertyName) {

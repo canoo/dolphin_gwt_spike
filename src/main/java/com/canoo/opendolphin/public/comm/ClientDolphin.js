@@ -1,6 +1,6 @@
 define([
-    'NamedCommand',
-    'PresentationModel'
+    'comm/NamedCommand',
+    'comm/PresentationModel'
 ], function (NamedCommand, PresentationModel) {
 
     return function() {

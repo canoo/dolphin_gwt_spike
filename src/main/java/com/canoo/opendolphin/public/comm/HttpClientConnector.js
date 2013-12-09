@@ -1,7 +1,7 @@
 define( [
     '$',
-    'Codec',
-    'ClientAttribute'
+    'comm/Codec',
+    'comm/ClientAttribute'
 ], function ($, Codec, ClientAttribute) {
 
     return function(clientDolphin, serverUrl) {

@@ -32,7 +32,7 @@ public final class Bla extends JavaScriptObject {
 		});
 
 		$wnd.require([
-			'Dolphin', 'ClientAttribute', 'HttpSession'
+			'Dolphin', 'comm/ClientAttribute', 'comm/HttpSession'
 		], function (Dolphin, ClientAttribute, HttpSession) {
 			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
 			httpSession.invalidateSession();

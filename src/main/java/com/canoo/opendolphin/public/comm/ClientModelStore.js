@@ -1,6 +1,6 @@
 define([
-    'CreatePresentationModelCommand',
-    'ValueChangedCommand'
+    'comm/CreatePresentationModelCommand',
+    'comm/ValueChangedCommand'
 ], function(CreatePresentationModelCommand, ValueChangedCommand) {
 
     return function(clientDolphin) {
