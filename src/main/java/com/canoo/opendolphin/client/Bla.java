@@ -66,6 +66,29 @@ public final class Bla extends JavaScriptObject {
 				label.innerHTML = data.newValue;
 			});
 
+			// bind range input field to pm rangeAttribute and label to pm
+			var rangeInput  = $doc.getElementById("range");
+			var rangeOutput = $doc.getElementById("rangeLabel");
+			rangeInput.addEventListener("input", function () {
+				rangeAttribute.setValue(rangeInput.value);
+			});
+			rangeAttribute.on("valueChange", function (data) {
+				rangeOutput.innerHTML = data.newValue;
+			});
+
+			// send add command on button click and add a div for each received model
+			var addButton = $doc.getElementById("addButton");
+			var list      = $doc.getElementById("list");
+			addButton.addEventListener("click", function () {
+				dolphin.getClientDolphin().send("org.opendolphin.demo.Tutorial.add", function (models) {
+					console.log("NEW models", models);
+					models.forEach(function (model) {
+						var element = $doc.createElement("div");
+						element.innerHTML = model.presentationModelType + ": " + model.attributes[0].value;
+						list.appendChild(element);
+					})
+				});
+			});
 
 
 

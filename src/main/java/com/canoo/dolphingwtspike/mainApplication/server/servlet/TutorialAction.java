@@ -43,9 +43,9 @@ public class TutorialAction extends DolphinServerAction {
 		actionRegistry.register(CMD_ADD, new CommandHandler<Command>() {
 			public void handleCommand(Command command, List<Command> response) {
 				count++;
-				presentationModel("weather.$count", "weather", new DTO(
-					new Slot("temperature", String.valueOf((int) (Math.random() * 100)), "weather.${count}.temperature"),
-					new Slot("humidity",    String.valueOf((int) (Math.random() * 100)), "weather.${count}.humidity")
+				presentationModel("weather." + count, "weather", new DTO(
+					new Slot("temperature", String.valueOf((int) (Math.random() * 100)), "weather." + count + ".temperature"),
+					new Slot("humidity",    String.valueOf((int) (Math.random() * 100)), "weather." + count + ".humidity")
 				));
 			}
 		});
