@@ -1,4 +1,4 @@
-define("PresentationModel", function () {
+define(function () {
 
     function PresentationModel(id, type) {
 

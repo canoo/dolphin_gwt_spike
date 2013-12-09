@@ -1,4 +1,4 @@
-define("ClientModelStore", [
+define([
     'CreatePresentationModelCommand',
     'ValueChangedCommand'
 ], function(CreatePresentationModelCommand, ValueChangedCommand) {

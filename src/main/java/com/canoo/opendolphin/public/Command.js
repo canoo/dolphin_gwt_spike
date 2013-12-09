@@ -1,4 +1,4 @@
-define("Command", function () {
+define(function () {
 
     return function() {
 

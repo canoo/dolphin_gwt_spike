@@ -1,4 +1,4 @@
-define("NamedCommand", [
+define([
     'Command'
 ], function (Command) {
 

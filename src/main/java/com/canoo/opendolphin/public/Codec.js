@@ -1,4 +1,4 @@
-define("Codec", function () {
+define(function () {
 
     return function() {
 

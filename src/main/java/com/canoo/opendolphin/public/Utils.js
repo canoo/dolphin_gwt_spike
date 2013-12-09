@@ -1,4 +1,4 @@
-define("Utils", function () {
+define(function () {
 
     var Utils = {};
 

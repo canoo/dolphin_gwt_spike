@@ -1,4 +1,4 @@
-define("Dolphin", [
+define([
     'ClientDolphin',
     'ClientModelStore',
     'HttpClientConnector'

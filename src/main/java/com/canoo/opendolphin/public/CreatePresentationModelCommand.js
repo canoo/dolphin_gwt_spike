@@ -1,4 +1,4 @@
-define("CreatePresentationModelCommand", [
+define([
     'Command'
 ], function (Command) {
 
