@@ -1,6 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.DolphinAPI;
+import com.canoo.opendolphin.client.DolphinMain2;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
 
@@ -44,19 +45,7 @@ public class MainApplication implements EntryPoint {
 		RootPanel.get("slot1").add(addServerDataButton);
 		RootPanel.get("slot1").add(listDiv);
 
-//		Canoo._info("hallo");
-
-		DolphinAPI.initializeConfig();
-//		DolphinAPI.newDolphin("http://127.0.0.1:8888/dolphin/", DolphinAPI.bla());
-		DolphinAPI.newDolphin("http://127.0.0.1:8888/dolphin/",
-			DolphinAPI.clientAttribute(
-				DolphinAPI.newAttribute("attrId")
-			)
-		);
-
-
-//		System.out.println("dolphinJS = " + dolphinJS);
-//		Dolphin.newDolphin(dolphinJS);
+		DolphinMain2.start(DolphinMain2.init());
 	}
 
 }
