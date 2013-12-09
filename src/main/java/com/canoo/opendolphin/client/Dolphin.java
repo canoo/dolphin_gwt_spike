@@ -7,33 +7,12 @@ public final class Dolphin extends JavaScriptObject {
 	protected Dolphin() {
 	}
 
-	public final static native void newDolphin(String url) /*-{
-		$wnd.require.config({
-			baseUrl: 'com.canoo.opendolphin.OpenDolphin',
-			paths: {
-				jquery : 'jquery'
-			},
-
-			shim: {
-				'jquery': {
-					exports: '$'
-				}
-			},
-
-			map : {
-				'*': {
-					$ : 'jquery'
-				}
-			}
-		});
-
+	public final static native JavaScriptObject newDolphin(JavaScriptObject dolphinJS) /*-{
 		$wnd.require([
-			'Dolphin', 'comm/ClientAttribute', 'comm/HttpSession'
-		], function (Dolphin, ClientAttribute, HttpSession) {
-			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
-			httpSession.invalidateSession();
+			'comm/ClientAttribute'
+		], function (ClientAttribute) {
 
-			var dolphin = new Dolphin('http://127.0.0.1:8888/dolphin/');
+			var dolphin = dolphinJS;
 
 			// create named PM with attribute on the client side
 			var textAttribute  = new ClientAttribute("attrId");

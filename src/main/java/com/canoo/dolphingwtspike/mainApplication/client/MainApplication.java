@@ -1,11 +1,8 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.Dolphin;
+import com.canoo.opendolphin.client.DolphinAPI;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -49,7 +46,17 @@ public class MainApplication implements EntryPoint {
 
 //		Canoo._info("hallo");
 
-		Dolphin.newDolphin("http://127.0.0.1:8888/dolphin/");
+		DolphinAPI.initializeConfig();
+//		DolphinAPI.newDolphin("http://127.0.0.1:8888/dolphin/", DolphinAPI.bla());
+		DolphinAPI.newDolphin("http://127.0.0.1:8888/dolphin/",
+			DolphinAPI.clientAttribute(
+				DolphinAPI.newAttribute("attrId")
+			)
+		);
+
+
+//		System.out.println("dolphinJS = " + dolphinJS);
+//		Dolphin.newDolphin(dolphinJS);
 	}
 
 }
