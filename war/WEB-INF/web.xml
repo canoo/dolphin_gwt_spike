@@ -13,6 +13,10 @@
 		<servlet-name>DolphinServlet</servlet-name>
 		<servlet-class>com.canoo.dolphingwtspike.mainApplication.server.servlet.ApplicationServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>InvalidateSessionServlet</servlet-name>
+		<servlet-class>com.canoo.dolphingwtspike.mainApplication.server.servlet.InvalidateSessionServlet</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>com.canoo.dolphingwtspike.mainApplication.MainApplication MainApplicationService</servlet-name>
 		<url-pattern>/MainApplication/MainApplicationService</url-pattern>
@@ -20,5 +24,9 @@
 	<servlet-mapping>
 		<servlet-name>DolphinServlet</servlet-name>
 		<url-pattern>/dolphin/</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>InvalidateSessionServlet</servlet-name>
+		<url-pattern>/invalidatesession</url-pattern>
 	</servlet-mapping>
 </web-app>

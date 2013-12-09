@@ -1,8 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.Bla;
-import com.canoo.opendolphin.client.Canoo;
-import com.canoo.opendolphin.client.Dolphin;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.rpc.AsyncCallback;

@@ -1,4 +1,4 @@
-define("ClientDolphin", [
+define([
     'NamedCommand',
     'PresentationModel'
 ], function (NamedCommand, PresentationModel) {

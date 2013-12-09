@@ -32,8 +32,11 @@ public final class Bla extends JavaScriptObject {
 		});
 
 		$wnd.require([
-			'Dolphin', 'ClientAttribute'
-		], function (Dolphin, ClientAttribute) {
+			'Dolphin', 'ClientAttribute', 'HttpSession'
+		], function (Dolphin, ClientAttribute, HttpSession) {
+			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
+			httpSession.invalidateSession();
+
 			var dolphin = new Dolphin('http://127.0.0.1:8888/dolphin/');
 
 			// create named PM with attribute on the client side
