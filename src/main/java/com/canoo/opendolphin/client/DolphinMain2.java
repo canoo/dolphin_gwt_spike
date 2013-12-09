@@ -36,12 +36,20 @@ public class DolphinMain2 {
 
 	}-*/;
 
+	public static void javaMethod(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
+		System.out.println("com.canoo.opendolphin.client.DolphinMain2.javaMethod");
+		System.out.println("Dolphin = " + Dolphin);
+		System.out.println("ClientAttribute = " + ClientAttribute);
+	}
+
 	public final static native JavaScriptObject init() /*-{
 		return function (Dolphin, ClientAttribute, HttpSession) {
 			console.log("DolphinMain2.init, dolphin: " + Dolphin);
 
 			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
 			httpSession.invalidateSession();
+
+			@com.canoo.opendolphin.client.DolphinMain2::javaMethod(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
 
 			var dolphin = new Dolphin("http://127.0.0.1:8888/dolphin/");
 
