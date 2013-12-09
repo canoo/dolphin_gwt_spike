@@ -1,5 +1,5 @@
 define("NamedCommand", [
-    'comm/Command'
+    'Command'
 ], function (Command) {
 
     var NamedCommand = function(name) {

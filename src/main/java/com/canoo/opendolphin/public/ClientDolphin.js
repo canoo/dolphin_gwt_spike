@@ -1,6 +1,6 @@
 define("ClientDolphin", [
-    'comm/NamedCommand',
-    'comm/PresentationModel'
+    'NamedCommand',
+    'PresentationModel'
 ], function (NamedCommand, PresentationModel) {
 
     return function() {

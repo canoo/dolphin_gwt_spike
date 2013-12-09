@@ -1,5 +1,5 @@
 define("CreatePresentationModelCommand", [
-    'comm/Command'
+    'Command'
 ], function (Command) {
 
     var CreatePresentationModelCommand = function(model) {

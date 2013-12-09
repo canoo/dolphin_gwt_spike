@@ -1,6 +1,6 @@
 define("ClientModelStore", [
-    'comm/CreatePresentationModelCommand',
-    'comm/ValueChangedCommand'
+    'CreatePresentationModelCommand',
+    'ValueChangedCommand'
 ], function(CreatePresentationModelCommand, ValueChangedCommand) {
 
     return function(clientDolphin) {

@@ -1,7 +1,7 @@
-define("HttpClientConnector", [
+define( [
     '$',
-    'comm/Codec',
-    'comm/ClientAttribute'
+    'Codec',
+    'ClientAttribute'
 ], function ($, Codec, ClientAttribute) {
 
     return function(clientDolphin, serverUrl) {

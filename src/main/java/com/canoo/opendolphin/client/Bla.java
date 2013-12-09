@@ -13,15 +13,34 @@ public final class Bla extends JavaScriptObject {
 
 	public static native void bla(String message, String otherarg) /*-{
 		$wnd.require.config({
-			baseUrl: 'MainApplication'
+			baseUrl: 'MainApplication',
+			paths: {
+				jquery : '../libs/jquery'
+			},
+
+			shim: {
+				'jquery': {
+					exports: '$'
+				}
+			},
+
+			map : {
+				'*': {
+					$ : 'jquery'
+				}
+			}
 		});
 
 		$wnd.require([
-			'Dolphin'
-		], function (Dolphin) {
+			'Dolphin', 'ClientAttribute'
+		], function (Dolphin, ClientAttribute) {
+			var dolphin = new Dolphin('http://127.0.0.1:8888/dolphin/');
 
-//			var dolphin = new Dolphin('http://127.0.0.1:8888/dolphin/');
+			// create named PM with attribute on the client side
+			var textAttribute  = new ClientAttribute("attrId");
 
 		});
+
+
 	}-*/;
 }
