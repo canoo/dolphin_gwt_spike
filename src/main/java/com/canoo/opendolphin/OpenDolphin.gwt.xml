@@ -7,26 +7,7 @@
 	<script src="require.js"/>
 	<!--<script src="config.js"/>-->
 	<script src="canoo.js"/>
-	<script src="bla.js"/>
 
-<!--
-	<script src="comm/EventBus.js"/>
-	<script src="comm/ClientAttribute.js"/>
-	<script src="comm/ClientDolphin.js"/>
-	<script src="comm/ClientModelStore.js"/>
-	<script src="comm/HttpClientConnector.js"/>
-	<script src="comm/Codec.js"/>
-	<script src="comm/Command.js"/>
-	<script src="comm/CreatePresentationModelCommand.js"/>
-	<script src="comm/NamedCommand.js"/>
-	<script src="comm/PresentationModel.js"/>
-	<script src="comm/Utils.js"/>
-	<script src="comm/ValueChangedCommand.js"/>
--->
 	<!--<script src="Dolphin.js"/>-->
-
-	<!--
-
-	-->
 
 </module>

@@ -9,9 +9,9 @@ public final class Dolphin extends JavaScriptObject {
 
 	public final static native void newDolphin(String url) /*-{
 		$wnd.require.config({
-			baseUrl: 'MainApplication',
+			baseUrl: 'com.canoo.opendolphin.OpenDolphin',
 			paths: {
-				jquery : '../libs/jquery'
+				jquery : 'jquery'
 			},
 
 			shim: {
