@@ -43,8 +43,8 @@ public class DolphinMain2 {
 		System.out.println("Dolphin = " + Dolphin);
 		System.out.println("ClientAttribute = " + ClientAttribute);
 		JavaScriptObject dolphin = newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
-		JavaScriptObject pms = initializePresentationModels(dolphin, ClientAttribute);
-		bindGUIToPMs(dolphin, pms);
+		initializePresentationModels(dolphin, ClientAttribute);
+		bindGUIToPMs(dolphin);
 	}
 
 	public static JsArray attributesJS(JavaScriptObject...attributes) {
@@ -67,28 +67,23 @@ public class DolphinMain2 {
 
 	}-*/;
 
-	public static JavaScriptObject initializePresentationModels(JavaScriptObject dolphin, JavaScriptObject ClientAttribute) {
+	public static void initializePresentationModels(JavaScriptObject dolphin, JavaScriptObject ClientAttribute) {
 		// create named PM with attribute on the client side
-		JsArray attributes = attributesJS(newAttribute(ClientAttribute, "attrId"), newAttribute(ClientAttribute, "range"));
-		JavaScriptObject pm = newPresentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", attributes);
-		return initializePresentationModelsJS(dolphin, attributes.get(0), attributes.get(1), pm);
+		newPresentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", attributesJS(newAttribute(ClientAttribute, "attrId"), newAttribute(ClientAttribute, "range")));
 	}
 
-	public static native JavaScriptObject initializePresentationModelsJS(JavaScriptObject dolphin, JavaScriptObject textAttribute, JavaScriptObject rangeAttribute, JavaScriptObject pm1) /*-{
-
-		return {
-			textAttribute: textAttribute,
-			rangeAttribute: rangeAttribute,
-			pm: pm1
-		}
-	}-*/;
 	public static native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
 		return new ClientAttribute(attributeId);
 	}-*/;
 
-	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin, JavaScriptObject pms) /*-{
-		var textAttribute  = pms.textAttribute;
-		var rangeAttribute = pms.rangeAttribute;
+	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
+		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
+		var textAttribute = clientModelStore.findAttributesByFilter(function (attr) {
+			return (attr.propertyName == "attrId")
+		})[0];
+		var rangeAttribute = clientModelStore.findAttributesByFilter(function (attr) {
+			return (attr.propertyName == "range")
+		})[0];
 
 		// send echo command on button click
 		var logActionButton = $doc.getElementById("logActionButton");
