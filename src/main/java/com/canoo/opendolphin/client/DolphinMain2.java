@@ -84,9 +84,6 @@ public class DolphinMain2 {
 
 	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
-//		var textAttribute = clientModelStore.findAttributesByFilter(function (attr) {
-//			return (attr.propertyName == "attrId")
-//		})[0];
 		var rangeAttribute = clientModelStore.findAttributesByFilter(function (attr) {
 			return (attr.propertyName == "range")
 		})[0];
@@ -96,21 +93,6 @@ public class DolphinMain2 {
 		logActionButton.addEventListener("click", function () {
 			dolphin.getClientDolphin().send("org.opendolphin.demo.Tutorial.echo");
 		});
-
-		// bind text input field to pm textAttribute bidirectionally
-//		var textInput = $doc.getElementById("textInput");
-//		textInput.addEventListener("input", function () {
-//			textAttribute.setValue(textInput.value);
-//		});
-//		textAttribute.on("valueChange", function (data) {
-//			textInput.value = data.newValue;
-//		});
-
-		// bind label to textAttribute
-//		var label = $doc.getElementById("label");
-//		textAttribute.on("valueChange", function (data) {
-//			label.innerHTML = data.newValue;
-//		});
 
 		// bind range input field to pm rangeAttribute and label to pm
 		var rangeInput  = $doc.getElementById("range");
