@@ -2,6 +2,7 @@
 package com.canoo.opendolphin.client;
 
 import com.canoo.dolphingwtspike.mainApplication.client.AttributeValueChangeHandler;
+import com.canoo.dolphingwtspike.mainApplication.client.DolphinStarter;
 import com.canoo.dolphingwtspike.mainApplication.client.MainApplication;
 import com.canoo.dolphingwtspike.mainApplication.client.OnFinishedHandler;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -9,8 +10,8 @@ import com.google.gwt.core.client.JsArray;
 
 public class DolphinMain2 {
 
-	public final static native JavaScriptObject boot(MainApplication view, JavaScriptObject next) /*-{
-		console.log("DolphinMain2.start: entered");
+	public final static native JavaScriptObject boot(DolphinStarter dolphinStarter) /*-{
+		console.log("DolphinMain2.boot: entered");
 		$wnd.require.config({
 			baseUrl: 'com.canoo.opendolphin.OpenDolphin',
 			paths: {
@@ -34,10 +35,12 @@ public class DolphinMain2 {
 			'Dolphin', 'comm/ClientAttribute', 'comm/HttpSession'
 		], function (Dolphin, ClientAttribute, HttpSession) {
 			console.log("DolphinMain2.start: in callback");
-			next(Dolphin, ClientAttribute, HttpSession, view);
+			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
+			httpSession.invalidateSession();
+			dolphinStarter.@com.canoo.dolphingwtspike.mainApplication.client.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
 		});
 
-		console.log("DolphinMain2.start: returning");
+		console.log("DolphinMain2.boot: returning");
 
 	}-*/;
 

@@ -25,31 +25,21 @@ public class MainApplication implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		DolphinMain2.boot(this, MainApplication.init());
+		DolphinMain2.boot(new DolphinStarter() {
+			@Override
+			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
+				MainApplication.this.start(Dolphin, ClientAttribute);
+			}
+		});
 	}
 
-	public final static native JavaScriptObject init() /*-{
-		return function (Dolphin, ClientAttribute, HttpSession, view) {
-			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
-			httpSession.invalidateSession();
-
-			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
-
-		};
-
-	}-*/;
-
-	public static void initializePresentationModels(JavaScriptObject dolphin, JavaScriptObject ClientAttribute) {
+	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
+		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		// create named PM with attribute on the client side
 		DolphinMain2.newPresentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId",
 			DolphinMain2.attributesJS(DolphinMain2.newAttribute(ClientAttribute, "attrId"),
 			DolphinMain2.newAttribute(ClientAttribute, "range"))
 		);
-	}
-
-	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
-		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
-		initializePresentationModels(dolphin, ClientAttribute);
 
 		final JavaScriptObject textAttribute = DolphinMain2.getAttribute(dolphin, "attrId");
 		final JavaScriptObject rangeAttribute = DolphinMain2.getAttribute(dolphin, "range");
