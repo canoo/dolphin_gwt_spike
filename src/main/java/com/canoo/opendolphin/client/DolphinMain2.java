@@ -1,6 +1,8 @@
+
 package com.canoo.opendolphin.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 public class DolphinMain2 {
 
@@ -42,31 +44,49 @@ public class DolphinMain2 {
 		System.out.println("ClientAttribute = " + ClientAttribute);
 		JavaScriptObject dolphin = newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		JavaScriptObject pms = initializePresentationModels(dolphin, ClientAttribute);
-		bindGUIToPMs(dolphin, pms, ClientAttribute);
+		bindGUIToPMs(dolphin, pms);
+	}
+
+	public static JsArray attributesJS(JavaScriptObject...attributes) {
+		JsArray result = JavaScriptObject.createArray().cast();
+		for (JavaScriptObject attribute : attributes) {
+			result.push(attribute);
+		}
+		return result;
 	}
 
 	public static native JavaScriptObject newDolphin(JavaScriptObject Dolphin, String url) /*-{
 		return new Dolphin(url);
 	}-*/;
 
-	public static native JavaScriptObject initializePresentationModels(JavaScriptObject dolphin, JavaScriptObject ClientAttribute) /*-{
-		// create named PM with attribute on the client side
-		var textAttribute  = new ClientAttribute("attrId");
-		var rangeAttribute = new ClientAttribute("range");
-		console.log("INIT PM");
-		var pm = dolphin.getClientDolphin().presentationModel(
-			"org.opendolphin.demo.Tutorial.modelId", undefined,
-			textAttribute, rangeAttribute
+	public static native JavaScriptObject newPresentationModel(JavaScriptObject dolphin, String pmId, JsArray<JavaScriptObject> javaScriptObjects) /*-{
+
+		return dolphin.getClientDolphin().presentationModel(
+			pmId, undefined, javaScriptObjects
 		);
+
+	}-*/;
+
+	public static JavaScriptObject initializePresentationModels(JavaScriptObject dolphin, JavaScriptObject ClientAttribute) {
+		// create named PM with attribute on the client side
+		JsArray attributes = attributesJS(newAttribute(ClientAttribute, "attrId"), newAttribute(ClientAttribute, "range"));
+		JavaScriptObject pm = newPresentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", attributes);
+		return initializePresentationModelsJS(dolphin, attributes.get(0), attributes.get(1), pm);
+	}
+
+	public static native JavaScriptObject initializePresentationModelsJS(JavaScriptObject dolphin, JavaScriptObject textAttribute, JavaScriptObject rangeAttribute, JavaScriptObject pm1) /*-{
 
 		return {
 			textAttribute: textAttribute,
 			rangeAttribute: rangeAttribute,
-			pm: pm
+			pm: pm1
 		}
 	}-*/;
+	public static native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
+		return new ClientAttribute(attributeId);
+	}-*/;
 
-	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin, JavaScriptObject pms, JavaScriptObject ClientAttribute) /*-{
+	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin, JavaScriptObject pms) /*-{
 		var textAttribute  = pms.textAttribute;
 		var rangeAttribute = pms.rangeAttribute;
 
@@ -118,8 +138,6 @@ public class DolphinMain2 {
 
 	public final static native JavaScriptObject init() /*-{
 		return function (Dolphin, ClientAttribute, HttpSession) {
-			console.log("DolphinMain2.init, dolphin: " + Dolphin);
-
 			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
 			httpSession.invalidateSession();
 
