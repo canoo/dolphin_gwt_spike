@@ -44,6 +44,7 @@ public class DolphinMain2 {
 		System.out.println("ClientAttribute = " + ClientAttribute);
 		JavaScriptObject dolphin = newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		initializePresentationModels(dolphin, ClientAttribute);
+		addEventHandler("textInput");
 		bindGUIToPMs(dolphin);
 	}
 
@@ -75,6 +76,29 @@ public class DolphinMain2 {
 	public static native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
 		return new ClientAttribute(attributeId);
 	}-*/;
+
+	public static native JavaScriptObject getClientModelStoreAttribute(String attributeId) /*-{
+		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
+		return clientModelStore.findAttributesByFilter(function (attr) {
+			return (attr.propertyName == attributeId)
+		})[0];
+	}-*/;
+
+	public static native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
+		attribute.setValue(value);
+	}-*/;
+
+	public static void addEventHandler(String elementId){
+//		Element element = DOM.getElementById(elementId);
+//
+//		final TextBox textBox = RootPanel.get(elementId);
+//		final TextBox textBox = TextBox.wrap(element);
+//		textBox.addChangeHandler(new ChangeHandler() {
+//			public void onChange(final ChangeEvent event) {
+//				setAttributeValue(getClientModelStoreAttribute("attrId"),textBox.getValue());
+//			}
+//		});
+	}
 
 	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
