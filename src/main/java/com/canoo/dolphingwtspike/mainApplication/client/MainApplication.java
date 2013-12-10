@@ -1,12 +1,13 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.DolphinMain2;
+import com.canoo.opendolphin.client.PresentationModelJS;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -18,6 +19,7 @@ public class MainApplication implements EntryPoint {
 	TextBox textBox;
 	TextBox range;
 	Label rangeLabel;
+	VerticalPanel listDiv;
 
 	public final static native JavaScriptObject init() /*-{
 		return function (Dolphin, ClientAttribute, HttpSession, view) {
@@ -45,6 +47,13 @@ public class MainApplication implements EntryPoint {
 	public void handleRangeChanged(String value) {
 		rangeLabel.setText(value);
 	}
+	public void handlePresentationModels(JsArray<PresentationModelJS> models) {
+		for (int i = 0; i < models.length(); i++) {
+			PresentationModelJS pm = models.get(i);
+			listDiv.add(new Label(pm.getPresentationModelType() + ": " + pm.getClientAttributes().get(0).getValue()));
+		}
+	}
+
 	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
 		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		initializePresentationModels(dolphin, ClientAttribute);
@@ -85,7 +94,7 @@ public class MainApplication implements EntryPoint {
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
 		final Button addServerDataButton = new Button("Add Server Data"); addServerDataButton.getElement().setId("addButton");
 
-		VerticalPanel listDiv = new VerticalPanel(); listDiv.getElement().setId("list");
+		listDiv = new VerticalPanel(); listDiv.getElement().setId("list");
 
 
 		// Assume that the host HTML has elements defined whose
@@ -105,7 +114,7 @@ public class MainApplication implements EntryPoint {
 		RootPanel.get("slot1").add(addServerDataButton);
 		RootPanel.get("slot1").add(listDiv);
 
-		DolphinMain2.bindGUIToPMs(dolphin);
+		DolphinMain2.bindGUIToPMs(this, dolphin);
 
 	}
 
