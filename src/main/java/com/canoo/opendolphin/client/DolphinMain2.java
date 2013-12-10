@@ -81,12 +81,15 @@ public class DolphinMain2 {
 			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handleAttributeChange(Ljava/lang/String;)(data.newValue);
 		});
 	}-*/;
+	public static native JavaScriptObject addRangeChangedHandler(MainApplication view, JavaScriptObject attribute) /*-{
+		attribute.on("valueChange", function (data) {
+			console.log("value CHANGE");
+
+			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handleRangeChanged(Ljava/lang/String;)(data.newValue);
+		});
+	}-*/;
 
 	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
-		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
-		var rangeAttribute = clientModelStore.findAttributesByFilter(function (attr) {
-			return (attr.propertyName == "range")
-		})[0];
 
 		// send echo command on button click
 		var logActionButton = $doc.getElementById("logActionButton");
@@ -94,15 +97,6 @@ public class DolphinMain2 {
 			dolphin.getClientDolphin().send("org.opendolphin.demo.Tutorial.echo");
 		});
 
-		// bind range input field to pm rangeAttribute and label to pm
-		var rangeInput  = $doc.getElementById("range");
-		var rangeOutput = $doc.getElementById("rangeLabel");
-		rangeInput.addEventListener("input", function () {
-			rangeAttribute.setValue(rangeInput.value);
-		});
-		rangeAttribute.on("valueChange", function (data) {
-			rangeOutput.innerHTML = data.newValue;
-		});
 
 		// send add command on button click and add a div for each received model
 		var addButton = $doc.getElementById("addButton");

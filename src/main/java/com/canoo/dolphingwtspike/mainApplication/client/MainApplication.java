@@ -4,6 +4,9 @@ import com.canoo.opendolphin.client.DolphinMain2;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -13,6 +16,8 @@ public class MainApplication implements EntryPoint {
 
 	Label label;
 	TextBox textBox;
+	TextBox range;
+	Label rangeLabel;
 
 	public final static native JavaScriptObject init() /*-{
 		return function (Dolphin, ClientAttribute, HttpSession, view) {
@@ -37,25 +42,39 @@ public class MainApplication implements EntryPoint {
 		label.setText(value);
 		textBox.setText(value);
 	}
+	public void handleRangeChanged(String value) {
+		rangeLabel.setText(value);
+	}
 	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
 		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		initializePresentationModels(dolphin, ClientAttribute);
 
 		final JavaScriptObject textAttribute = DolphinMain2.getAttribute(dolphin, "attrId");
+		final JavaScriptObject rangeAttribute = DolphinMain2.getAttribute(dolphin, "range");
 
-		textBox = new TextBox(); textBox.getElement().setId("textInput");
+		textBox = new TextBox();
 		textBox.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(final KeyUpEvent event) {
 				DolphinMain2.setAttributeValue(textAttribute, textBox.getText());
 			}
 		});
+		// bind 'textBox' to 'textAttribute' bidirectionally
+		// bind 'label' to 'textAttribute':
 		DolphinMain2.addValueChangedHandler(this, textAttribute);
 
-		label = new Label("--"); label.getElement().setId("label");
+		label = new Label("--");
 		final Button serverModificationButton = new Button("Server Modification"); serverModificationButton.getElement().setId("logActionButton");
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
-		TextBox range = new TextBox(); range.getElement().setAttribute("type", "range"); range.getElement().setId("range");
-		Label rangeLabel = new Label("--"); rangeLabel.getElement().setId("rangeLabel");
+
+		// bind range input field to pm rangeAttribute and label to pm
+		range = new TextBox(); range.getElement().setAttribute("type", "range");
+		range.addValueChangeHandler(new ValueChangeHandler<String>() {
+			public void onValueChange(final ValueChangeEvent<String> event) {
+				DolphinMain2.setAttributeValue(rangeAttribute, event.getValue());
+			}
+		});
+		rangeLabel = new Label("--");
+		DolphinMain2.addRangeChangedHandler(this, rangeAttribute);
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
 		final Button addServerDataButton = new Button("Add Server Data"); addServerDataButton.getElement().setId("addButton");
