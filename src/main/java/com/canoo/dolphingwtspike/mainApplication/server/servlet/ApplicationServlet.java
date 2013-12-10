@@ -19,6 +19,12 @@ public class ApplicationServlet extends DolphinServlet {
 	}
 
 	@Override
+	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
+		resp.addHeader("Cache-Control", "no-cache");
+		super.doPost(req, resp);
+	}
+
+	@Override
 	protected void registerApplicationActions(ServerDolphin serverDolphin) {
 		serverDolphin.registerDefaultActions();
 		serverDolphin.register(new TutorialAction());
