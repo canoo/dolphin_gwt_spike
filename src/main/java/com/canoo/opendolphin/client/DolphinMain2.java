@@ -6,7 +6,7 @@ import com.google.gwt.core.client.JsArray;
 
 public class DolphinMain2 {
 
-	public final static native JavaScriptObject start(JavaScriptObject next) /*-{
+	public final static native JavaScriptObject boot(JavaScriptObject next) /*-{
 		console.log("DolphinMain2.start: entered");
 		$wnd.require.config({
 			baseUrl: 'com.canoo.opendolphin.OpenDolphin',
@@ -38,16 +38,6 @@ public class DolphinMain2 {
 
 	}-*/;
 
-	public static void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
-		System.out.println("com.canoo.opendolphin.client.DolphinMain2.javaMethod");
-		System.out.println("Dolphin = " + Dolphin);
-		System.out.println("ClientAttribute = " + ClientAttribute);
-		JavaScriptObject dolphin = newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
-		initializePresentationModels(dolphin, ClientAttribute);
-		addEventHandler("textInput");
-		bindGUIToPMs(dolphin);
-	}
-
 	public static JsArray attributesJS(JavaScriptObject...attributes) {
 		JsArray result = JavaScriptObject.createArray().cast();
 		for (JavaScriptObject attribute : attributes) {
@@ -68,16 +58,11 @@ public class DolphinMain2 {
 
 	}-*/;
 
-	public static void initializePresentationModels(JavaScriptObject dolphin, JavaScriptObject ClientAttribute) {
-		// create named PM with attribute on the client side
-		newPresentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", attributesJS(newAttribute(ClientAttribute, "attrId"), newAttribute(ClientAttribute, "range")));
-	}
-
 	public static native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
 		return new ClientAttribute(attributeId);
 	}-*/;
 
-	public static native JavaScriptObject getClientModelStoreAttribute(String attributeId) /*-{
+	public static native JavaScriptObject getClientModelStoreAttribute(JavaScriptObject dolphin, String attributeId) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
 		return clientModelStore.findAttributesByFilter(function (attr) {
 			return (attr.propertyName == attributeId)
@@ -87,18 +72,6 @@ public class DolphinMain2 {
 	public static native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
 		attribute.setValue(value);
 	}-*/;
-
-	public static void addEventHandler(String elementId){
-//		Element element = DOM.getElementById(elementId);
-//
-//		final TextBox textBox = RootPanel.get(elementId);
-//		final TextBox textBox = TextBox.wrap(element);
-//		textBox.addChangeHandler(new ChangeHandler() {
-//			public void onChange(final ChangeEvent event) {
-//				setAttributeValue(getClientModelStoreAttribute("attrId"),textBox.getValue());
-//			}
-//		});
-	}
 
 	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
@@ -117,9 +90,9 @@ public class DolphinMain2 {
 
 		// bind text input field to pm textAttribute bidirectionally
 		var textInput = $doc.getElementById("textInput");
-		textInput.addEventListener("input", function () {
-			textAttribute.setValue(textInput.value);
-		});
+//		textInput.addEventListener("input", function () {
+//			textAttribute.setValue(textInput.value);
+//		});
 		textAttribute.on("valueChange", function (data) {
 			textInput.value = data.newValue;
 		});
@@ -155,15 +128,5 @@ public class DolphinMain2 {
 		});
 	}-*/;
 
-	public final static native JavaScriptObject init() /*-{
-		return function (Dolphin, ClientAttribute, HttpSession) {
-			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
-			httpSession.invalidateSession();
-
-			@com.canoo.opendolphin.client.DolphinMain2::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
-
-		};
-
-	}-*/;
 
 }
