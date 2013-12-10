@@ -73,6 +73,9 @@ public class DolphinMain2 {
 	public static native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
 		attribute.setValue(value);
 	}-*/;
+	public static native JavaScriptObject send(JavaScriptObject dolphin, String commandName) /*-{
+		dolphin.getClientDolphin().send(commandName);
+	}-*/;
 
 	public static native JavaScriptObject addValueChangedHandler(MainApplication view, JavaScriptObject attribute) /*-{
 		attribute.on("valueChange", function (data) {
@@ -90,13 +93,6 @@ public class DolphinMain2 {
 	}-*/;
 
 	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
-
-		// send echo command on button click
-		var logActionButton = $doc.getElementById("logActionButton");
-		logActionButton.addEventListener("click", function () {
-			dolphin.getClientDolphin().send("org.opendolphin.demo.Tutorial.echo");
-		});
-
 
 		// send add command on button click and add a div for each received model
 		var addButton = $doc.getElementById("addButton");

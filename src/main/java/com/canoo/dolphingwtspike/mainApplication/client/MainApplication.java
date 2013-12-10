@@ -63,7 +63,13 @@ public class MainApplication implements EntryPoint {
 		DolphinMain2.addValueChangedHandler(this, textAttribute);
 
 		label = new Label("--");
+		// send echo command on button click:
 		final Button serverModificationButton = new Button("Server Modification"); serverModificationButton.getElement().setId("logActionButton");
+		serverModificationButton.addClickHandler(new ClickHandler() {
+			public void onClick(final ClickEvent event) {
+				DolphinMain2.send(dolphin, "org.opendolphin.demo.Tutorial.echo");
+			}
+		});
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
 
 		// bind range input field to pm rangeAttribute and label to pm
