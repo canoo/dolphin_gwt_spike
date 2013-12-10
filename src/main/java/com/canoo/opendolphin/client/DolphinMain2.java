@@ -77,6 +77,12 @@ public class DolphinMain2 {
 		dolphin.getClientDolphin().send(commandName);
 	}-*/;
 
+	public static native JavaScriptObject send2(MainApplication view, JavaScriptObject dolphin, String commandName) /*-{
+		dolphin.getClientDolphin().send(commandName, function (models) {
+			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(models);
+		});
+	}-*/;
+
 	public static native JavaScriptObject addValueChangedHandler(MainApplication view, JavaScriptObject attribute) /*-{
 		attribute.on("valueChange", function (data) {
 			console.log("value CHANGE");
@@ -89,18 +95,6 @@ public class DolphinMain2 {
 			console.log("value CHANGE");
 
 			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handleRangeChanged(Ljava/lang/String;)(data.newValue);
-		});
-	}-*/;
-
-	public static native JavaScriptObject bindGUIToPMs(MainApplication view, JavaScriptObject dolphin) /*-{
-
-		// send add command on button click and add a div for each received model
-		var addButton = $doc.getElementById("addButton");
-		var list      = $doc.getElementById("list");
-		addButton.addEventListener("click", function () {
-			dolphin.getClientDolphin().send("org.opendolphin.demo.Tutorial.add", function (models) {
-				view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(models);
-			});
 		});
 	}-*/;
 

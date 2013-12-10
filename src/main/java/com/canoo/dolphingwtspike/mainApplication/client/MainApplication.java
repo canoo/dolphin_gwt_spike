@@ -73,7 +73,7 @@ public class MainApplication implements EntryPoint {
 
 		label = new Label("--");
 		// send echo command on button click:
-		final Button serverModificationButton = new Button("Server Modification"); serverModificationButton.getElement().setId("logActionButton");
+		final Button serverModificationButton = new Button("Server Modification");
 		serverModificationButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 				DolphinMain2.send(dolphin, "org.opendolphin.demo.Tutorial.echo");
@@ -92,9 +92,14 @@ public class MainApplication implements EntryPoint {
 		DolphinMain2.addRangeChangedHandler(this, rangeAttribute);
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
-		final Button addServerDataButton = new Button("Add Server Data"); addServerDataButton.getElement().setId("addButton");
+		final Button addServerDataButton = new Button("Add Server Data");
+		addServerDataButton.addClickHandler(new ClickHandler() {
+			public void onClick(final ClickEvent event) {
+				DolphinMain2.send2(MainApplication.this, dolphin, "org.opendolphin.demo.Tutorial.add");
+			}
+		});
 
-		listDiv = new VerticalPanel(); listDiv.getElement().setId("list");
+		listDiv = new VerticalPanel();
 
 
 		// Assume that the host HTML has elements defined whose
@@ -113,9 +118,6 @@ public class MainApplication implements EntryPoint {
 		RootPanel.get("slot1").add(help2Label);
 		RootPanel.get("slot1").add(addServerDataButton);
 		RootPanel.get("slot1").add(listDiv);
-
-		DolphinMain2.bindGUIToPMs(this, dolphin);
-
 	}
 
 	/**
