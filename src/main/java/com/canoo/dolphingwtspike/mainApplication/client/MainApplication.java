@@ -21,6 +21,13 @@ public class MainApplication implements EntryPoint {
 	Label rangeLabel;
 	VerticalPanel listDiv;
 
+	/**
+	 * This is the entry point method.
+	 */
+	public void onModuleLoad() {
+		DolphinMain2.boot(this, MainApplication.init());
+	}
+
 	public final static native JavaScriptObject init() /*-{
 		return function (Dolphin, ClientAttribute, HttpSession, view) {
 			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
@@ -118,16 +125,6 @@ public class MainApplication implements EntryPoint {
 		RootPanel.get("slot1").add(help2Label);
 		RootPanel.get("slot1").add(addServerDataButton);
 		RootPanel.get("slot1").add(listDiv);
-	}
-
-	/**
-	 * This is the entry point method.
-	 */
-	public void onModuleLoad() {
-		DolphinMain2.boot(this, MainApplication.init());
-
-
-
 	}
 
 
