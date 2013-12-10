@@ -38,7 +38,7 @@ define([
             if (arguments.length > 2) {
                 for (var i = 2; i < arguments.length; i++) {
                     var arg = arguments[i];
-                    if (arg instanceof Array){
+					if (arg.constructor.name == 'Array') {
                         arg.forEach(function(elem) {
                             model.addAttribute(elem);
                         })
