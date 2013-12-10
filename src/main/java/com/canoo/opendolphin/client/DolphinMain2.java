@@ -1,12 +1,13 @@
 
 package com.canoo.opendolphin.client;
 
+import com.canoo.dolphingwtspike.mainApplication.client.MainApplication;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 public class DolphinMain2 {
 
-	public final static native JavaScriptObject boot(JavaScriptObject next) /*-{
+	public final static native JavaScriptObject boot(MainApplication view, JavaScriptObject next) /*-{
 		console.log("DolphinMain2.start: entered");
 		$wnd.require.config({
 			baseUrl: 'com.canoo.opendolphin.OpenDolphin',
@@ -31,7 +32,7 @@ public class DolphinMain2 {
 			'Dolphin', 'comm/ClientAttribute', 'comm/HttpSession'
 		], function (Dolphin, ClientAttribute, HttpSession) {
 			console.log("DolphinMain2.start: in callback");
-			next(Dolphin, ClientAttribute, HttpSession);
+			next(Dolphin, ClientAttribute, HttpSession, view);
 		});
 
 		console.log("DolphinMain2.start: returning");
@@ -62,7 +63,7 @@ public class DolphinMain2 {
 		return new ClientAttribute(attributeId);
 	}-*/;
 
-	public static native JavaScriptObject getClientModelStoreAttribute(JavaScriptObject dolphin, String attributeId) /*-{
+	public static native JavaScriptObject getAttribute(JavaScriptObject dolphin, String attributeId) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
 		return clientModelStore.findAttributesByFilter(function (attr) {
 			return (attr.propertyName == attributeId)
@@ -73,11 +74,19 @@ public class DolphinMain2 {
 		attribute.setValue(value);
 	}-*/;
 
+	public static native JavaScriptObject addValueChangedHandler(MainApplication view, JavaScriptObject attribute) /*-{
+		attribute.on("valueChange", function (data) {
+			console.log("value CHANGE");
+
+			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handleAttributeChange(Ljava/lang/String;)(data.newValue);
+		});
+	}-*/;
+
 	public static native JavaScriptObject bindGUIToPMs(JavaScriptObject dolphin) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
-		var textAttribute = clientModelStore.findAttributesByFilter(function (attr) {
-			return (attr.propertyName == "attrId")
-		})[0];
+//		var textAttribute = clientModelStore.findAttributesByFilter(function (attr) {
+//			return (attr.propertyName == "attrId")
+//		})[0];
 		var rangeAttribute = clientModelStore.findAttributesByFilter(function (attr) {
 			return (attr.propertyName == "range")
 		})[0];
@@ -89,19 +98,19 @@ public class DolphinMain2 {
 		});
 
 		// bind text input field to pm textAttribute bidirectionally
-		var textInput = $doc.getElementById("textInput");
+//		var textInput = $doc.getElementById("textInput");
 //		textInput.addEventListener("input", function () {
 //			textAttribute.setValue(textInput.value);
 //		});
-		textAttribute.on("valueChange", function (data) {
-			textInput.value = data.newValue;
-		});
+//		textAttribute.on("valueChange", function (data) {
+//			textInput.value = data.newValue;
+//		});
 
 		// bind label to textAttribute
-		var label = $doc.getElementById("label");
-		textAttribute.on("valueChange", function (data) {
-			label.innerHTML = data.newValue;
-		});
+//		var label = $doc.getElementById("label");
+//		textAttribute.on("valueChange", function (data) {
+//			label.innerHTML = data.newValue;
+//		});
 
 		// bind range input field to pm rangeAttribute and label to pm
 		var rangeInput  = $doc.getElementById("range");

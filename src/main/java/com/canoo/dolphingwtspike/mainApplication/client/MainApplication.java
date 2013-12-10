@@ -4,6 +4,7 @@ import com.canoo.opendolphin.client.DolphinMain2;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -11,12 +12,15 @@ import com.google.gwt.user.client.ui.*;
  */
 public class MainApplication implements EntryPoint {
 
+	Label label;
+	TextBox textBox;
+
 	public final static native JavaScriptObject init() /*-{
-		return function (Dolphin, ClientAttribute, HttpSession) {
+		return function (Dolphin, ClientAttribute, HttpSession, view) {
 			var httpSession = new HttpSession('http://127.0.0.1:8888/invalidatesession');
 			httpSession.invalidateSession();
 
-			@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
+			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
 
 		};
 
@@ -30,20 +34,25 @@ public class MainApplication implements EntryPoint {
 		);
 	}
 
-	public static void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
+	public void handleAttributeChange(String value) {
+		label.setText(value);
+		textBox.setText(value);
+	}
+	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
 		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		initializePresentationModels(dolphin, ClientAttribute);
 
-		final JavaScriptObject textAttribute = DolphinMain2.getClientModelStoreAttribute(dolphin, "attrId");
+		final JavaScriptObject textAttribute = DolphinMain2.getAttribute(dolphin, "attrId");
 
-		final TextBox textBox = new TextBox(); textBox.getElement().setId("textInput");
+		textBox = new TextBox(); textBox.getElement().setId("textInput");
 		textBox.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(final KeyUpEvent event) {
 				DolphinMain2.setAttributeValue(textAttribute, textBox.getText());
 			}
 		});
+		DolphinMain2.addValueChangedHandler(this, textAttribute);
 
-		Label label = new Label("--"); label.getElement().setId("label");
+		label = new Label("--"); label.getElement().setId("label");
 		final Button serverModificationButton = new Button("Server Modification"); serverModificationButton.getElement().setId("logActionButton");
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
 		TextBox range = new TextBox(); range.getElement().setAttribute("type", "range"); range.getElement().setId("range");
@@ -80,7 +89,7 @@ public class MainApplication implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		DolphinMain2.boot(MainApplication.init());
+		DolphinMain2.boot(this, MainApplication.init());
 
 
 
