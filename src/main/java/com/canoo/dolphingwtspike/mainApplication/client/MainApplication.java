@@ -47,13 +47,6 @@ public class MainApplication implements EntryPoint {
 		);
 	}
 
-	public void handleAttributeChange(String value) {
-		label.setText(value);
-		textBox.setText(value);
-	}
-	public void handleRangeChanged(String value) {
-		rangeLabel.setText(value);
-	}
 	public void handlePresentationModels(JsArray<PresentationModelJS> models) {
 		for (int i = 0; i < models.length(); i++) {
 			PresentationModelJS pm = models.get(i);
@@ -76,7 +69,13 @@ public class MainApplication implements EntryPoint {
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		DolphinMain2.addValueChangedHandler(this, textAttribute);
+		DolphinMain2.addAttributeValueChangeHandler(textAttribute, new AttributeValueChangeHandler() {
+			@Override
+			public void handleValueChange(final String value) {
+				label.setText(value);
+				textBox.setText(value);
+			}
+		});
 
 		label = new Label("--");
 		// send echo command on button click:
@@ -96,7 +95,12 @@ public class MainApplication implements EntryPoint {
 			}
 		});
 		rangeLabel = new Label("--");
-		DolphinMain2.addRangeChangedHandler(this, rangeAttribute);
+		DolphinMain2.addAttributeValueChangeHandler(rangeAttribute, new AttributeValueChangeHandler() {
+			@Override
+			public void handleValueChange(final String value) {
+				rangeLabel.setText(value);
+			}
+		});
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
 		final Button addServerDataButton = new Button("Add Server Data");

@@ -1,6 +1,7 @@
 
 package com.canoo.opendolphin.client;
 
+import com.canoo.dolphingwtspike.mainApplication.client.AttributeValueChangeHandler;
 import com.canoo.dolphingwtspike.mainApplication.client.MainApplication;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -83,18 +84,9 @@ public class DolphinMain2 {
 		});
 	}-*/;
 
-	public static native JavaScriptObject addValueChangedHandler(MainApplication view, JavaScriptObject attribute) /*-{
+	public static native JavaScriptObject addAttributeValueChangeHandler(JavaScriptObject attribute, AttributeValueChangeHandler handler) /*-{
 		attribute.on("valueChange", function (data) {
-			console.log("value CHANGE");
-
-			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handleAttributeChange(Ljava/lang/String;)(data.newValue);
-		});
-	}-*/;
-	public static native JavaScriptObject addRangeChangedHandler(MainApplication view, JavaScriptObject attribute) /*-{
-		attribute.on("valueChange", function (data) {
-			console.log("value CHANGE");
-
-			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handleRangeChanged(Ljava/lang/String;)(data.newValue);
+			handler.@com.canoo.dolphingwtspike.mainApplication.client.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
 		});
 	}-*/;
 
