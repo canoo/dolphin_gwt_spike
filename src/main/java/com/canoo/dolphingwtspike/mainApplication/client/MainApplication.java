@@ -99,7 +99,7 @@ public class MainApplication implements EntryPoint {
 		final Button addServerDataButton = new Button("Add Server Data");
 		addServerDataButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				DolphinMain2.send3(dolphin, "org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
+				DolphinMain2.send(dolphin, "org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
 					@Override
 					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
 						for (int i = 0; i < pms.length(); i++) {

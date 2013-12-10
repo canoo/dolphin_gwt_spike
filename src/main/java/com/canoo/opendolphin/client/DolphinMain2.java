@@ -79,7 +79,7 @@ public class DolphinMain2 {
 		dolphin.getClientDolphin().send(commandName);
 	}-*/;
 
-	public static native JavaScriptObject send3(JavaScriptObject dolphin, String commandName, OnFinishedHandler handler) /*-{
+	public static native JavaScriptObject send(JavaScriptObject dolphin, String commandName, OnFinishedHandler handler) /*-{
 		dolphin.getClientDolphin().send(commandName, function (pms) {
 			handler.@com.canoo.dolphingwtspike.mainApplication.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
 		});
