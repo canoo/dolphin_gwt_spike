@@ -5,9 +5,6 @@ define([
 ], function (ClientDolphin, ClientModelStore, HttpClientConnector) {
 
     return function(serverUrl) {
-//		alert("ClientDolphin " + ClientDolphin);
-//		alert("ClientModelStore: " + ClientModelStore);
-//		alert("HttpClientConnector: " + HttpClientConnector);
         this.clientDolphin = new ClientDolphin();
         this.clientDolphin.setClientModelStore(new ClientModelStore(this.clientDolphin));
 
