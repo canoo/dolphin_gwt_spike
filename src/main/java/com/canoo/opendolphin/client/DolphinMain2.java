@@ -3,6 +3,7 @@ package com.canoo.opendolphin.client;
 
 import com.canoo.dolphingwtspike.mainApplication.client.AttributeValueChangeHandler;
 import com.canoo.dolphingwtspike.mainApplication.client.MainApplication;
+import com.canoo.dolphingwtspike.mainApplication.client.OnFinishedHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
@@ -78,9 +79,9 @@ public class DolphinMain2 {
 		dolphin.getClientDolphin().send(commandName);
 	}-*/;
 
-	public static native JavaScriptObject send2(MainApplication view, JavaScriptObject dolphin, String commandName) /*-{
-		dolphin.getClientDolphin().send(commandName, function (models) {
-			view.@com.canoo.dolphingwtspike.mainApplication.client.MainApplication::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(models);
+	public static native JavaScriptObject send3(JavaScriptObject dolphin, String commandName, OnFinishedHandler handler) /*-{
+		dolphin.getClientDolphin().send(commandName, function (pms) {
+			handler.@com.canoo.dolphingwtspike.mainApplication.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
 		});
 	}-*/;
 

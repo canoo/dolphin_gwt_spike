@@ -47,13 +47,6 @@ public class MainApplication implements EntryPoint {
 		);
 	}
 
-	public void handlePresentationModels(JsArray<PresentationModelJS> models) {
-		for (int i = 0; i < models.length(); i++) {
-			PresentationModelJS pm = models.get(i);
-			listDiv.add(new Label(pm.getPresentationModelType() + ": " + pm.getClientAttributes().get(0).getValue()));
-		}
-	}
-
 	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
 		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		initializePresentationModels(dolphin, ClientAttribute);
@@ -106,7 +99,15 @@ public class MainApplication implements EntryPoint {
 		final Button addServerDataButton = new Button("Add Server Data");
 		addServerDataButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				DolphinMain2.send2(MainApplication.this, dolphin, "org.opendolphin.demo.Tutorial.add");
+				DolphinMain2.send3(dolphin, "org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
+					@Override
+					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
+						for (int i = 0; i < pms.length(); i++) {
+							PresentationModelJS pm = pms.get(i);
+							listDiv.add(new Label(pm.getPresentationModelType() + ": " + pm.getClientAttributes().get(0).getValue()));
+						}
+					}
+				});
 			}
 		});
 
