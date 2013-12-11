@@ -7,7 +7,6 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -25,7 +24,7 @@ public class MainApplication implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
-		DolphinMain2.boot(new DolphinStarter() {
+		DolphinMain2.boot(Constants.getInvalidateSessionUrl(), new DolphinStarter() {
 			@Override
 			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
 				MainApplication.this.start((DolphinJS)Dolphin, (ClientAttributeJS)ClientAttribute);
@@ -36,7 +35,7 @@ public class MainApplication implements EntryPoint {
 	public void start(DolphinJS Dolphin, ClientAttributeJS ClientAttribute) {
 
 
-        final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8080/dolphin/");
+        final Dolphin dolphin = new Dolphin(Dolphin, Constants.getDolphinUrl());
         final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
         final ClientAttribute textAttribute = new ClientAttribute(ClientAttribute, "attrId");
@@ -98,7 +97,8 @@ public class MainApplication implements EntryPoint {
 				clientDolphin.send("org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
 					@Override
 					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
-						for (int i = 0; i < pms.length(); i++) {
+						for (int i = 0; i
+< pms.length(); i++) {
 							PresentationModelJS pm = pms.get(i);
 							listDiv.add(new Label(pm.getPresentationModelType() + ": " + pm.getClientAttributes().get(0).getValue()));
 						}
