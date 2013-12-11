@@ -22,7 +22,6 @@ public class PMContext {
 		final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
 		textAttribute = new ClientAttribute(ClientAttributeJS, TEXT_ATTR_ID);
-		System.out.println("textAttribute = " + textAttribute);
 		rangeAttribute = new ClientAttribute(ClientAttributeJS, RANGE_ATTR_ID);
 
 		// create named PM with attribute on the client side

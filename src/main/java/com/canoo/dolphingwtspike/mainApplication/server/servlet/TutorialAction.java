@@ -23,8 +23,6 @@ public class TutorialAction extends DolphinServerAction {
 
 	public void registerIn(ActionRegistry actionRegistry) {
 
-        System.out.println("registerIn !!!!!!!!!");
-
         actionRegistry.register(CMD_ECHO, new CommandHandler<Command>() {
             public void handleCommand(Command command, List<Command> response) {
                 System.out.println(getServerDolphin().listPresentationModelIds());

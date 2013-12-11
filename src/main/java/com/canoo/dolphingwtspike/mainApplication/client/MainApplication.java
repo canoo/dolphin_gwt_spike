@@ -21,12 +21,9 @@ public class MainApplication implements EntryPoint {
 	}
 
 	public void initialize() {
-		System.out.println("com.canoo.dolphingwtspike.mainApplication.client.MainApplication.initialize");
 		DolphinLoader.load(Constants.getInvalidateSessionUrl(), new DolphinStarter() {
 			@Override
 			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
-				System.out.println("XXX");
-
 				PMContext pmContext = new PMContext();
 				pmContext.initialize((DolphinJS) Dolphin, (ClientAttributeJS) ClientAttribute);
 

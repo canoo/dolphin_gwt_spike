@@ -22,8 +22,6 @@ public class Binder {
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		System.out.println("pmContext = " + pmContext);
-		System.out.println("pmContext.getTextAttribute() = " + pmContext.getTextAttribute());
 		pmContext.getTextAttribute().addValueChangedHandler(new AttributeValueChangeHandler() {
 			@Override
 			public void handleValueChange(final String value) {

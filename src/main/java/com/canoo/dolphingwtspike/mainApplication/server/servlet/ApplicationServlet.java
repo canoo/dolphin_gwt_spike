@@ -13,14 +13,10 @@ import java.io.IOException;
  * For real server mode, this servlet acts as entry point for all communication.
  */
 public class ApplicationServlet extends DolphinServlet {
-	@Override
-	protected void doGet(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("==> com.canoo.dolphingwtspike.mainApplication.server.servlet.ApplicationServlet.doGet");
-	}
 
 	@Override
 	protected void doPost(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
-		resp.addHeader("Cache-Control", "no-cache");
+		resp.addHeader("Cache-Control", "no-cache"); // for development
 		super.doPost(req, resp);
 	}
 
