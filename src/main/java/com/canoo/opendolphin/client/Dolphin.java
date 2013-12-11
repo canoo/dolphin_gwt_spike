@@ -12,8 +12,8 @@ public class Dolphin {
     }
 
 
-    public ClientDolphinGWT getClientDolphin(){
-        return new ClientDolphinGWT();
+    public ClientDolphin getClientDolphin(){
+        return new ClientDolphin();
     }
 
     public JavaScriptObject getDolphin() {
