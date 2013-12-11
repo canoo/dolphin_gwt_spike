@@ -44,17 +44,7 @@ public class DolphinMain2 {
 		return new Dolphin(url);
 	}-*/;
 
-	public static native JavaScriptObject newPresentationModel(JavaScriptObject dolphin, String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
 
-		return dolphin.getClientDolphin().presentationModel(
-			pmId, type, javaScriptObjects
-		);
-
-	}-*/;
-
-	public static native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
-		return new ClientAttribute(attributeId);
-	}-*/;
 
 	public static native JavaScriptObject getAttribute(JavaScriptObject dolphin, String attributeId) /*-{
 		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();

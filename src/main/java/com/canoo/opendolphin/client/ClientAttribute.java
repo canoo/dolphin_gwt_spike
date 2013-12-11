@@ -9,7 +9,7 @@ public class ClientAttribute {
 
     public ClientAttribute(JavaScriptObject ClientAttribute, String id) {
         this.id = id;
-        attribute = DolphinMain2.newAttribute(ClientAttribute, id);
+        attribute = newAttribute(ClientAttribute, id);
     }
 
     public String getId() {
@@ -19,4 +19,12 @@ public class ClientAttribute {
     public JavaScriptObject getAttribute() {
         return attribute;
     }
+
+    public void setValue(String value) {
+        DolphinMain2.setAttributeValue(getAttribute(), value);
+    }
+
+    private native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
+        return new ClientAttribute(attributeId);
+    }-*/;
 }

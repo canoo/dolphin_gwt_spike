@@ -13,11 +13,17 @@ public class Dolphin {
 
 
     public ClientDolphin getClientDolphin(){
-        return new ClientDolphin();
+        return new ClientDolphin(getClientDolphinJS(dolphin));
     }
 
     public JavaScriptObject getDolphin() {
         return dolphin;
     }
+
+    private native JavaScriptObject getClientDolphinJS(JavaScriptObject dolphin) /*-{
+
+        return dolphin.getClientDolphin();
+
+    }-*/;
 
 }

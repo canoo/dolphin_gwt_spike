@@ -5,15 +5,26 @@ import com.google.gwt.core.client.JsArray;
 
 public class ClientDolphin {
 
-    public void presentationModel(Dolphin dolphin, String id, String type, ClientAttribute... clientAttributes) {
+    private final JavaScriptObject clientDolphinJS;
+
+    public ClientDolphin(JavaScriptObject clientDolphinJS) {
+        this.clientDolphinJS = clientDolphinJS;
+    }
+
+    public void presentationModel(String id, String type, ClientAttribute... clientAttributes) {
 
         JsArray jsAttributes = JavaScriptObject.createArray().cast();
         for (ClientAttribute attribute : clientAttributes) {
             jsAttributes.push(attribute.getAttribute());
         }
 
-        DolphinMain2.newPresentationModel(dolphin.getDolphin(), id, type, jsAttributes);
+        newPresentationModel(id, type, jsAttributes);
     }
 
+    private native JavaScriptObject newPresentationModel(String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
+
+        var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
+        return clientDolphinLocal.presentationModel( pmId, type, javaScriptObjects );
+    }-*/;
 
 }

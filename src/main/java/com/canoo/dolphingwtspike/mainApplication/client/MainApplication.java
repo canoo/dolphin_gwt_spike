@@ -43,12 +43,12 @@ public class MainApplication implements EntryPoint {
 
 		// create named PM with attribute on the client side
         String type = null;
-        clientDolphin.presentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", type, textAttribute, rangeAttribute);
+        clientDolphin.presentationModel("org.opendolphin.demo.Tutorial.modelId", type, textAttribute, rangeAttribute);
 
 		textBox = new TextBox();
 		textBox.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(final KeyUpEvent event) {
-				DolphinMain2.setAttributeValue(textAttribute.getAttribute(), textBox.getText());
+                textAttribute.setValue(textBox.getText());
 			}
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
