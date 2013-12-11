@@ -6,4 +6,3 @@ out/
 classes/
 *.log
 **/WEB-INF/lib/
-war/
