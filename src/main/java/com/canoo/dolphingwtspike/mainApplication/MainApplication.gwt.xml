@@ -11,7 +11,4 @@
 	<entry-point class='com.canoo.dolphingwtspike.mainApplication.client.MainApplication'/>
 
 
-	<!-- Specify the app servlets.                   -->
-	<servlet path='/MainApplicationService' class='com.canoo.dolphingwtspike.mainApplication.server.MainApplicationServiceImpl'/>
-
 </module>
