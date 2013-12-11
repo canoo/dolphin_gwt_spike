@@ -30,7 +30,7 @@ public class DolphinMain2 {
 			'Dolphin', 'comm/ClientAttribute', 'comm/HttpSession'
 		], function (Dolphin, ClientAttribute, HttpSession) {
 			console.log("DolphinMain2.start: in callback");
-			var httpSession = new HttpSession('http://127.0.0.1:8080/dolphin_gwt_spike/invalidatesession');
+			var httpSession = new HttpSession('http://127.0.0.1:8080/invalidatesession');
 			httpSession.invalidateSession();
 			dolphinStarter.@com.canoo.opendolphin.client.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
 		});
