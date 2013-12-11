@@ -40,22 +40,14 @@ public class DolphinMain2 {
 
 	}-*/;
 
-	public static JsArray attributesJS(JavaScriptObject...attributes) {
-		JsArray result = JavaScriptObject.createArray().cast();
-		for (JavaScriptObject attribute : attributes) {
-			result.push(attribute);
-		}
-		return result;
-	}
-
 	public static native JavaScriptObject newDolphin(JavaScriptObject Dolphin, String url) /*-{
 		return new Dolphin(url);
 	}-*/;
 
-	public static native JavaScriptObject newPresentationModel(JavaScriptObject dolphin, String pmId, JsArray<JavaScriptObject> javaScriptObjects) /*-{
+	public static native JavaScriptObject newPresentationModel(JavaScriptObject dolphin, String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
 
 		return dolphin.getClientDolphin().presentationModel(
-			pmId, undefined, javaScriptObjects
+			pmId, type, javaScriptObjects
 		);
 
 	}-*/;

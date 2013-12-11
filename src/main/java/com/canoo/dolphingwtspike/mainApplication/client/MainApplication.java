@@ -41,13 +41,9 @@ public class MainApplication implements EntryPoint {
         final ClientAttribute textAttribute = new ClientAttribute(ClientAttribute, "attrId");
         final ClientAttribute rangeAttribute = new ClientAttribute(ClientAttribute, "range");
 
-//        final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		// create named PM with attribute on the client side
-//		DolphinMain2.newPresentationModel(dolphin.getDolphin(), "org.opendolphin.demo.Tutorial.modelId",
-//			DolphinMain2.attributesJS(textAttribute.getAttribute(),
-//			rangeAttribute.getAttribute())
-//		);
-        clientDolphin.presentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", null, textAttribute, rangeAttribute);
+        String type = null;
+        clientDolphin.presentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId", type, textAttribute, rangeAttribute);
 
 		textBox = new TextBox();
 		textBox.addKeyUpHandler(new KeyUpHandler() {
