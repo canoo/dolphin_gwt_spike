@@ -1,29 +1,24 @@
 package com.canoo.opendolphin.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 public class Dolphin {
 
-    private final JavaScriptObject dolphin;
+    private final ClientDolphin clientDolphin;
 
-    public Dolphin(JavaScriptObject Dolphin, String dolphinUrl) {
-        this.dolphin = DolphinMain2.newDolphin(Dolphin, dolphinUrl);
-
+    public Dolphin(DolphinJS Dolphin, String dolphinUrl) {
+		clientDolphin = new ClientDolphin(getClientDolphinJS(newDolphin(Dolphin, dolphinUrl)));
     }
-
 
     public ClientDolphin getClientDolphin(){
-        return new ClientDolphin(getClientDolphinJS(dolphin));
+        return clientDolphin;
     }
 
-    public JavaScriptObject getDolphin() {
-        return dolphin;
-    }
-
-    private native JavaScriptObject getClientDolphinJS(JavaScriptObject dolphin) /*-{
+    private native ClientDolphinJS getClientDolphinJS(DolphinJS dolphin) /*-{
 
         return dolphin.getClientDolphin();
 
     }-*/;
 
+	private native DolphinJS newDolphin(DolphinJS Dolphin, String url) /*-{
+		return new Dolphin(url);
+	}-*/;
 }

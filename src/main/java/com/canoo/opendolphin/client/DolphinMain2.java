@@ -2,7 +2,6 @@
 package com.canoo.opendolphin.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 
 public class DolphinMain2 {
 
@@ -38,19 +37,6 @@ public class DolphinMain2 {
 
 		console.log("DolphinMain2.boot: returning");
 
-	}-*/;
-
-	public static native JavaScriptObject newDolphin(JavaScriptObject Dolphin, String url) /*-{
-		return new Dolphin(url);
-	}-*/;
-
-
-
-	public static native JavaScriptObject getAttribute(JavaScriptObject dolphin, String attributeId) /*-{
-		var clientModelStore = dolphin.getClientDolphin().getClientModelStore();
-		return clientModelStore.findAttributesByFilter(function (attr) {
-			return (attr.propertyName == attributeId)
-		})[0];
 	}-*/;
 
 

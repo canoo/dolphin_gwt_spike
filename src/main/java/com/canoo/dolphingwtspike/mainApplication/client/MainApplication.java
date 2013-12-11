@@ -28,12 +28,12 @@ public class MainApplication implements EntryPoint {
 		DolphinMain2.boot(new DolphinStarter() {
 			@Override
 			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
-				MainApplication.this.start(Dolphin, ClientAttribute);
+				MainApplication.this.start((DolphinJS)Dolphin, ClientAttribute);
 			}
 		});
 	}
 
-	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
+	public void start(DolphinJS Dolphin, JavaScriptObject ClientAttribute) {
 
 
         final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8080/dolphin_gwt_spike/dolphin/");
@@ -69,7 +69,7 @@ public class MainApplication implements EntryPoint {
 			public void onClick(final ClickEvent event) {
 				clientDolphin.send("org.opendolphin.demo.Tutorial.echo");
                 // Just to demonstrate findAttributeById
-                System.out.println("value = " + clientDolphin.getClientModelStore().findAttributeById("attrId").getValue());
+                System.out.println("*** Attribute Value from ModelStore = " + clientDolphin.getClientModelStore().findAttributeById("attrId").getValue());
 			}
 		});
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
