@@ -28,12 +28,12 @@ public class MainApplication implements EntryPoint {
 		DolphinMain2.boot(new DolphinStarter() {
 			@Override
 			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
-				MainApplication.this.start(Dolphin, ClientAttribute);
+				MainApplication.this.start((DolphinJS)Dolphin, ClientAttribute);
 			}
 		});
 	}
 
-	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
+	public void start(DolphinJS Dolphin, JavaScriptObject ClientAttribute) {
 
 
         final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");

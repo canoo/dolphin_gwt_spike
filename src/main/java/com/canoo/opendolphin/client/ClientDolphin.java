@@ -5,9 +5,9 @@ import com.google.gwt.core.client.JsArray;
 
 public class ClientDolphin {
 
-    private final JavaScriptObject clientDolphinJS;
+    private final ClientDolphinJS clientDolphinJS;
 
-    public ClientDolphin(JavaScriptObject clientDolphinJS) {
+    public ClientDolphin(ClientDolphinJS clientDolphinJS) {
         this.clientDolphinJS = clientDolphinJS;
     }
 
@@ -33,21 +33,21 @@ public class ClientDolphin {
         return new ClientModelStore(getClientModelStoreJS(clientDolphinJS));
     }
 
-    private native JavaScriptObject presentationModelJS(JavaScriptObject clientDolphin, String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
+    private native JavaScriptObject presentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
         return clientDolphin.presentationModel( pmId, type, javaScriptObjects );
     }-*/;
 
-    private native JavaScriptObject sendJS(JavaScriptObject clientDolphinJS, String commandName) /*-{
+    private native JavaScriptObject sendJS(ClientDolphinJS clientDolphinJS, String commandName) /*-{
         clientDolphinJS.send(commandName);
     }-*/;
 
-    private native JavaScriptObject sendJS(JavaScriptObject clientDolphin, String commandName, OnFinishedHandler handler) /*-{
+    private native JavaScriptObject sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandler handler) /*-{
 		clientDolphin.send(commandName, function (pms) {
             handler.@com.canoo.opendolphin.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
         });
     }-*/;
 
-    private native JavaScriptObject getClientModelStoreJS(JavaScriptObject clientDolphin) /*-{
+    private native JavaScriptObject getClientModelStoreJS(ClientDolphinJS clientDolphin) /*-{
         return clientDolphin.getClientModelStore();
     }-*/;
 
