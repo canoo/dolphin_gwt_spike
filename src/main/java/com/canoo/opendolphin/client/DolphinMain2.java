@@ -64,11 +64,5 @@ public class DolphinMain2 {
 		});
 	}-*/;
 
-	public static native JavaScriptObject addAttributeValueChangeHandler(JavaScriptObject attribute, AttributeValueChangeHandler handler) /*-{
-		attribute.on("valueChange", function (data) {
-			handler.@com.canoo.opendolphin.client.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
-		});
-	}-*/;
-
 
 }

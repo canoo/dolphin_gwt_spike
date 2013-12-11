@@ -53,7 +53,7 @@ public class MainApplication implements EntryPoint {
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		DolphinMain2.addAttributeValueChangeHandler(textAttribute.getAttribute(), new AttributeValueChangeHandler() {
+        textAttribute.addValueChangedHandler(new AttributeValueChangeHandler() {
 			@Override
 			public void handleValueChange(final String value) {
 				label.setText(value);
@@ -78,13 +78,15 @@ public class MainApplication implements EntryPoint {
 				rangeAttribute.setValue(event.getValue());
 			}
 		});
+
 		rangeLabel = new Label("--");
-		DolphinMain2.addAttributeValueChangeHandler(rangeAttribute.getAttribute(), new AttributeValueChangeHandler() {
-			@Override
-			public void handleValueChange(final String value) {
-				rangeLabel.setText(value);
-			}
-		});
+        rangeAttribute.addValueChangedHandler(new AttributeValueChangeHandler() {
+            @Override
+            public void handleValueChange(final String value) {
+                rangeLabel.setText(value);
+            }
+        });
+
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
 		final Button addServerDataButton = new Button("Add Server Data");
