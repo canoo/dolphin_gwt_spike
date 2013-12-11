@@ -1,12 +1,10 @@
 package com.canoo.opendolphin.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 public class ClientModelStore {
 
-    private final JavaScriptObject clientModelStoreJS;
+    private final ClientModelStoreJS clientModelStoreJS;
 
-    public ClientModelStore(JavaScriptObject clientModelStoreJS) {
+    public ClientModelStore(ClientModelStoreJS clientModelStoreJS) {
         this.clientModelStoreJS = clientModelStoreJS;
     }
 
@@ -14,7 +12,7 @@ public class ClientModelStore {
         return new ClientAttribute(id, getAttribute(id, clientModelStoreJS));
     }
 
-    private native JavaScriptObject getAttribute(String attributeId, JavaScriptObject clientModelStoreJS) /*-{
+    private native ClientAttributeJS getAttribute(String attributeId, ClientModelStoreJS clientModelStoreJS) /*-{
 
         var list = clientModelStoreJS.findAttributesByFilter(function (attr) {
             return (attr.propertyName == attributeId)

@@ -1,18 +1,16 @@
 package com.canoo.opendolphin.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 public class ClientAttribute {
 
     private final String id;
-    private final JavaScriptObject attribute;
+    private final ClientAttributeJS attribute;
 
-    public ClientAttribute(JavaScriptObject ClientAttribute, String id) {
+    public ClientAttribute(ClientAttributeJS ClientAttribute, String id) {
         this.id = id;
         attribute = newAttribute(ClientAttribute, id);
     }
 
-    public ClientAttribute(String id, JavaScriptObject attribute) {
+    public ClientAttribute(String id, ClientAttributeJS attribute) {
         this.id = id;
         this.attribute = attribute;
     }
@@ -21,7 +19,7 @@ public class ClientAttribute {
         return id;
     }
 
-    public JavaScriptObject getAttribute() {
+    public ClientAttributeJS getAttribute() {
         return attribute;
     }
 
@@ -37,19 +35,19 @@ public class ClientAttribute {
         addAttributeValueChangeHandler(getAttribute(), handler);
     }
 
-    private native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
+    private native void setAttributeValue(ClientAttributeJS attribute, String value) /*-{
         attribute.setValue(value);
     }-*/;
 
-    private native String getValueJS(JavaScriptObject attribute) /*-{
+    private native String getValueJS(ClientAttributeJS attribute) /*-{
         return attribute.getValue();
     }-*/;
 
-    private native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
+    private native ClientAttributeJS newAttribute(ClientAttributeJS ClientAttribute, String attributeId) /*-{
         return new ClientAttribute(attributeId);
     }-*/;
 
-    private native JavaScriptObject addAttributeValueChangeHandler(JavaScriptObject attribute, AttributeValueChangeHandler handler) /*-{
+    private native void addAttributeValueChangeHandler(ClientAttributeJS attribute, AttributeValueChangeHandler handler) /*-{
         attribute.on("valueChange", function (data) {
             handler.@com.canoo.opendolphin.client.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
         });

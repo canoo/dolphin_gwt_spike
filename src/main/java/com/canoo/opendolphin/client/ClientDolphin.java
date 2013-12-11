@@ -1,6 +1,5 @@
 package com.canoo.opendolphin.client;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 public class ClientDolphin {
@@ -21,7 +20,7 @@ public class ClientDolphin {
 
     public void presentationModel(String id, String type, ClientAttribute... clientAttributes) {
 
-        JsArray jsAttributes = JavaScriptObject.createArray().cast();
+        JsArray jsAttributes = ClientAttributeJS.createArray().cast();
         for (ClientAttribute attribute : clientAttributes) {
             jsAttributes.push(attribute.getAttribute());
         }
@@ -33,21 +32,21 @@ public class ClientDolphin {
         return new ClientModelStore(getClientModelStoreJS(clientDolphinJS));
     }
 
-    private native JavaScriptObject presentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
+    private native PresentationModelJS presentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> javaScriptObjects) /*-{
         return clientDolphin.presentationModel( pmId, type, javaScriptObjects );
     }-*/;
 
-    private native JavaScriptObject sendJS(ClientDolphinJS clientDolphinJS, String commandName) /*-{
+    private native void sendJS(ClientDolphinJS clientDolphinJS, String commandName) /*-{
         clientDolphinJS.send(commandName);
     }-*/;
 
-    private native JavaScriptObject sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandler handler) /*-{
+    private native void sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandler handler) /*-{
 		clientDolphin.send(commandName, function (pms) {
             handler.@com.canoo.opendolphin.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
         });
     }-*/;
 
-    private native JavaScriptObject getClientModelStoreJS(ClientDolphinJS clientDolphin) /*-{
+    private native ClientModelStoreJS getClientModelStoreJS(ClientDolphinJS clientDolphin) /*-{
         return clientDolphin.getClientModelStore();
     }-*/;
 
