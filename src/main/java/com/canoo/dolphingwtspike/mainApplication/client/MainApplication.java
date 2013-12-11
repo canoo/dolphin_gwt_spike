@@ -36,7 +36,7 @@ public class MainApplication implements EntryPoint {
 
 
         final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
-        ClientDolphin clientDolphin = dolphin.getClientDolphin();
+        final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
         final ClientAttribute textAttribute = new ClientAttribute(ClientAttribute, "attrId");
         final ClientAttribute rangeAttribute = new ClientAttribute(ClientAttribute, "range");
@@ -66,7 +66,7 @@ public class MainApplication implements EntryPoint {
 		final Button serverModificationButton = new Button("Server Modification");
 		serverModificationButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				DolphinMain2.send(dolphin.getDolphin(), "org.opendolphin.demo.Tutorial.echo");
+				clientDolphin.send("org.opendolphin.demo.Tutorial.echo");
 			}
 		});
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
@@ -92,7 +92,7 @@ public class MainApplication implements EntryPoint {
 		final Button addServerDataButton = new Button("Add Server Data");
 		addServerDataButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				DolphinMain2.send(dolphin.getDolphin(), "org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
+				clientDolphin.send("org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
 					@Override
 					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
 						for (int i = 0; i < pms.length(); i++) {

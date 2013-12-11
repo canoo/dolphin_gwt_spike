@@ -2,6 +2,7 @@ package com.canoo.opendolphin.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.user.client.ui.Label;
 
 public class ClientDolphin {
 
@@ -11,6 +12,14 @@ public class ClientDolphin {
         this.clientDolphinJS = clientDolphinJS;
     }
 
+    public void send(String commandName){
+        sendJS(commandName);
+    }
+
+    public void send(String commandName, OnFinishedHandler handler){
+        sendJS(commandName, handler);
+    }
+
     public void presentationModel(String id, String type, ClientAttribute... clientAttributes) {
 
         JsArray jsAttributes = JavaScriptObject.createArray().cast();
@@ -18,13 +27,24 @@ public class ClientDolphin {
             jsAttributes.push(attribute.getAttribute());
         }
 
-        newPresentationModel(id, type, jsAttributes);
+        presentationModelJS(id, type, jsAttributes);
     }
 
-    private native JavaScriptObject newPresentationModel(String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
-
+    private native JavaScriptObject presentationModelJS(String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
         var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
         return clientDolphinLocal.presentationModel( pmId, type, javaScriptObjects );
+    }-*/;
+
+    private native JavaScriptObject sendJS(String commandName) /*-{
+        var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
+        clientDolphinLocal.send(commandName);
+    }-*/;
+
+    private native JavaScriptObject sendJS(String commandName, OnFinishedHandler handler) /*-{
+        var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
+        clientDolphinLocal.send(commandName, function (pms) {
+            handler.@com.canoo.opendolphin.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
+        });
     }-*/;
 
 }

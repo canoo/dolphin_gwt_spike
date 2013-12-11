@@ -54,15 +54,4 @@ public class DolphinMain2 {
 	}-*/;
 
 
-	public static native JavaScriptObject send(JavaScriptObject dolphin, String commandName) /*-{
-		dolphin.getClientDolphin().send(commandName);
-	}-*/;
-
-	public static native JavaScriptObject send(JavaScriptObject dolphin, String commandName, OnFinishedHandler handler) /*-{
-		dolphin.getClientDolphin().send(commandName, function (pms) {
-			handler.@com.canoo.opendolphin.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
-		});
-	}-*/;
-
-
 }
