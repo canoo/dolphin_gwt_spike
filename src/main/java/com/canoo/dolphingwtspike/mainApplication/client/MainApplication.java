@@ -33,25 +33,31 @@ public class MainApplication implements EntryPoint {
 	}
 
 	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
-		final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
+
+
+        final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
+        ClientDolphinGWT clientDolphin = dolphin.getClientDolphin();
+
+        final ClientAttribute textAttribute = new ClientAttribute(ClientAttribute, "attrId");
+        final ClientAttribute rangeAttribute = new ClientAttribute(ClientAttribute, "range");
+
+//        final JavaScriptObject dolphin = DolphinMain2.newDolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
 		// create named PM with attribute on the client side
-		DolphinMain2.newPresentationModel(dolphin, "org.opendolphin.demo.Tutorial.modelId",
-			DolphinMain2.attributesJS(DolphinMain2.newAttribute(ClientAttribute, "attrId"),
-			DolphinMain2.newAttribute(ClientAttribute, "range"))
+		DolphinMain2.newPresentationModel(dolphin.getDolphin(), "org.opendolphin.demo.Tutorial.modelId",
+			DolphinMain2.attributesJS(textAttribute.getAttribute(),
+			rangeAttribute.getAttribute())
 		);
 
-		final JavaScriptObject textAttribute = DolphinMain2.getAttribute(dolphin, "attrId");
-		final JavaScriptObject rangeAttribute = DolphinMain2.getAttribute(dolphin, "range");
 
 		textBox = new TextBox();
 		textBox.addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(final KeyUpEvent event) {
-				DolphinMain2.setAttributeValue(textAttribute, textBox.getText());
+				DolphinMain2.setAttributeValue(textAttribute.getAttribute(), textBox.getText());
 			}
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		DolphinMain2.addAttributeValueChangeHandler(textAttribute, new AttributeValueChangeHandler() {
+		DolphinMain2.addAttributeValueChangeHandler(textAttribute.getAttribute(), new AttributeValueChangeHandler() {
 			@Override
 			public void handleValueChange(final String value) {
 				label.setText(value);
@@ -64,7 +70,7 @@ public class MainApplication implements EntryPoint {
 		final Button serverModificationButton = new Button("Server Modification");
 		serverModificationButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				DolphinMain2.send(dolphin, "org.opendolphin.demo.Tutorial.echo");
+				DolphinMain2.send(dolphin.getDolphin(), "org.opendolphin.demo.Tutorial.echo");
 			}
 		});
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
@@ -73,11 +79,11 @@ public class MainApplication implements EntryPoint {
 		range = new TextBox(); range.getElement().setAttribute("type", "range");
 		range.addValueChangeHandler(new ValueChangeHandler<String>() {
 			public void onValueChange(final ValueChangeEvent<String> event) {
-				DolphinMain2.setAttributeValue(rangeAttribute, event.getValue());
+				DolphinMain2.setAttributeValue(rangeAttribute.getAttribute(), event.getValue());
 			}
 		});
 		rangeLabel = new Label("--");
-		DolphinMain2.addAttributeValueChangeHandler(rangeAttribute, new AttributeValueChangeHandler() {
+		DolphinMain2.addAttributeValueChangeHandler(rangeAttribute.getAttribute(), new AttributeValueChangeHandler() {
 			@Override
 			public void handleValueChange(final String value) {
 				rangeLabel.setText(value);
@@ -88,7 +94,7 @@ public class MainApplication implements EntryPoint {
 		final Button addServerDataButton = new Button("Add Server Data");
 		addServerDataButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				DolphinMain2.send(dolphin, "org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
+				DolphinMain2.send(dolphin.getDolphin(), "org.opendolphin.demo.Tutorial.add", new OnFinishedHandler() {
 					@Override
 					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
 						for (int i = 0; i < pms.length(); i++) {
