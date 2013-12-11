@@ -75,7 +75,7 @@ public class MainApplication implements EntryPoint {
 		range = new TextBox(); range.getElement().setAttribute("type", "range");
 		range.addValueChangeHandler(new ValueChangeHandler<String>() {
 			public void onValueChange(final ValueChangeEvent<String> event) {
-				DolphinMain2.setAttributeValue(rangeAttribute.getAttribute(), event.getValue());
+				rangeAttribute.setValue(event.getValue());
 			}
 		});
 		rangeLabel = new Label("--");

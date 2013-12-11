@@ -53,9 +53,7 @@ public class DolphinMain2 {
 		})[0];
 	}-*/;
 
-	public static native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
-		attribute.setValue(value);
-	}-*/;
+
 	public static native JavaScriptObject send(JavaScriptObject dolphin, String commandName) /*-{
 		dolphin.getClientDolphin().send(commandName);
 	}-*/;

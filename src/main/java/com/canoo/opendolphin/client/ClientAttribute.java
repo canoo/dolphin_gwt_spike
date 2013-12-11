@@ -21,8 +21,12 @@ public class ClientAttribute {
     }
 
     public void setValue(String value) {
-        DolphinMain2.setAttributeValue(getAttribute(), value);
+        setAttributeValue(getAttribute(), value);
     }
+
+    private native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
+        attribute.setValue(value);
+    }-*/;
 
     private native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{
         return new ClientAttribute(attributeId);
