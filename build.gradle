@@ -15,6 +15,9 @@ version = 0.1
 
 apply plugin: 'war'
 apply plugin: 'gwt'
+apply plugin: 'jetty'
+
+def gwtBuildDir = 'war'
 
 repositories {
 	mavenCentral()
@@ -29,6 +32,16 @@ gwt {
 	gwtVersion='2.5.1'
 	modules 'com.canoo.dolphingwtspike.mainApplication.MainApplication'
 	modules 'com.canoo.opendolphin.OpenDolphin'
+
+    dev {
+        port=8080
+    }
+}
+
+task jettyDraftWar(type: JettyRunWar) {
+    dependsOn draftWar
+    dependsOn.remove('war')
+    webApp=draftWar.archivePath
 }
 
 

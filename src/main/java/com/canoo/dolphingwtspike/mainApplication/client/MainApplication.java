@@ -36,7 +36,7 @@ public class MainApplication implements EntryPoint {
 	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute) {
 
 
-        final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8888/dolphin/");
+        final Dolphin dolphin = new Dolphin(Dolphin, "http://127.0.0.1:8080/dolphin_gwt_spike/dolphin/");
         final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
         final ClientAttribute textAttribute = new ClientAttribute(ClientAttribute, "attrId");
