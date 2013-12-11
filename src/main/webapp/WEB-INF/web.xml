@@ -15,10 +15,10 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DolphinServlet</servlet-name>
-		<url-pattern>dolphin_gwt_spike/dolphin/</url-pattern>
+		<url-pattern>dolphin/</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>InvalidateSessionServlet</servlet-name>
-		<url-pattern>dolphin_gwt_spike/invalidatesession</url-pattern>
+		<url-pattern>invalidatesession</url-pattern>
 	</servlet-mapping>
 </web-app>
