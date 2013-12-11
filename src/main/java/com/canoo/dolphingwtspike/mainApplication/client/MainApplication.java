@@ -69,7 +69,7 @@ public class MainApplication implements EntryPoint {
 			public void onClick(final ClickEvent event) {
 				clientDolphin.send("org.opendolphin.demo.Tutorial.echo");
                 // Just to demonstrate findAttributeById
-                System.out.println("value = " + clientDolphin.getClientModelStore().findAttributeById("attrId").getValue());
+                System.out.println("*** Attribute Value from ModelStore = " + clientDolphin.getClientModelStore().findAttributeById("attrId").getValue());
 			}
 		});
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
