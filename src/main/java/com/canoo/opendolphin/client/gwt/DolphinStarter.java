@@ -1,4 +1,4 @@
-package com.canoo.opendolphin.client;
+package com.canoo.opendolphin.client.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 

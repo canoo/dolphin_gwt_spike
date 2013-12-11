@@ -1,5 +1,5 @@
 
-package com.canoo.opendolphin.client;
+package com.canoo.opendolphin.client.gwt;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -32,7 +32,7 @@ public class DolphinMain2 {
 			console.log("DolphinMain2.start: in callback");
 			var httpSession = new HttpSession(invalidateSessionUrl);
 			httpSession.invalidateSession();
-			dolphinStarter.@com.canoo.opendolphin.client.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
+			dolphinStarter.@com.canoo.opendolphin.client.gwt.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
 		});
 
 		console.log("DolphinMain2.boot: returning");

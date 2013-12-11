@@ -1,6 +1,8 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.*;
+import com.canoo.opendolphin.client.gwt.*;
+import com.canoo.opendolphin.client.js.ClientAttributeJS;
+import com.canoo.opendolphin.client.js.DolphinJS;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
@@ -27,7 +29,7 @@ public class MainApplication implements EntryPoint {
 		DolphinMain2.boot(Constants.getInvalidateSessionUrl(), new DolphinStarter() {
 			@Override
 			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
-				MainApplication.this.start((DolphinJS)Dolphin, (ClientAttributeJS)ClientAttribute);
+				MainApplication.this.start((DolphinJS) Dolphin, (ClientAttributeJS) ClientAttribute);
 			}
 		});
 	}
@@ -35,7 +37,7 @@ public class MainApplication implements EntryPoint {
 	public void start(DolphinJS Dolphin, ClientAttributeJS ClientAttribute) {
 
 
-        final Dolphin dolphin = new Dolphin(Dolphin, Constants.getDolphinUrl());
+        final com.canoo.opendolphin.client.gwt.Dolphin dolphin = new Dolphin(Dolphin, Constants.getDolphinUrl());
         final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
         final ClientAttribute textAttribute = new ClientAttribute(ClientAttribute, "attrId");

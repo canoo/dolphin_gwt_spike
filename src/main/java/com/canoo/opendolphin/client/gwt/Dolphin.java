@@ -1,4 +1,7 @@
-package com.canoo.opendolphin.client;
+package com.canoo.opendolphin.client.gwt;
+
+import com.canoo.opendolphin.client.js.ClientDolphinJS;
+import com.canoo.opendolphin.client.js.DolphinJS;
 
 public class Dolphin {
 

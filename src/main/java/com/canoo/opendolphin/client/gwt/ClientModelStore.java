@@ -1,4 +1,7 @@
-package com.canoo.opendolphin.client;
+package com.canoo.opendolphin.client.gwt;
+
+import com.canoo.opendolphin.client.js.ClientAttributeJS;
+import com.canoo.opendolphin.client.js.ClientModelStoreJS;
 
 public class ClientModelStore {
 

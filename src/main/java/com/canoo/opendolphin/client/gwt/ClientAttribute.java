@@ -1,4 +1,6 @@
-package com.canoo.opendolphin.client;
+package com.canoo.opendolphin.client.gwt;
+
+import com.canoo.opendolphin.client.js.ClientAttributeJS;
 
 public class ClientAttribute {
 
@@ -49,7 +51,7 @@ public class ClientAttribute {
 
     private native void addAttributeValueChangeHandler(ClientAttributeJS attribute, AttributeValueChangeHandler handler) /*-{
         attribute.on("valueChange", function (data) {
-            handler.@com.canoo.opendolphin.client.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
+            handler.@com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
         });
     }-*/;
 }
