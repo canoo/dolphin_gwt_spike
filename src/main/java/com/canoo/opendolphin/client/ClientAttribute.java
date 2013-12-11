@@ -12,6 +12,11 @@ public class ClientAttribute {
         attribute = newAttribute(ClientAttribute, id);
     }
 
+    public ClientAttribute(String id, JavaScriptObject attribute) {
+        this.id = id;
+        this.attribute = attribute;
+    }
+
     public String getId() {
         return id;
     }
@@ -24,12 +29,20 @@ public class ClientAttribute {
         setAttributeValue(getAttribute(), value);
     }
 
+    public String getValue() {
+        return getValueJS(getAttribute());
+    }
+
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
         addAttributeValueChangeHandler(getAttribute(), handler);
     }
 
     private native JavaScriptObject setAttributeValue(JavaScriptObject attribute, String value) /*-{
         attribute.setValue(value);
+    }-*/;
+
+    private native String getValueJS(JavaScriptObject attribute) /*-{
+        return attribute.getValue();
     }-*/;
 
     private native JavaScriptObject newAttribute(JavaScriptObject ClientAttribute, String attributeId) /*-{

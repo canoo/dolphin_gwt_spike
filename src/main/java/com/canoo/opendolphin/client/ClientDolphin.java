@@ -2,7 +2,6 @@ package com.canoo.opendolphin.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.user.client.ui.Label;
 
 public class ClientDolphin {
 
@@ -13,7 +12,7 @@ public class ClientDolphin {
     }
 
     public void send(String commandName){
-        sendJS(commandName);
+        sendJS(clientDolphinJS, commandName);
     }
 
     public void send(String commandName, OnFinishedHandler handler){
@@ -30,14 +29,17 @@ public class ClientDolphin {
         presentationModelJS(id, type, jsAttributes);
     }
 
+    public ClientModelStore getClientModelStore() {
+        return new ClientModelStore(getClientModelStoreJS(/*clientDolphinJS*/));
+    }
+
     private native JavaScriptObject presentationModelJS(String pmId, String type, JsArray<JavaScriptObject> javaScriptObjects) /*-{
         var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
         return clientDolphinLocal.presentationModel( pmId, type, javaScriptObjects );
     }-*/;
 
-    private native JavaScriptObject sendJS(String commandName) /*-{
-        var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
-        clientDolphinLocal.send(commandName);
+    private native JavaScriptObject sendJS(JavaScriptObject clientDolphinJS, String commandName) /*-{
+        clientDolphinJS.send(commandName);
     }-*/;
 
     private native JavaScriptObject sendJS(String commandName, OnFinishedHandler handler) /*-{
@@ -45,6 +47,11 @@ public class ClientDolphin {
         clientDolphinLocal.send(commandName, function (pms) {
             handler.@com.canoo.opendolphin.client.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
         });
+    }-*/;
+
+    private native JavaScriptObject getClientModelStoreJS(/*JavaScriptObject clientDolphin*/) /*-{
+        var clientDolphinLocal = this.@com.canoo.opendolphin.client.ClientDolphin::clientDolphinJS;
+        return clientDolphinLocal.getClientModelStore();
     }-*/;
 
 }

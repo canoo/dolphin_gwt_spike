@@ -7,6 +7,7 @@ import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.*;
 
 /**
@@ -67,6 +68,8 @@ public class MainApplication implements EntryPoint {
 		serverModificationButton.addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 				clientDolphin.send("org.opendolphin.demo.Tutorial.echo");
+                // Just to demonstrate findAttributeById
+                System.out.println("value = " + clientDolphin.getClientModelStore().findAttributeById("attrId").getValue());
 			}
 		});
 		Label helpLabel = new Label("Drag the slider to see the label being updated.");
