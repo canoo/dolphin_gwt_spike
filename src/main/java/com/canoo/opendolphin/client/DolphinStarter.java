@@ -1,4 +1,4 @@
-package com.canoo.dolphingwtspike.mainApplication.client;
+package com.canoo.opendolphin.client;
 
 import com.google.gwt.core.client.JavaScriptObject;
 

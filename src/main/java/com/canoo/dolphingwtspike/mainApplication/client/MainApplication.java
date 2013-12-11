@@ -1,7 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.DolphinMain2;
-import com.canoo.opendolphin.client.PresentationModelJS;
+import com.canoo.opendolphin.client.*;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
