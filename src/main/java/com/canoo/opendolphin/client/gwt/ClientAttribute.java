@@ -7,9 +7,9 @@ public class ClientAttribute {
     private final String id;
     private final ClientAttributeJS attribute;
 
-    public ClientAttribute(ClientAttributeJS ClientAttribute, String id) {
+    public ClientAttribute(ClientAttributeJS clientAttributeModule, String id) {
         this.id = id;
-        attribute = newClientAttributeJS(ClientAttribute, id);
+        attribute = newClientAttributeJS(clientAttributeModule, id);
     }
 
     public ClientAttribute(String id, ClientAttributeJS attribute) {

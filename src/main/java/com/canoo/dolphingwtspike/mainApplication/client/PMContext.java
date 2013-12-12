@@ -2,7 +2,7 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.ClientAttribute;
 import com.canoo.opendolphin.client.gwt.Dolphin;
-import com.canoo.opendolphin.client.js.OnFinishedHandlerJS;
+import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
 
 public class PMContext {
 
@@ -37,7 +37,7 @@ public class PMContext {
 	public void sendEchoCommand() {
 		dolphin.getClientDolphin().send(ECHO_COMMAND);
 	}
-	public void sendAddCommand(OnFinishedHandlerJS handler) {
+	public void sendAddCommand(OnFinishedHandler handler) {
 		dolphin.getClientDolphin().send(ADD_COMMAND, handler);
 	}
 

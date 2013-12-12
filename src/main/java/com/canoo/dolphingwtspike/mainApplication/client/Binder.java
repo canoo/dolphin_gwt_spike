@@ -1,9 +1,8 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
-import com.canoo.opendolphin.client.js.OnFinishedHandlerJS;
-import com.canoo.opendolphin.client.js.PresentationModelJS;
-import com.google.gwt.core.client.JsArray;
+import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
+import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -11,6 +10,8 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.ui.Label;
+
+import java.util.List;
 
 public class Binder {
 	public void bind(final MainView view, final PMContext pmContext) {
@@ -56,12 +57,11 @@ public class Binder {
 
 		view.getAddServerDataButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				pmContext.sendAddCommand(new OnFinishedHandlerJS() {
+				pmContext.sendAddCommand(new OnFinishedHandler() {
 					@Override
-					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
-						for (int i = 0; i < pms.length(); i++) {
-							PresentationModelJS pm = pms.get(i);
-							view.getListDiv().add(new Label(pm.getPresentationModelType() + ": " + pm.getClientAttributes().get(0).getValue()));
+					public void handlePresentationModels(final List<PresentationModel> pms) {
+						for (PresentationModel pm : pms) {
+							view.getListDiv().add(new Label(pm.getPresentationModelType() + ": " + pm.getAttributes().get(0).getValue()));
 						}
 					}
 				});

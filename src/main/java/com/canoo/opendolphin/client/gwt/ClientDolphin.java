@@ -3,6 +3,9 @@ package com.canoo.opendolphin.client.gwt;
 import com.canoo.opendolphin.client.js.*;
 import com.google.gwt.core.client.JsArray;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClientDolphin {
 
     private final ClientDolphinJS clientDolphinJS;
@@ -17,8 +20,18 @@ public class ClientDolphin {
         sendJS(clientDolphinJS, commandName);
     }
 
-    public void send(String commandName, OnFinishedHandlerJS handler){
-        sendJS(clientDolphinJS, commandName, handler);
+    public void send(String commandName, final OnFinishedHandler handler){
+        sendJS(clientDolphinJS, commandName, new OnFinishedHandlerJS() {
+			@Override
+			public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {
+				List<PresentationModel> pms = new ArrayList<PresentationModel>(jsPMs.length());
+				for (int i = 0; i < jsPMs.length(); i++) {
+					pms.add(new PresentationModel(jsPMs.get(i)));
+				}
+
+				handler.handlePresentationModels(pms);
+			}
+		});
     }
 
     public void presentationModel(String id, String type, String... clientAttributeIDs) {
