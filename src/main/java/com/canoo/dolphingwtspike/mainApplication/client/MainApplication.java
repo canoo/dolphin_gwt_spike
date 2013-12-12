@@ -3,8 +3,6 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 import com.canoo.opendolphin.client.gwt.Dolphin;
 import com.canoo.opendolphin.client.gwt.DolphinLoader;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
-import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.DolphinJS;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
@@ -21,11 +19,10 @@ public class MainApplication implements EntryPoint {
 	}
 
 	public void initialize() {
-		DolphinLoader.load(Constants.getInvalidateSessionUrl(), new DolphinStarter() {
+		// 1: Bootstrap Dolphin:
+		DolphinLoader.load(Constants.getDolphinUrl(), new DolphinStarter() {
 			@Override
-			public void start(final DolphinJS dolphinModule, final ClientAttributeJS clientAttributeModule) {
-				// 1: Initialize Dolphin:
-				Dolphin dolphin = new Dolphin(dolphinModule, clientAttributeModule, Constants.getDolphinUrl());
+			public void start(final Dolphin dolphin) {
 
 				// 2: Initialize PMs:
 				PMContext pmContext = new PMContext().initialize(dolphin);
