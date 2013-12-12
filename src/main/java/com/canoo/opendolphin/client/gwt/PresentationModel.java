@@ -17,7 +17,7 @@ public class PresentationModel {
 		JsArray<ClientAttributeJS> clientAttributesJS = pmJS.getClientAttributes();
 		for (int i = 0; i < clientAttributesJS.length(); i++) {
 			ClientAttributeJS clientAttributeJS = clientAttributesJS.get(i);
-			attributes.add(new ClientAttribute(clientAttributeJS.getId(), clientAttributeJS));
+			attributes.add(new ClientAttribute(clientAttributeJS));
 		}
 	}
 
@@ -27,5 +27,18 @@ public class PresentationModel {
 
 	public List<ClientAttribute> getAttributes() {
 		return attributes;
+	}
+
+	public ClientAttribute getAt(String propertyName) {
+		for (ClientAttribute attribute : attributes) {
+			if (propertyName.equals(attribute.getPropertyName())) return attribute;
+		}
+		return null;
+	}
+	public ClientAttribute getAt(String propertyName, String tag) {
+		for (ClientAttribute attribute : attributes) {
+			if (propertyName.equals(attribute.getPropertyName()) && tag.equals(attribute.getTag())) return attribute;
+		}
+		return null;
 	}
 }

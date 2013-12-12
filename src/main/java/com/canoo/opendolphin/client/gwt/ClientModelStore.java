@@ -11,18 +11,9 @@ public class ClientModelStore {
         this.clientModelStoreJS = clientModelStoreJS;
     }
 
-    public ClientAttribute findAttributeById(String id) {
-        return new ClientAttribute(id, getAttribute(id, clientModelStoreJS));
+    public ClientAttribute findAttributeById(Long id) {
+		ClientAttributeJS clientAttributeJS = clientModelStoreJS.findAttributeById(id);
+		return new ClientAttribute(clientAttributeJS);
     }
-
-    private native ClientAttributeJS getAttribute(String attributeId, ClientModelStoreJS clientModelStoreJS) /*-{
-
-        var list = clientModelStoreJS.findAttributesByFilter(function (attr) {
-            return (attr.propertyName == attributeId)
-        });
-        var attribute = list[0];
-
-        return attribute;
-    }-*/;
 
 }

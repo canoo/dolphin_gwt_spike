@@ -34,22 +34,22 @@ public class ClientDolphin {
 		});
     }
 
-    public void presentationModel(String id, String type, String... clientAttributeIDs) {
+    public PresentationModel presentationModel(String id, String type, String... clientAttributePropertyNames) {
 
         JsArray jsAttributes = ClientAttributeJS.createArray().cast();
-        for (String attrId : clientAttributeIDs) {
-            jsAttributes.push(ClientAttribute.newClientAttributeJS(clientAttributeModule, attrId));
+        for (String propertyName : clientAttributePropertyNames) {
+            jsAttributes.push(ClientAttribute.newClientAttributeJS(clientAttributeModule, propertyName));
         }
 
-        presentationModelJS(clientDolphinJS, id, type, jsAttributes);
+		return new PresentationModel(presentationModelJS(clientDolphinJS, id, type, jsAttributes));
     }
 
     public ClientModelStore getClientModelStore() {
         return new ClientModelStore(getClientModelStoreJS(clientDolphinJS));
     }
 
-    private native PresentationModelJS presentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> javaScriptObjects) /*-{
-        return clientDolphin.presentationModel( pmId, type, javaScriptObjects );
+    private native PresentationModelJS presentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
+        return clientDolphin.presentationModel(pmId, type, clientAttributesJS);
     }-*/;
 
     private native void sendJS(ClientDolphinJS clientDolphinJS, String commandName) /*-{

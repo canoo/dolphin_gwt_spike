@@ -36,7 +36,7 @@ public class Binder {
 			public void onClick(final ClickEvent event) {
 				pmContext.sendEchoCommand();
 				// Just to demonstrate findAttributeById
-				System.out.println("*** Attribute Value from ModelStore = " + pmContext.findAttribute(PMContext.TEXT_ATTR_ID).getValue());
+				System.out.println("*** Attribute Value from ModelStore = " + pmContext.findAttribute(pmContext.getTextAttribute().getId()).getValue());
 			}
 		});
 

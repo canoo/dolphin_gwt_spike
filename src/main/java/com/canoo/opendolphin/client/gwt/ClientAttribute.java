@@ -4,38 +4,45 @@ import com.canoo.opendolphin.client.js.ClientAttributeJS;
 
 public class ClientAttribute {
 
-    private final String id;
-    private final ClientAttributeJS attribute;
+    private final ClientAttributeJS clientAttributeJS;
 
-    public ClientAttribute(ClientAttributeJS clientAttributeModule, String id) {
-        this.id = id;
-        attribute = newClientAttributeJS(clientAttributeModule, id);
+    public ClientAttribute(ClientAttributeJS clientAttributeJS) {
+        this.clientAttributeJS = clientAttributeJS;
     }
 
-    public ClientAttribute(String id, ClientAttributeJS attribute) {
-        this.id = id;
-        this.attribute = attribute;
+    public Long getId() {
+        return clientAttributeJS.getId();
     }
-
-    public String getId() {
-        return id;
-    }
-
-    public ClientAttributeJS getAttribute() {
-        return attribute;
-    }
+	public final  String getPropertyName() {
+		return clientAttributeJS.getPropertyName();
+	}
+	public final  String getBaseValue() {
+		return clientAttributeJS.getBaseValue();
+	}
+	public final  String getQualifier() {
+		return clientAttributeJS.getQualifier();
+	}
+	public final  String getTag() {
+		return clientAttributeJS.getTag();
+	}
+	public String getValue() {
+		return clientAttributeJS.getValue();
+	}
 
     public void setValue(String value) {
-        setAttributeValue(getAttribute(), value);
+        setAttributeValue(getClientAttributeJS(), value);
     }
 
-    public String getValue() {
-        return getValueJS(getAttribute());
-    }
 
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
-        addAttributeValueChangeHandler(getAttribute(), handler);
+        addAttributeValueChangeHandler(getClientAttributeJS(), handler);
     }
+
+	private ClientAttributeJS getClientAttributeJS() {
+		return clientAttributeJS;
+	}
+
+	// --- Javascript ---
 
     private native void setAttributeValue(ClientAttributeJS attribute, String value) /*-{
         attribute.setValue(value);
@@ -45,8 +52,8 @@ public class ClientAttribute {
         return attribute.getValue();
     }-*/;
 
-    static native ClientAttributeJS newClientAttributeJS(ClientAttributeJS clientAttributeModule, String attributeId) /*-{
-        return new clientAttributeModule(attributeId);
+    static native ClientAttributeJS newClientAttributeJS(ClientAttributeJS clientAttributeModule, String propertyName) /*-{
+        return new clientAttributeModule(propertyName);
     }-*/;
 
     private native void addAttributeValueChangeHandler(ClientAttributeJS attribute, AttributeValueChangeHandler handler) /*-{
