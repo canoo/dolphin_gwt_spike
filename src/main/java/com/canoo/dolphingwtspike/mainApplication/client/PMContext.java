@@ -14,14 +14,14 @@ public class PMContext {
 	public static final String RANGE_ATTR_ID = "range";
 	private Dolphin dolphin;
 
-	public void initialize(DolphinJS DolphinJS, ClientAttributeJS ClientAttributeJS) {
+	public void initialize(DolphinJS dolphinModule, ClientAttributeJS clientAttributeModule) {
 
-		dolphin = new Dolphin(DolphinJS, Constants.getDolphinUrl());
+		dolphin = new Dolphin(dolphinModule, clientAttributeModule, Constants.getDolphinUrl());
 		final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
 		// create named PM with attribute on the client side
 		String type = null;
-		clientDolphin.presentationModel(PM_ID, type, new ClientAttribute(ClientAttributeJS, TEXT_ATTR_ID), new ClientAttribute(ClientAttributeJS, RANGE_ATTR_ID));
+		clientDolphin.presentationModel(PM_ID, type, new ClientAttribute(clientAttributeModule, TEXT_ATTR_ID), new ClientAttribute(clientAttributeModule, RANGE_ATTR_ID));
 
 	}
 

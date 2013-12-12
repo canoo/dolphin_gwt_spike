@@ -23,9 +23,9 @@ public class MainApplication implements EntryPoint {
 	public void initialize() {
 		DolphinLoader.load(Constants.getInvalidateSessionUrl(), new DolphinStarter() {
 			@Override
-			public void start(final JavaScriptObject Dolphin, final JavaScriptObject ClientAttribute) {
+			public void start(final DolphinJS dolphinModule, final ClientAttributeJS clientAttributeModule) {
 				PMContext pmContext = new PMContext();
-				pmContext.initialize((DolphinJS) Dolphin, (ClientAttributeJS) ClientAttribute);
+				pmContext.initialize(dolphinModule, clientAttributeModule);
 
 				MainView view = new MainView();
 				view.initialize();

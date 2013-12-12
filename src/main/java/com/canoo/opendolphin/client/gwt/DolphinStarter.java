@@ -1,7 +1,8 @@
 package com.canoo.opendolphin.client.gwt;
 
-import com.google.gwt.core.client.JavaScriptObject;
+import com.canoo.opendolphin.client.js.ClientAttributeJS;
+import com.canoo.opendolphin.client.js.DolphinJS;
 
 public interface DolphinStarter {
-	public void start(JavaScriptObject Dolphin, JavaScriptObject ClientAttribute);
+	public void start(DolphinJS Dolphin, ClientAttributeJS ClientAttribute);
 }

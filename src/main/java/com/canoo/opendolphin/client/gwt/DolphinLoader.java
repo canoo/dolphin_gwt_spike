@@ -26,9 +26,10 @@ public class DolphinLoader {
 
 		$wnd.require([
 			'Dolphin', 'comm/ClientAttribute'
-		], function (Dolphin, ClientAttribute) {
+		], function (dolphinModule, clientAttributeModule) {
 			console.log("DolphinLoader.load: in callback");
-			dolphinStarter.@com.canoo.opendolphin.client.gwt.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(Dolphin, ClientAttribute);
+//			dolphinStarter.@com.canoo.opendolphin.client.gwt.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(dolphinModule, clientAttributeModule);
+			dolphinStarter.@com.canoo.opendolphin.client.gwt.DolphinStarter::start(Lcom/canoo/opendolphin/client/js/DolphinJS;Lcom/canoo/opendolphin/client/js/ClientAttributeJS;)(dolphinModule, clientAttributeModule);
 		});
 
 		console.log("DolphinLoader.load: returning");
