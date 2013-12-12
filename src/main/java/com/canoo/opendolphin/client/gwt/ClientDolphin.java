@@ -38,7 +38,7 @@ public class ClientDolphin {
 
         JsArray jsAttributes = ClientAttributeJS.createArray().cast();
         for (String propertyName : clientAttributePropertyNames) {
-            jsAttributes.push(ClientAttribute.newClientAttributeJS(clientAttributeModule, propertyName));
+            jsAttributes.push(ClientAttributeJS.newClientAttributeJS(clientAttributeModule, propertyName));
         }
 
 		PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(clientDolphinJS, id, type, jsAttributes);

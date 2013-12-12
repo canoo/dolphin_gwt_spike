@@ -34,23 +34,7 @@ public class ClientAttribute {
     }
 
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
-        addAttributeValueChangeHandler(getClientAttributeJS(), handler);
+        clientAttributeJS.addAttributeValueChangeHandler( handler);
     }
 
-	private ClientAttributeJS getClientAttributeJS() {
-		return clientAttributeJS;
-	}
-
-	// --- Javascript ---
-
-
-    static native ClientAttributeJS newClientAttributeJS(ClientAttributeJS clientAttributeModule, String propertyName) /*-{
-        return new clientAttributeModule(propertyName);
-    }-*/;
-
-    private native void addAttributeValueChangeHandler(ClientAttributeJS attribute, AttributeValueChangeHandler handler) /*-{
-        attribute.on("valueChange", function (data) {
-            handler.@com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
-        });
-    }-*/;
 }

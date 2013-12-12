@@ -1,10 +1,15 @@
 package com.canoo.opendolphin.client.js;
 
+import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class ClientAttributeJS extends JavaScriptObject
 {
 	protected ClientAttributeJS(){}
+
+	public static final native ClientAttributeJS newClientAttributeJS(ClientAttributeJS clientAttributeModule, String propertyName) /*-{
+		return new clientAttributeModule(propertyName);
+	}-*/;
 
 	public final native Long getId()/*-{
 		return this.id;
@@ -28,5 +33,12 @@ public class ClientAttributeJS extends JavaScriptObject
 	public final native void setValue(String value) /*-{
 		this.setValue(value);
 	}-*/;
+
+	public final native void addAttributeValueChangeHandler(AttributeValueChangeHandler handler) /*-{
+		this.on("valueChange", function (data) {
+			handler.@com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
+		});
+	}-*/;
+
 }
 
