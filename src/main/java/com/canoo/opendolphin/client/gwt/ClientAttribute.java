@@ -30,9 +30,8 @@ public class ClientAttribute {
 	}
 
     public void setValue(String value) {
-        setAttributeValue(getClientAttributeJS(), value);
+        clientAttributeJS.setValue(value);
     }
-
 
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
         addAttributeValueChangeHandler(getClientAttributeJS(), handler);
@@ -44,13 +43,6 @@ public class ClientAttribute {
 
 	// --- Javascript ---
 
-    private native void setAttributeValue(ClientAttributeJS attribute, String value) /*-{
-        attribute.setValue(value);
-    }-*/;
-
-    private native String getValueJS(ClientAttributeJS attribute) /*-{
-        return attribute.getValue();
-    }-*/;
 
     static native ClientAttributeJS newClientAttributeJS(ClientAttributeJS clientAttributeModule, String propertyName) /*-{
         return new clientAttributeModule(propertyName);

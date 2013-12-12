@@ -17,7 +17,7 @@ public class ClientDolphin {
     }
 
     public void send(String commandName){
-        sendJS(clientDolphinJS, commandName);
+		clientDolphinJS.sendJS(commandName);
     }
 
     public void send(String commandName, final OnFinishedHandler handler){
@@ -41,20 +41,13 @@ public class ClientDolphin {
             jsAttributes.push(ClientAttribute.newClientAttributeJS(clientAttributeModule, propertyName));
         }
 
-		return new PresentationModel(presentationModelJS(clientDolphinJS, id, type, jsAttributes));
+		PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(clientDolphinJS, id, type, jsAttributes);
+		return new PresentationModel(presentationModelJS);
     }
 
     public ClientModelStore getClientModelStore() {
         return new ClientModelStore(getClientModelStoreJS(clientDolphinJS));
     }
-
-    private native PresentationModelJS presentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
-        return clientDolphin.presentationModel(pmId, type, clientAttributesJS);
-    }-*/;
-
-    private native void sendJS(ClientDolphinJS clientDolphinJS, String commandName) /*-{
-        clientDolphinJS.send(commandName);
-    }-*/;
 
     private native void sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandlerJS handler) /*-{
 		clientDolphin.send(commandName, function (pms) {

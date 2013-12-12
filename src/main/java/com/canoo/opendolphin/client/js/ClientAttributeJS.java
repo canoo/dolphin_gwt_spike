@@ -25,5 +25,8 @@ public class ClientAttributeJS extends JavaScriptObject
 		return this.value;
 	}-*/;
 
+	public final native void setValue(String value) /*-{
+		this.setValue(value);
+	}-*/;
 }
 
