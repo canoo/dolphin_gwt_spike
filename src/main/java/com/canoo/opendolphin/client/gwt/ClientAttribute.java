@@ -9,7 +9,7 @@ public class ClientAttribute {
 
     public ClientAttribute(ClientAttributeJS ClientAttribute, String id) {
         this.id = id;
-        attribute = newAttribute(ClientAttribute, id);
+        attribute = newClientAttributeJS(ClientAttribute, id);
     }
 
     public ClientAttribute(String id, ClientAttributeJS attribute) {
@@ -45,8 +45,8 @@ public class ClientAttribute {
         return attribute.getValue();
     }-*/;
 
-    private native ClientAttributeJS newAttribute(ClientAttributeJS ClientAttribute, String attributeId) /*-{
-        return new ClientAttribute(attributeId);
+    static native ClientAttributeJS newClientAttributeJS(ClientAttributeJS clientAttributeModule, String attributeId) /*-{
+        return new clientAttributeModule(attributeId);
     }-*/;
 
     private native void addAttributeValueChangeHandler(ClientAttributeJS attribute, AttributeValueChangeHandler handler) /*-{

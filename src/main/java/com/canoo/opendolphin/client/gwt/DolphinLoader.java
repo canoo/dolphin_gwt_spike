@@ -28,7 +28,6 @@ public class DolphinLoader {
 			'Dolphin', 'comm/ClientAttribute'
 		], function (dolphinModule, clientAttributeModule) {
 			console.log("DolphinLoader.load: in callback");
-//			dolphinStarter.@com.canoo.opendolphin.client.gwt.DolphinStarter::start(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/google/gwt/core/client/JavaScriptObject;)(dolphinModule, clientAttributeModule);
 			dolphinStarter.@com.canoo.opendolphin.client.gwt.DolphinStarter::start(Lcom/canoo/opendolphin/client/js/DolphinJS;Lcom/canoo/opendolphin/client/js/ClientAttributeJS;)(dolphinModule, clientAttributeModule);
 		});
 

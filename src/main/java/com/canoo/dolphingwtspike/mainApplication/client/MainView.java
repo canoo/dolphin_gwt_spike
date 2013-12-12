@@ -12,7 +12,7 @@ public class MainView {
 	private Label helpLabel;
 	private Button addServerDataButton;
 
-	public void initialize() {
+	public MainView initialize() {
 		textBox = new TextBox();
 		label = new Label("--");
 		serverModificationButton = new Button("Server Modification");
@@ -40,6 +40,8 @@ public class MainView {
 		RootPanel.get("slot1").add(help2Label);
 		RootPanel.get("slot1").add(addServerDataButton);
 		RootPanel.get("slot1").add(listDiv);
+
+		return this;
 	}
 
 	public Label getLabel() {

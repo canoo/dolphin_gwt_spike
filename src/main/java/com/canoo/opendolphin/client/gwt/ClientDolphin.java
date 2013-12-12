@@ -8,9 +8,11 @@ import com.google.gwt.core.client.JsArray;
 public class ClientDolphin {
 
     private final ClientDolphinJS clientDolphinJS;
+    private final ClientAttributeJS clientAttributeModule;
 
-    public ClientDolphin(ClientDolphinJS clientDolphinJS) {
+    public ClientDolphin(ClientDolphinJS clientDolphinJS, final ClientAttributeJS clientAttributeModule) {
         this.clientDolphinJS = clientDolphinJS;
+		this.clientAttributeModule = clientAttributeModule;
     }
 
     public void send(String commandName){
@@ -21,11 +23,11 @@ public class ClientDolphin {
         sendJS(clientDolphinJS, commandName, handler);
     }
 
-    public void presentationModel(String id, String type, ClientAttribute... clientAttributes) {
+    public void presentationModel(String id, String type, String... clientAttributeIDs) {
 
         JsArray jsAttributes = ClientAttributeJS.createArray().cast();
-        for (ClientAttribute attribute : clientAttributes) {
-            jsAttributes.push(attribute.getAttribute());
+        for (String attrId : clientAttributeIDs) {
+            jsAttributes.push(ClientAttribute.newClientAttributeJS(clientAttributeModule, attrId));
         }
 
         presentationModelJS(clientDolphinJS, id, type, jsAttributes);

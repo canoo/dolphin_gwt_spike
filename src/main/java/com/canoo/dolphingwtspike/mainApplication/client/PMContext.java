@@ -4,8 +4,6 @@ import com.canoo.opendolphin.client.gwt.ClientAttribute;
 import com.canoo.opendolphin.client.gwt.ClientDolphin;
 import com.canoo.opendolphin.client.gwt.Dolphin;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
-import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.DolphinJS;
 
 public class PMContext {
 
@@ -14,15 +12,15 @@ public class PMContext {
 	public static final String RANGE_ATTR_ID = "range";
 	private Dolphin dolphin;
 
-	public void initialize(DolphinJS dolphinModule, ClientAttributeJS clientAttributeModule) {
+	public PMContext initialize(Dolphin dolphin) {
+		this.dolphin = dolphin;
 
-		dolphin = new Dolphin(dolphinModule, clientAttributeModule, Constants.getDolphinUrl());
 		final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
 		// create named PM with attribute on the client side
 		String type = null;
-		clientDolphin.presentationModel(PM_ID, type, new ClientAttribute(clientAttributeModule, TEXT_ATTR_ID), new ClientAttribute(clientAttributeModule, RANGE_ATTR_ID));
-
+		clientDolphin.presentationModel(PM_ID, type, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		return this;
 	}
 
 	public ClientAttribute findAttribute(String attrId) {
