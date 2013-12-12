@@ -12,8 +12,6 @@ public class PMContext {
 	public static final String PM_ID = "org.opendolphin.demo.Tutorial.modelId";
 	public static final String TEXT_ATTR_ID = "attrId";
 	public static final String RANGE_ATTR_ID = "range";
-	private ClientAttribute textAttribute;
-	private ClientAttribute rangeAttribute;
 	private Dolphin dolphin;
 
 	public void initialize(DolphinJS DolphinJS, ClientAttributeJS ClientAttributeJS) {
@@ -21,12 +19,9 @@ public class PMContext {
 		dolphin = new Dolphin(DolphinJS, Constants.getDolphinUrl());
 		final ClientDolphin clientDolphin = dolphin.getClientDolphin();
 
-		textAttribute = new ClientAttribute(ClientAttributeJS, TEXT_ATTR_ID);
-		rangeAttribute = new ClientAttribute(ClientAttributeJS, RANGE_ATTR_ID);
-
 		// create named PM with attribute on the client side
 		String type = null;
-		clientDolphin.presentationModel(PM_ID, type, textAttribute, rangeAttribute);
+		clientDolphin.presentationModel(PM_ID, type, new ClientAttribute(ClientAttributeJS, TEXT_ATTR_ID), new ClientAttribute(ClientAttributeJS, RANGE_ATTR_ID));
 
 	}
 
@@ -35,11 +30,11 @@ public class PMContext {
 
 	}
 	public ClientAttribute getTextAttribute() {
-		return textAttribute;
+       return findAttribute(PMContext.TEXT_ATTR_ID);
 	}
 
 	public ClientAttribute getRangeAttribute() {
-		return rangeAttribute;
+        return findAttribute(PMContext.RANGE_ATTR_ID);
 	}
 
 	public void sendEchoCommand() {
