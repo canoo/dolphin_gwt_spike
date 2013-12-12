@@ -1,8 +1,6 @@
 package com.canoo.opendolphin.client.gwt;
 
-import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.ClientDolphinJS;
-import com.canoo.opendolphin.client.js.ClientModelStoreJS;
+import com.canoo.opendolphin.client.js.*;
 import com.google.gwt.core.client.JsArray;
 
 public class ClientDolphin {
@@ -19,7 +17,7 @@ public class ClientDolphin {
         sendJS(clientDolphinJS, commandName);
     }
 
-    public void send(String commandName, OnFinishedHandler handler){
+    public void send(String commandName, OnFinishedHandlerJS handler){
         sendJS(clientDolphinJS, commandName, handler);
     }
 
@@ -45,9 +43,9 @@ public class ClientDolphin {
         clientDolphinJS.send(commandName);
     }-*/;
 
-    private native void sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandler handler) /*-{
+    private native void sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandlerJS handler) /*-{
 		clientDolphin.send(commandName, function (pms) {
-            handler.@com.canoo.opendolphin.client.gwt.OnFinishedHandler::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
+            handler.@com.canoo.opendolphin.client.js.OnFinishedHandlerJS::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
         });
     }-*/;
 

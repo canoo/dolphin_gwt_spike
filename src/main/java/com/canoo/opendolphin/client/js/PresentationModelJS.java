@@ -1,6 +1,5 @@
-package com.canoo.opendolphin.client.gwt;
+package com.canoo.opendolphin.client.js;
 
-import com.canoo.opendolphin.client.js.ClientAttributeJS;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 

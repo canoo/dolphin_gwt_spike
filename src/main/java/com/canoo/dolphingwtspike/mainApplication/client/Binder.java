@@ -1,8 +1,8 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
-import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
-import com.canoo.opendolphin.client.gwt.PresentationModelJS;
+import com.canoo.opendolphin.client.js.OnFinishedHandlerJS;
+import com.canoo.opendolphin.client.js.PresentationModelJS;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -56,7 +56,7 @@ public class Binder {
 
 		view.getAddServerDataButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				pmContext.sendAddCommand(new OnFinishedHandler() {
+				pmContext.sendAddCommand(new OnFinishedHandlerJS() {
 					@Override
 					public void handlePresentationModels(final JsArray<PresentationModelJS> pms) {
 						for (int i = 0; i < pms.length(); i++) {
