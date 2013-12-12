@@ -21,7 +21,7 @@ public class ClientDolphin {
     }
 
     public void send(String commandName, final OnFinishedHandler handler){
-        sendJS(clientDolphinJS, commandName, new OnFinishedHandlerJS() {
+		clientDolphinJS.sendJS(commandName, new OnFinishedHandlerJS() {
 			@Override
 			public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {
 				List<PresentationModel> pms = new ArrayList<PresentationModel>(jsPMs.length());
@@ -46,17 +46,8 @@ public class ClientDolphin {
     }
 
     public ClientModelStore getClientModelStore() {
-        return new ClientModelStore(getClientModelStoreJS(clientDolphinJS));
+        return new ClientModelStore(clientDolphinJS.getClientModelStoreJS());
     }
 
-    private native void sendJS(ClientDolphinJS clientDolphin, String commandName, OnFinishedHandlerJS handler) /*-{
-		clientDolphin.send(commandName, function (pms) {
-            handler.@com.canoo.opendolphin.client.js.OnFinishedHandlerJS::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
-        });
-    }-*/;
-
-    private native ClientModelStoreJS getClientModelStoreJS(ClientDolphinJS clientDolphin) /*-{
-        return clientDolphin.getClientModelStore();
-    }-*/;
 
 }

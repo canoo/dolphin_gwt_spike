@@ -12,5 +12,14 @@ public class ClientDolphinJS extends JavaScriptObject
 		this.send(commandName);
 	}-*/;
 
+	public final native void sendJS(String commandName, OnFinishedHandlerJS handler) /*-{
+		this.send(commandName, function (pms) {
+			handler.@com.canoo.opendolphin.client.js.OnFinishedHandlerJS::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
+		});
+	}-*/;
+
+	public final native ClientModelStoreJS getClientModelStoreJS() /*-{
+		return this.getClientModelStore();
+	}-*/;
 }
 
