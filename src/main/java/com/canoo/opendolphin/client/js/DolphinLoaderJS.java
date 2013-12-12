@@ -1,7 +1,9 @@
 
-package com.canoo.opendolphin.client.gwt;
+package com.canoo.opendolphin.client.js;
 
-public class DolphinLoader {
+import com.canoo.opendolphin.client.gwt.DolphinStarter;
+
+public class DolphinLoaderJS {
 
 	public final static native void load(String dolphinURL, DolphinStarter dolphinStarter) /*-{
 		console.log("DolphinLoader.load: entered");

@@ -1,7 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.Dolphin;
-import com.canoo.opendolphin.client.gwt.DolphinLoader;
+import com.canoo.opendolphin.client.js.DolphinLoaderJS;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
 import com.google.gwt.core.client.EntryPoint;
 
@@ -20,7 +20,7 @@ public class MainApplication implements EntryPoint {
 
 	public void initialize() {
 		// 1: Bootstrap Dolphin:
-		DolphinLoader.load(Constants.getDolphinUrl(), new DolphinStarter() {
+		DolphinLoaderJS.load(Constants.getDolphinUrl(), new DolphinStarter() {
 			@Override
 			public void start(final Dolphin dolphin) {
 
