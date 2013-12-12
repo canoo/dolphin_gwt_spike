@@ -9,20 +9,13 @@ public class Dolphin {
     private final ClientDolphin clientDolphin;
 
     public Dolphin(DolphinJS dolphinModule, final ClientAttributeJS clientAttributeModule, String dolphinUrl) {
-		clientDolphin = new ClientDolphin(getClientDolphinJS(newDolphinJS(dolphinModule, dolphinUrl)), clientAttributeModule);
+		DolphinJS dolphinJS = DolphinJS.newDolphinJS(dolphinModule, dolphinUrl);
+		clientDolphin = new ClientDolphin(dolphinJS.getClientDolphinJS(), clientAttributeModule);
     }
 
     public ClientDolphin getClientDolphin(){
         return clientDolphin;
     }
 
-    private native ClientDolphinJS getClientDolphinJS(DolphinJS dolphinJS) /*-{
 
-        return dolphinJS.getClientDolphin();
-
-    }-*/;
-
-	private native DolphinJS newDolphinJS(DolphinJS dolphinModule, String url) /*-{
-		return new dolphinModule(url);
-	}-*/;
 }
