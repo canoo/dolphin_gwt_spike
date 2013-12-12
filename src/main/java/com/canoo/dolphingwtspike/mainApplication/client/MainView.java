@@ -18,7 +18,7 @@ public class MainView {
 		serverModificationButton = new Button("Server Modification");
 		helpLabel = new Label("Drag the slider to see the label being updated.");
 		range = new TextBox(); range.getElement().setAttribute("type", "range");
-		rangeLabel = new Label("--");
+		rangeLabel = new Label();
 		listDiv = new VerticalPanel();
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");

@@ -31,6 +31,7 @@ public class MainApplication implements EntryPoint {
 				view.initialize();
 
 				new Binder().bind(view, pmContext);
+				new PMLoader().load(pmContext);
 			}
 		});
 
