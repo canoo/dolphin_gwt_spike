@@ -1,5 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
+import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
 import com.canoo.opendolphin.client.gwt.PresentationModel;
@@ -16,6 +17,11 @@ import java.util.List;
 public class Binder {
 	public void bind(final MainView view, final PMContext pmContext) {
 
+		// TODO: find a way to register a real ValueChangedHandler (we did not find one with GWT)
+		// in HTML5 you do it as follows:
+		//  textInput.addEventListener("input", function () {
+		//    textAttribute.setValue(textInput.value);
+	    //  });
 		view.getTextBox().addKeyUpHandler(new KeyUpHandler() {
 			public void onKeyUp(final KeyUpEvent event) {
 				pmContext.getTextAttribute().setValue(view.getTextBox().getText());
@@ -34,7 +40,7 @@ public class Binder {
 		// send echo command on button click:
 		view.getServerModificationButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				pmContext.sendEchoCommand();
+				pmContext.sendCommand(PMConstants.CMD_ECHO);
 				// Just to demonstrate findAttributeById
 				System.out.println("*** Attribute Value from ModelStore = " + pmContext.findAttribute(pmContext.getTextAttribute().getId()).getValue());
 			}
@@ -57,7 +63,7 @@ public class Binder {
 
 		view.getAddServerDataButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				pmContext.sendAddCommand(new OnFinishedHandler() {
+				pmContext.sendCommand(PMConstants.CMD_ADD, new OnFinishedHandler() {
 					@Override
 					public void handlePresentationModels(final List<PresentationModel> pms) {
 						for (PresentationModel pm : pms) {

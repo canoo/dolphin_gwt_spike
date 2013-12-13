@@ -17,11 +17,11 @@ public class ClientDolphin {
     }
 
     public void send(String commandName){
-		clientDolphinJS.sendJS(commandName);
+		clientDolphinJS.send(commandName);
     }
 
     public void send(String commandName, final OnFinishedHandler handler){
-		clientDolphinJS.sendJS(commandName, new OnFinishedHandlerJS() {
+		clientDolphinJS.send(commandName, new OnFinishedHandlerJS() {
 			@Override
 			public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {
 				List<PresentationModel> pms = new ArrayList<PresentationModel>(jsPMs.length());
