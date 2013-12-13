@@ -1,5 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
+import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.Dolphin;
 import com.canoo.opendolphin.client.js.DolphinLoaderJS;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
@@ -35,6 +36,7 @@ public class MainApplication implements EntryPoint {
 
 				// 5: Load initial data into PMs:
 				new PMLoader().load(pmContext);
+//				pmContext.sendCommand(PMConstants.CMD_LOAD_INITIAL);
 			}
 		});
 

@@ -7,4 +7,5 @@ public class PMConstants {
 
 	public static final String CMD_ECHO     = "org.opendolphin.demo.Tutorial.echo";
 	public static final String CMD_ADD      = "org.opendolphin.demo.Tutorial.add";
+	public static final String CMD_LOAD_INITIAL      = "org.opendolphin.demo.Tutorial.loadInitial";
 }
