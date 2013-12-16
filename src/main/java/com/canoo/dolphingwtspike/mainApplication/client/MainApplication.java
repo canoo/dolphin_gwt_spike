@@ -5,12 +5,15 @@ import com.canoo.opendolphin.client.gwt.Dolphin;
 import com.canoo.opendolphin.client.js.DolphinLoaderJS;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
  */
 public class MainApplication implements EntryPoint {
 
+
+    public static final String DOLPHIN_URL = GWT.getHostPageBaseURL() + "dolphin/";
 
 	/**
 	 * This is the entry point method.
@@ -21,7 +24,7 @@ public class MainApplication implements EntryPoint {
 
 	public void initialize() {
 		// 1: Bootstrap Dolphin:
-		DolphinLoaderJS.load(Constants.getDolphinUrl(), new DolphinStarter() {
+		DolphinLoaderJS.load(DOLPHIN_URL, new DolphinStarter() {
 			@Override
 			public void start(final Dolphin dolphin) {
 
