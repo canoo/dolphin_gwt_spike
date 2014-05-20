@@ -13,16 +13,23 @@ Binding Java JS
   e.g.: Dolphin.java -> DolphinJS.java
 
 
-
-Get into Development
-====================
-- main entry point: src/main/java/com/canoo/dolphingwtspike/mainApplication/MainApplication.gwt.xml
+Application Bootstrap:
+======================
+- main HTML entry point: src/main/webapp/MainApplication.html
+- main GWT entry point: src/main/java/com/canoo/dolphingwtspike/mainApplication/MainApplication.gwt.xml
   -> MainApplication.java
   -> DolphinLoaderJS
   -> (via JS) DolphinBaseStarter::start
   -> DolphinStarter::start
   -> MainApplication$DolphinStarter::start
 
+- Note: the instruction '<script src="require.js"/>' causes require.js to get loaded by the browser.
+  This is not visible by with 'view source' command of the browser. Use 'inspect element' instead and take a look at the <head> element.
+
+
+TODO:
+=====
+- probably unused (check by deletion): /home/sven/canoo/git/dolphin_gwt_spike/src/main/java/com/canoo/opendolphin/public/config.js
 
 Temporary notes (just that we do not forget them):
 ===================================================
