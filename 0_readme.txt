@@ -8,7 +8,7 @@ which should automatically open a new tab in your browser showing the HTML page 
 
 Concepts
 ========
-Binding Java JS
+Binding Java <-> JS
 - from <ABC>.java to <ABC>JS.java
   e.g.: Dolphin.java -> DolphinJS.java
 
@@ -63,6 +63,9 @@ Application Bootstrap:
   -> MainApplication.java
   -> DolphinLoaderJS
   -> (via JS) DolphinBaseStarter::start
+     -> new Dolphin()
+        -> DolphinJS.newDolphinJS(...)
+        -> clientDolphin = new ClientDolphin
   -> DolphinStarter::start
   -> MainApplication$DolphinStarter::start
 

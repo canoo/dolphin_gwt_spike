@@ -6,16 +6,17 @@ var __extends = this.__extends || function (d, b) {
 };
 define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
     (function (dolphin) {
-        var NamedCommand = (function (_super) {
-            __extends(NamedCommand, _super);
-            function NamedCommand(name) {
+        var BaseValueChangedCommand = (function (_super) {
+            __extends(BaseValueChangedCommand, _super);
+            function BaseValueChangedCommand(attributeId) {
                 _super.call(this);
-                this.id = name;
-                this.className = "org.opendolphin.core.comm.NamedCommand";
+                this.attributeId = attributeId;
+                this.id = 'BaseValueChanged';
+                this.className = "org.opendolphin.core.comm.BaseValueChangedCommand";
             }
-            return NamedCommand;
+            return BaseValueChangedCommand;
         })(cmd.dolphin.Command);
-        dolphin.NamedCommand = NamedCommand;
+        dolphin.BaseValueChangedCommand = BaseValueChangedCommand;
     })(exports.dolphin || (exports.dolphin = {}));
     var dolphin = exports.dolphin;
 });

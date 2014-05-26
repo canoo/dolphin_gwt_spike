@@ -1,34 +1,37 @@
-define([
-    'comm/Command'
-], function (Command) {
+var __extends = this.__extends || function (d, b) {
+	for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	function __() { this.constructor = d; }
+	__.prototype = b.prototype;
+	d.prototype = new __();
+};
+define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
+	(function (dolphin) {
+		var CreatePresentationModelCommand = (function (_super) {
+			__extends(CreatePresentationModelCommand, _super);
+			function CreatePresentationModelCommand(presentationModel) {
+				_super.call(this);
+				this.attributes = [];
+				this.clientSideOnly = false;
+				this.id = "CreatePresentationModel";
+				this.className = "org.opendolphin.core.comm.CreatePresentationModelCommand";
+				this.pmId = presentationModel.id;
+				this.pmType = presentationModel.presentationModelType;
 
-    var CreatePresentationModelCommand = function(model) {
-
-        this.id = "CreatePresentationModel";
-        this.className = "org.opendolphin.core.comm.CreatePresentationModelCommand";
-
-        this.pmId = model.id;
-        this.pmType = model.presentationModelType;
-//        this.clientSideOnly = false;
-
-        var attributes = [];
-
-        model.attributes.forEach(function(attr) {
-            attributes.push({
-                propertyName:   attr.propertyName,
-                id:             attr.id,
-                qualifier:      attr.qualifier,
-                value:          attr.value,
-                tag:            attr.tag
-            });
-        });
-
-        this.attributes = attributes;
-
-    };
-
-    CreatePresentationModelCommand.prototype = new Command();
-
-    return CreatePresentationModelCommand;
-
+				var attrs = this.attributes;
+				presentationModel.getAttributes().forEach(function (attr) {
+					attrs.push({
+						propertyName: attr.propertyName,
+						id: attr.id,
+						qualifier: attr.getQualifier(),
+						value: attr.getValue(),
+						tag: attr.tag
+					});
+				});
+			}
+			return CreatePresentationModelCommand;
+		})(cmd.dolphin.Command);
+		dolphin.CreatePresentationModelCommand = CreatePresentationModelCommand;
+	})(exports.dolphin || (exports.dolphin = {}));
+	var dolphin = exports.dolphin;
 });
+

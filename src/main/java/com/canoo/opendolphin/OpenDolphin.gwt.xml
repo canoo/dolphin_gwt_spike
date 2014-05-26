@@ -3,10 +3,6 @@
 <module>
 	<inherits name="com.google.gwt.user.User" />
 
-	<!--<script src="dolphin-all.js"/>-->
 	<script src="require.js"/>
-	<!--<script src="config.js"/>-->
-
-	<!--<script src="Dolphin.js"/>-->
 
 </module>
