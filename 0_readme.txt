@@ -12,6 +12,49 @@ Binding Java JS
 - from <ABC>.java to <ABC>JS.java
   e.g.: Dolphin.java -> DolphinJS.java
 
+- ClientDolphin.presentationModel()  (ClientDolphin.java):
+    PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(...)
+    return new PresentationModel(presentationModelJS)
+
+- public class PresentationModel {
+  	private final PresentationModelJS pmJS;
+  	...
+  }
+- public class PresentationModelJS extends JavaScriptObject
+  {
+  	...
+
+  	public static final native PresentationModelJS newPresentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
+  		return clientDolphin.presentationModel(pmId, type, clientAttributesJS);
+  	}-*/;
+
+    ...
+  }
+---
+
+- Dolphin.java:
+    DolphinJS dolphinJS = DolphinJS.newDolphinJS(dolphinModule, dolphinUrl);
+    -> DolphinJS.java:
+       	public static final native DolphinJS newDolphinJS(DolphinJS dolphinModule, String url) /*-{
+       		return new dolphinModule(url); // <====== call into Dolphin.js passing 'url'
+       	}-*/;
+      -> Dolphin.js:
+         define([
+             'comm/ClientDolphin',
+             'comm/ClientModelStore',
+             'comm/HttpClientConnector'
+         ], function (ClientDolphin, ClientModelStore, HttpClientConnector) {
+
+             return function(serverUrl) { // <========= call from DolphinJS.java receiving 'url'
+                 ...
+             }
+            };
+
+         });
+
+
+
+
 
 Application Bootstrap:
 ======================
