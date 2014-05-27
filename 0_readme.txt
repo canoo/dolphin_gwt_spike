@@ -8,6 +8,10 @@ which should automatically open a new tab in your browser showing the HTML page 
 
 Concepts
 ========
+- JavaScript files which got loaded by require.js and thus served as a module (also just another JavaScript object)
+  can be cast to a GWT-Java Object of type 'JavaScriptObject'. Example: 'DolphinLoaderJS.java' loads 'OpenDolphin.js' via require.js
+  and then passes it as first parameter to 'DolphinBaseStarter::start(...)' casting it to type 'OpenDolphinJS.java' (which extends 'JavaScriptObject').
+
 Binding Java <-> JS
 - from <ABC>.java to <ABC>JS.java
   e.g.: Dolphin.java -> DolphinJS.java
