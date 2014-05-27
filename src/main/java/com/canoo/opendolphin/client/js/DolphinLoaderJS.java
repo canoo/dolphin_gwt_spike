@@ -9,28 +9,13 @@ public class DolphinLoaderJS {
 		console.log("DolphinLoader.load: entered");
 		$wnd.require.config({
 			baseUrl: 'com.canoo.opendolphin.OpenDolphin',
-			paths: {
-				jquery : 'jquery'
-			},
-
-			shim: {
-				'jquery': {
-					exports: '$'
-				}
-			},
-
-			map : {
-				'*': {
-					$ : 'jquery'
-				}
-			}
 		});
 
 		$wnd.require([
-			'comm/ClientDolphin', 'comm/ClientAttribute'
-		], function (dolphinModule, clientAttributeModule) {
+			'comm/OpenDolphin'
+		], function (OpenDolphin_js) {
 			console.log("DolphinLoader.load: in callback");
-			@com.canoo.opendolphin.client.gwt.DolphinBaseStarter::start(Lcom/canoo/opendolphin/client/js/DolphinJS;Lcom/canoo/opendolphin/client/js/ClientAttributeJS;Ljava/lang/String;Lcom/canoo/opendolphin/client/gwt/DolphinStarter;)(dolphinModule, clientAttributeModule, dolphinURL, dolphinStarter);
+			@com.canoo.opendolphin.client.gwt.DolphinBaseStarter::start(Lcom/canoo/opendolphin/client/js/OpenDolphinJS;Ljava/lang/String;Lcom/canoo/opendolphin/client/gwt/DolphinStarter;)(OpenDolphin_js, dolphinURL, dolphinStarter);
 		});
 
 		console.log("DolphinLoader.load: returning");
