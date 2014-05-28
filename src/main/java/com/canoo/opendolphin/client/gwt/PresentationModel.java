@@ -7,6 +7,7 @@ import com.google.gwt.core.client.JsArray;
 import java.util.ArrayList;
 import java.util.List;
 
+// todo: rename as ClientPresentationModel
 public class PresentationModel {
 	private final PresentationModelJS pmJS;
 

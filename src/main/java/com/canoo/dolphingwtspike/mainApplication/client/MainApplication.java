@@ -1,9 +1,10 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
-import com.canoo.opendolphin.client.gwt.Dolphin;
+import com.canoo.opendolphin.client.gwt.ClientDolphin;
 import com.canoo.opendolphin.client.js.DolphinLoaderJS;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
+import com.canoo.opendolphin.client.js.JSLogger;
 import com.google.gwt.core.client.EntryPoint;
 
 /**
@@ -23,10 +24,13 @@ public class MainApplication implements EntryPoint {
 		// 1: Bootstrap Dolphin:
 		DolphinLoaderJS.load(Constants.getDolphinUrl(), new DolphinStarter() {
 			@Override
-			public void start(final Dolphin dolphin) {
+			public void start(final ClientDolphin clientDolphin) {
+				System.out.println("");
+				JSLogger.log("=== MainApplication.start: 1");
 
 				// 2: Initialize PMs:
-				PMContext pmContext = new PMContext().initialize(dolphin);
+				PMContext pmContext = new PMContext().initialize(clientDolphin);
+/*
 
 				// 3: Initialize View:
 				MainView view = new MainView().initialize();
@@ -36,6 +40,7 @@ public class MainApplication implements EntryPoint {
 
 				// 5: Load initial data into PMs:
 				new PMLoader().load(pmContext);
+*/
 //				pmContext.sendCommand(PMConstants.CMD_LOAD_INITIAL);
 			}
 		});
