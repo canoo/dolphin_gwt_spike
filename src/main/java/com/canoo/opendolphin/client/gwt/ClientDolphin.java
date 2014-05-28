@@ -1,7 +1,6 @@
 package com.canoo.opendolphin.client.gwt;
 
 import com.canoo.opendolphin.client.js.*;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
 import java.util.ArrayList;
@@ -10,11 +9,9 @@ import java.util.List;
 public class ClientDolphin {
 
     private final ClientDolphinJS clientDolphinJS;
-    private final JavaScriptObject instance;
 
-    public ClientDolphin(ClientDolphinJS clientDolphinJS) {
-        this.clientDolphinJS = clientDolphinJS;
-		instance = clientDolphinJS.instance();
+    public ClientDolphin(ClientDolphinJS clientDolphinJSModule) {
+		clientDolphinJS = clientDolphinJSModule.newInstance();
     }
 
     public void send(String commandName){
@@ -36,7 +33,7 @@ public class ClientDolphin {
     }
 
     public ClientAttribute attribute(String propertyName, String qualifier, String value, String tag) {
-		ClientAttributeJS clientAttributeJS = clientDolphinJS.attribute(instance, propertyName, qualifier, value, tag);
+		ClientAttributeJS clientAttributeJS = clientDolphinJS.attribute(clientDolphinJS, propertyName, qualifier, value, tag);
 		return new ClientAttribute(clientAttributeJS);
 	}
 

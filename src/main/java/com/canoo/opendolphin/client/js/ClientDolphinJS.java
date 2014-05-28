@@ -8,7 +8,7 @@ public class ClientDolphinJS extends JavaScriptObject
 	protected ClientDolphinJS() {
 	}
 
-	public final native JavaScriptObject instance() /*-{
+	public final native ClientDolphinJS newInstance() /*-{
 		return this();
 	}-*/;
 
@@ -24,7 +24,7 @@ public class ClientDolphinJS extends JavaScriptObject
 
 	public final native ClientAttributeJS attribute(JavaScriptObject instance, String propertyName, String qualifier, String value, String tag) /*-{
 		console.log('ClientDolphinJS.attribute: 1');
-		var result = instance.attribute(propertyName, qualifier,  value, tag);
+		var result = this.attribute(propertyName, qualifier,  value, tag);
 		console.log('ClientDolphinJS.attribute: 1');
 		return result;
 	}-*/;
