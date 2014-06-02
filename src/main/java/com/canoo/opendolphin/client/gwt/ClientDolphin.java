@@ -39,22 +39,28 @@ public class ClientDolphin {
 
     public PresentationModel presentationModel(String id, String type, String... clientAttributePropertyNames) {
 
+		List<ClientAttribute> clientAttributes = new ArrayList<ClientAttribute>();
 		for (String propertyName : clientAttributePropertyNames) {
 			JSLogger.log("ClientDolphin.presentationModel: creating attribute for: " + propertyName);
-			this.attribute(propertyName, null, null, null);
+			ClientAttribute clientAttribute = this.attribute(propertyName, null, null, null);
+			clientAttributes.add(clientAttribute);
 			JSLogger.log("ClientDolphin.presentationModel: creating attribute done.");
 		}
 
-/*
         JsArray jsAttributes = ClientAttributeJS.createArray().cast();
-        for (String propertyName : clientAttributePropertyNames) {
-            jsAttributes.push(ClientAttributeJS.newClientAttributeJS(clientAttributeModule, propertyName));
-        }
+		for (ClientAttribute clientAttribute : clientAttributes) {
+			JSLogger.log(clientAttribute.getClientAttributeJS());
+            jsAttributes.push(clientAttribute.getClientAttributeJS());
+		}
+//        for (String propertyName : clientAttributePropertyNames) {
+//            jsAttributes.push(ClientAttributeJS.newClientAttributeJS(clientAttributeModule, propertyName));
+//        }
 
-		PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(clientDolphinJS, id, type, jsAttributes);
+		JSLogger.log(jsAttributes);
+		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, type, jsAttributes);
+
+//		PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(clientDolphinJS, id, type, jsAttributes);
 		return new PresentationModel(presentationModelJS);
-*/
-		return null;
     }
 
     public ClientModelStore getClientModelStore() {

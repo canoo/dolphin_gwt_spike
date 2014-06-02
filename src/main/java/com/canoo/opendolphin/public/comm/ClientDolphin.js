@@ -33,7 +33,16 @@ define(["require", "exports", "comm/NamedCommand", "comm/SignalCommand", "comm/E
 				var model = new pm.dolphin.ClientPresentationModel(id, type);
 				if (attributes && attributes.length > 0) {
 					attributes.forEach(function (attribute) {
-						model.addAttribute(attribute);
+						//OD-GWT: start change:
+						if (attribute.constructor.name == 'Array') {
+							attribute.forEach(function(elem) {
+								model.addAttribute(elem);
+							})
+						} else {
+							model.addAttribute(attribute);
+						}
+						//OD-GWT: end change.
+
 					});
 				}
 				this.getClientModelStore().add(model);

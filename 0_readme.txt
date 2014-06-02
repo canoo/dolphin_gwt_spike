@@ -76,6 +76,9 @@ Application Bootstrap:
 - Note: the instruction '<script src="require.js"/>' causes require.js to get loaded by the browser.
   This is not visible by with 'view source' command of the browser. Use 'inspect element' instead and take a look at the <head> element.
 
+Other Notes:
+============
+- modifications of original open-dolphin.js code are marked with: OD-GWT
 
 TODO:
 =====

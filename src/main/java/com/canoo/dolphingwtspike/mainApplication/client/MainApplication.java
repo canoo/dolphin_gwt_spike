@@ -30,10 +30,10 @@ public class MainApplication implements EntryPoint {
 
 				// 2: Initialize PMs:
 				PMContext pmContext = new PMContext().initialize(clientDolphin);
-/*
 
 				// 3: Initialize View:
 				MainView view = new MainView().initialize();
+/*
 
 				// 4: Bind view and PMs:
 				new Binder().bind(view, pmContext);

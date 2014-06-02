@@ -1,6 +1,7 @@
 package com.canoo.opendolphin.client.js;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 
 public class ClientDolphinJS extends JavaScriptObject
 {
@@ -27,6 +28,12 @@ public class ClientDolphinJS extends JavaScriptObject
 		var result = this.attribute(propertyName, qualifier,  value, tag);
 		console.log('ClientDolphinJS.attribute: 1');
 		return result;
+	}-*/;
+
+	public final native PresentationModelJS presentationModel(String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
+		console.log("***", pmId, clientAttributesJS);
+//		return this.presentationModel(pmId, type, clientAttributesJS);
+		return this.presentationModel(pmId, type, clientAttributesJS[0], clientAttributesJS[1]);
 	}-*/;
 
 	public final native ClientModelStoreJS getClientModelStoreJS() /*-{
