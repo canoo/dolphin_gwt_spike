@@ -24,16 +24,12 @@ public class ClientDolphinJS extends JavaScriptObject
 	}-*/;
 
 	public final native ClientAttributeJS attribute(JavaScriptObject instance, String propertyName, String qualifier, String value, String tag) /*-{
-		console.log('ClientDolphinJS.attribute: 1');
 		var result = this.attribute(propertyName, qualifier,  value, tag);
-		console.log('ClientDolphinJS.attribute: 1');
 		return result;
 	}-*/;
 
 	public final native PresentationModelJS presentationModel(String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
-		console.log("***", pmId, clientAttributesJS);
-//		return this.presentationModel(pmId, type, clientAttributesJS);
-		return this.presentationModel(pmId, type, clientAttributesJS[0], clientAttributesJS[1]);
+		return this.presentationModel(pmId, type, clientAttributesJS);
 	}-*/;
 
 	public final native ClientModelStoreJS getClientModelStoreJS() /*-{

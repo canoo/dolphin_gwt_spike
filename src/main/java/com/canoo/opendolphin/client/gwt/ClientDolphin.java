@@ -49,17 +49,10 @@ public class ClientDolphin {
 
         JsArray jsAttributes = ClientAttributeJS.createArray().cast();
 		for (ClientAttribute clientAttribute : clientAttributes) {
-			JSLogger.log(clientAttribute.getClientAttributeJS());
             jsAttributes.push(clientAttribute.getClientAttributeJS());
 		}
-//        for (String propertyName : clientAttributePropertyNames) {
-//            jsAttributes.push(ClientAttributeJS.newClientAttributeJS(clientAttributeModule, propertyName));
-//        }
 
-		JSLogger.log(jsAttributes);
 		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, type, jsAttributes);
-
-//		PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(clientDolphinJS, id, type, jsAttributes);
 		return new PresentationModel(presentationModelJS);
     }
 
