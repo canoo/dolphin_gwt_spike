@@ -35,7 +35,7 @@ public class ClientAttributeJS extends JavaScriptObject
 	}-*/;
 
 	public final native void addAttributeValueChangeHandler(AttributeValueChangeHandler handler) /*-{
-		this.on("valueChange", function (data) {
+		this.onValueChange(function (data) {
 			handler.@com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler::handleValueChange(Ljava/lang/String;)(data.newValue);
 		});
 	}-*/;

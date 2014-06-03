@@ -41,10 +41,8 @@ public class ClientDolphin {
 
 		List<ClientAttribute> clientAttributes = new ArrayList<ClientAttribute>();
 		for (String propertyName : clientAttributePropertyNames) {
-			JSLogger.log("ClientDolphin.presentationModel: creating attribute for: " + propertyName);
 			ClientAttribute clientAttribute = this.attribute(propertyName, null, null, null);
 			clientAttributes.add(clientAttribute);
-			JSLogger.log("ClientDolphin.presentationModel: creating attribute done.");
 		}
 
         JsArray jsAttributes = ClientAttributeJS.createArray().cast();

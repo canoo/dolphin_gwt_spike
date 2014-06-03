@@ -33,10 +33,10 @@ public class MainApplication implements EntryPoint {
 
 				// 3: Initialize View:
 				MainView view = new MainView().initialize();
-/*
 
 				// 4: Bind view and PMs:
 				new Binder().bind(view, pmContext);
+/*
 
 				// 5: Load initial data into PMs:
 				new PMLoader().load(pmContext);

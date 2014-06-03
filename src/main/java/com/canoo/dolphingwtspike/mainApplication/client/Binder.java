@@ -60,7 +60,6 @@ public class Binder {
 			}
 		});
 
-
 		view.getAddServerDataButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 				pmContext.sendCommand(PMConstants.CMD_ADD, new OnFinishedHandler() {
