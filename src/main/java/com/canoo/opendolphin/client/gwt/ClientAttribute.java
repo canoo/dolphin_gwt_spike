@@ -14,7 +14,7 @@ public class ClientAttribute {
 		return clientAttributeJS;
 	}
 
-	public Long getId() {
+	public String getId() {
         return clientAttributeJS.getId();
     }
 	public final  String getPropertyName() {

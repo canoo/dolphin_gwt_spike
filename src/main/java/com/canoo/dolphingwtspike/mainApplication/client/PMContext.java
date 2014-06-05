@@ -17,7 +17,7 @@ public class PMContext {
 		return this;
 	}
 
-	public ClientAttribute findAttribute(Long attrId) {
+	public ClientAttribute findAttribute(String attrId) {
 		return clientDolphin.getClientModelStore().findAttributeById(attrId);
 
 	}
@@ -29,9 +29,6 @@ public class PMContext {
 		return pm.getAt(PMConstants.RANGE_ATTR_ID);
 	}
 
-	public void sendCommand(String command) {
-		clientDolphin.send(command);
-	}
 	public void sendCommand(String command, OnFinishedHandler handler) {
 		clientDolphin.send(command, handler);
 	}

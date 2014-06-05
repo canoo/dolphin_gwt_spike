@@ -83,6 +83,7 @@ Other Notes:
 TODO:
 =====
 - probably unused (check by deletion): /home/sven/canoo/git/dolphin_gwt_spike/src/main/java/com/canoo/opendolphin/public/config.js
+- BasePresentationModel.findAttributeByPropertyNameAndTag: should throw IllegArgException if 'propertyName' or 'tag' is null ?
 
 Temporary notes (just that we do not forget them):
 ===================================================

@@ -21,7 +21,7 @@ public class TutorialAction extends DolphinServerAction {
 
         actionRegistry.register(PMConstants.CMD_ECHO, new CommandHandler<Command>() {
             public void handleCommand(Command command, List<Command> response) {
-                final ServerPresentationModel presentationModel = getServerDolphin().getAt(PMConstants.PM_ID);
+				final ServerPresentationModel presentationModel = getServerDolphin().getAt(PMConstants.PM_ID);
                 final ServerAttribute attribute = presentationModel.getAt(PMConstants.TEXT_ATTR_ID);
                 TutorialAction.this.changeValue(attribute, "Server: " + attribute.getValue());
             }
@@ -44,8 +44,9 @@ public class TutorialAction extends DolphinServerAction {
 		});
 		actionRegistry.register(PMConstants.CMD_LOAD_INITIAL, new CommandHandler<Command>() {
 			public void handleCommand(Command command, List<Command> response) {
-				System.out.println("in CMD_LOAD_INITIAL command");
+
 				final ServerPresentationModel presentationModel = getServerDolphin().getAt(PMConstants.PM_ID);
+
 				presentationModel.getAt(PMConstants.TEXT_ATTR_ID).setValue("12");
 				presentationModel.getAt(PMConstants.RANGE_ATTR_ID).setValue("40");
 			}

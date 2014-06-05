@@ -4,6 +4,7 @@ import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
 import com.canoo.opendolphin.client.gwt.PresentationModel;
+import com.canoo.opendolphin.client.js.JSLogger;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -40,9 +41,14 @@ public class Binder {
 		// send echo command on button click:
 		view.getServerModificationButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				pmContext.sendCommand(PMConstants.CMD_ECHO);
+				// TODO: use version without OnFinishedHandler:
+				pmContext.sendCommand(PMConstants.CMD_ECHO, new OnFinishedHandler() {
+					@Override
+					public void handlePresentationModels(List<PresentationModel> pms) {
+					}
+				});
 				// Just to demonstrate findAttributeById
-				System.out.println("*** Attribute Value from ModelStore = " + pmContext.findAttribute(pmContext.getTextAttribute().getId()).getValue());
+				JSLogger.log("*** Attribute Value from ModelStore = " + pmContext.findAttribute(pmContext.getTextAttribute().getId()).getValue());
 			}
 		});
 

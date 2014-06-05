@@ -13,18 +13,19 @@ public class ClientDolphinJS extends JavaScriptObject
 		return this();
 	}-*/;
 
-	public final native void send(String commandName) /*-{
-		this.send(commandName);
-	}-*/;
-
 	public final native void send(String commandName, OnFinishedHandlerJS handler) /*-{
-		this.send(commandName, function (pms) {
+		this.send(commandName, {onFinished: function (pms)  {
 			handler.@com.canoo.opendolphin.client.js.OnFinishedHandlerJS::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
+			}
 		});
 	}-*/;
 
-	public final native ClientAttributeJS attribute(JavaScriptObject instance, String propertyName, String qualifier, String value, String tag) /*-{
-		var result = this.attribute(propertyName, qualifier,  value, tag);
+	public final native ClientAttributeJS attribute(String propertyName, String qualifier, String value) /*-{
+		var result = this.attribute(propertyName, qualifier, value);
+		return result;
+	}-*/;
+	public final native ClientAttributeJS attribute(String propertyName, String qualifier, String value, String tag) /*-{
+		var result = this.attribute(propertyName, qualifier, value, tag);
 		return result;
 	}-*/;
 

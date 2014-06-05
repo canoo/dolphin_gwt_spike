@@ -11,7 +11,7 @@ public class ClientModelStore {
         this.clientModelStoreJS = clientModelStoreJS;
     }
 
-    public ClientAttribute findAttributeById(Long id) {
+    public ClientAttribute findAttributeById(String id) {
 		ClientAttributeJS clientAttributeJS = clientModelStoreJS.findAttributeById(id);
 		return new ClientAttribute(clientAttributeJS);
     }

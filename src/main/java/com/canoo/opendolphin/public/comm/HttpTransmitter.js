@@ -13,7 +13,7 @@ define(["require", "exports", "comm/Codec"], function(require, exports, cod) {
                 }
             }
             HttpTransmitter.prototype.transmit = function (commands, onDone) {
-                var _this = this;
+				var _this = this;
                 this.http.onerror = function (evt) {
                     alert("could not fetch " + _this.url + ", message: " + evt.message); // todo dk: make this injectable
                     onDone([]);
