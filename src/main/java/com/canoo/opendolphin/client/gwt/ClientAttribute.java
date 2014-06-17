@@ -10,7 +10,11 @@ public class ClientAttribute {
         this.clientAttributeJS = clientAttributeJS;
     }
 
-    public Long getId() {
+	public ClientAttributeJS getClientAttributeJS() {
+		return clientAttributeJS;
+	}
+
+	public String getId() {
         return clientAttributeJS.getId();
     }
 	public final  String getPropertyName() {

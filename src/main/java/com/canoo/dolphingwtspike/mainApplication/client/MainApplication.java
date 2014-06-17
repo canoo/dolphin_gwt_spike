@@ -1,10 +1,14 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
-import com.canoo.opendolphin.client.gwt.Dolphin;
+import com.canoo.opendolphin.client.gwt.ClientDolphin;
+import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
+import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.DolphinLoaderJS;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
 import com.google.gwt.core.client.EntryPoint;
+
+import java.util.List;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -23,10 +27,10 @@ public class MainApplication implements EntryPoint {
 		// 1: Bootstrap Dolphin:
 		DolphinLoaderJS.load(Constants.getDolphinUrl(), new DolphinStarter() {
 			@Override
-			public void start(final Dolphin dolphin) {
+			public void start(final ClientDolphin clientDolphin) {
 
 				// 2: Initialize PMs:
-				PMContext pmContext = new PMContext().initialize(dolphin);
+				PMContext pmContext = new PMContext().initialize(clientDolphin);
 
 				// 3: Initialize View:
 				MainView view = new MainView().initialize();
@@ -36,7 +40,11 @@ public class MainApplication implements EntryPoint {
 
 				// 5: Load initial data into PMs:
 				new PMLoader().load(pmContext);
-//				pmContext.sendCommand(PMConstants.CMD_LOAD_INITIAL);
+				pmContext.sendCommand(PMConstants.CMD_LOAD_INITIAL, new OnFinishedHandler() {
+					@Override
+					public void handlePresentationModels(List<PresentationModel> pms) {
+					}
+				});
 			}
 		});
 

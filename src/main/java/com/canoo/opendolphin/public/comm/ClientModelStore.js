@@ -1,76 +1,274 @@
-define([
-    'comm/CreatePresentationModelCommand',
-    'comm/ValueChangedCommand'
-], function(CreatePresentationModelCommand, ValueChangedCommand) {
+define(["require", "exports", "comm/CreatePresentationModelCommand", "comm/ValueChangedCommand", "comm/ChangeAttributeMetadataCommand", "comm/Attribute", "comm/Map", "comm/DeletedAllPresentationModelsOfTypeNotification", "comm/EventBus", "comm/DeletedPresentationModelNotification", "comm/BaseValueChangedCommand"], function(require, exports, createPMCmd, valueChangedCmd, changeAttMD, attr, map, dpmoftn, bus, dpmn, bvcc) {
+	(function (dolphin) {
+		(function (Type) {
+			Type[Type["ADDED"] = 'ADDED'] = "ADDED";
+			Type[Type["REMOVED"] = 'REMOVED'] = "REMOVED";
+		})(dolphin.Type || (dolphin.Type = {}));
+		var Type = dolphin.Type;
 
-    return function(clientDolphin) {
+		var ClientModelStore = (function () {
+			function ClientModelStore(clientDolphin) {
+				this.clientDolphin = clientDolphin;
+				this.presentationModels = new map.dolphin.Map();
+				this.presentationModelsPerType = new map.dolphin.Map();
+				this.attributesPerId = new map.dolphin.Map();
+				this.attributesPerQualifier = new map.dolphin.Map();
+				this.modelStoreChangeBus = new bus.dolphin.EventBus();
+			}
+			ClientModelStore.prototype.getClientDolphin = function () {
+				return this.clientDolphin;
+			};
 
-        this.clientDolphin = clientDolphin;
+			ClientModelStore.prototype.registerModel = function (model) {
+				var _this = this;
+				if (model.clientSideOnly) {
+					return;
+				}
+				var connector = this.clientDolphin.getClientConnector();
+				var createPMCommand = new createPMCmd.dolphin.CreatePresentationModelCommand(model);
+				connector.send(createPMCommand, null);
+				model.getAttributes().forEach(function (attribute) {
+					_this.registerAttribute(attribute);
+				});
+			};
 
-        this.models = [];
+			ClientModelStore.prototype.registerAttribute = function (attribute) {
+				var _this = this;
+				this.addAttributeById(attribute);
+				if (attribute.getQualifier()) {
+					this.addAttributeByQualifier(attribute);
+				}
 
-        this.getClientDolphin = function() {
-            return this.clientDolphin;
-        };
+				// whenever an attribute changes its value, the server needs to be notified
+				// and all other attributes with the same qualifier are given the same value
+				attribute.onValueChange(function (evt) {
+					var valueChangeCommand = new valueChangedCmd.dolphin.ValueChangedCommand(attribute.id, evt.oldValue, evt.newValue);
+					_this.clientDolphin.getClientConnector().send(valueChangeCommand, null);
 
-        this.registerModel = function(model) {
-            var me = this;
+					if (attribute.getQualifier()) {
+						var attrs = _this.findAttributesByFilter(function (attr) {
+							return attr !== attribute && attr.getQualifier() == attribute.getQualifier();
+						});
+						attrs.forEach(function (attr) {
+							attr.setValue(attribute.getValue());
+						});
+					}
+				});
 
-            var connector = this.clientDolphin.getClientConnector();
+				// all attributes with the same qualifier should have the same base value
+				attribute.onBaseValueChange(function (evt) {
+					var baseValueChangeCommand = new bvcc.dolphin.BaseValueChangedCommand(attribute.id);
+					_this.clientDolphin.getClientConnector().send(baseValueChangeCommand, null);
+					if (attribute.getQualifier()) {
+						var attrs = _this.findAttributesByFilter(function (attr) {
+							return attr !== attribute && attr.getQualifier() == attribute.getQualifier();
+						});
+						attrs.forEach(function (attr) {
+							attr.setBaseValue(attribute.getBaseValue());
+						});
+					}
+				});
 
-            var createCmd = new CreatePresentationModelCommand(model);
-            console.log("about to send create pm", createCmd);
-            connector.send(createCmd);
+				attribute.onQualifierChange(function (evt) {
+					var changeAttrMetadataCmd = new changeAttMD.dolphin.ChangeAttributeMetadataCommand(attribute.id, attr.dolphin.Attribute.QUALIFIER_PROPERTY, evt.newValue);
+					_this.clientDolphin.getClientConnector().send(changeAttrMetadataCmd, null);
+				});
+			};
+			ClientModelStore.prototype.add = function (model) {
+				if (!model) {
+					return false;
+				}
+				if (this.presentationModels.containsKey(model.id)) {
+					console.log("There already is a PM with id " + model.id);
+				}
+				var added = false;
+				if (!this.presentationModels.containsValue(model)) {
+					this.presentationModels.put(model.id, model);
+					this.addPresentationModelByType(model);
+					this.registerModel(model);
 
-            model.attributes.forEach(function(attr) {
-                attr.on("valueChange", function(data) {
-                    var cmd = new ValueChangedCommand(attr.id, data.oldValue, data.newValue);
-                    console.log("about to send value changed", cmd);
-                    connector.send(cmd);
+					this.modelStoreChangeBus.trigger({ 'eventType': Type.ADDED, 'clientPresentationModel': model });
+					added = true;
+				}
+				return added;
+			};
 
-                    if (attr.qualifier) {
-                        var attrs = me.findAttributesByFilter(function(a) {
-                            return a !== attr && a.qualifier === attr.qualifier;
-                        });
-                        attrs.forEach(function(a) {
-                            a.setValue(attr.getValue());
-                        })
-                    }
-                });
-                attr.stored = true;
-            })
-        };
+			ClientModelStore.prototype.remove = function (model) {
+				var _this = this;
+				if (!model) {
+					return false;
+				}
+				var removed = false;
+				if (this.presentationModels.containsValue(model)) {
+					this.removePresentationModelByType(model);
+					this.presentationModels.remove(model.id);
+					model.getAttributes().forEach(function (attribute) {
+						_this.removeAttributeById(attribute);
+						if (attribute.getQualifier()) {
+							_this.removeAttributeByQualifier(attribute);
+						}
+					});
 
-        this.add = function(model) {
-            // TODO check if model exists already
-            this.models.push(model);
+					this.modelStoreChangeBus.trigger({ 'eventType': Type.REMOVED, 'clientPresentationModel': model });
+					removed = true;
+				}
+				return removed;
+			};
 
-            // TODO bind client connector to PM attributes
-            this.registerModel(model);
+			ClientModelStore.prototype.findAttributesByFilter = function (filter) {
+				var matches = [];
+				this.presentationModels.forEach(function (key, model) {
+					model.getAttributes().forEach(function (attr) {
+						if (filter(attr)) {
+							matches.push(attr);
+						}
+					});
+				});
+				return matches;
+			};
 
-            console.log("model added and registerd");
-        };
+			ClientModelStore.prototype.addPresentationModelByType = function (model) {
+				if (!model) {
+					return;
+				}
+				var type = model.presentationModelType;
+				if (!type) {
+					return;
+				}
+				var presentationModels = this.presentationModelsPerType.get(type);
+				if (!presentationModels) {
+					presentationModels = [];
+					this.presentationModelsPerType.put(type, presentationModels);
+				}
+				if (!(presentationModels.indexOf(model) > -1)) {
+					presentationModels.push(model);
+				}
+			};
 
-        /**
-         * @param filter the filter function
-         * @returns an array of matches or an empty array otherwise
-         */
-        this.findAttributesByFilter = function(filter) {
-            if (typeof filter != 'function') {
-                throw new Error("Argument filter must be a function");
-            }
-            var matches = [];
-            this.models.forEach(function(model) {
-                model.attributes.forEach(function(attr) {
-                    if (filter(attr)) {
-                        matches.push(attr);
-                    }
-                });
-            });
-            return matches;
-        };
+			ClientModelStore.prototype.removePresentationModelByType = function (model) {
+				if (!model || !(model.presentationModelType)) {
+					return;
+				}
 
-    };
+				var presentationModels = this.presentationModelsPerType.get(model.presentationModelType);
+				if (!presentationModels) {
+					return;
+				}
+				if (presentationModels.length > -1) {
+					presentationModels.splice(presentationModels.indexOf(model), 1);
+				}
+				if (presentationModels.length === 0) {
+					this.presentationModelsPerType.remove(model.presentationModelType);
+				}
+			};
 
+			ClientModelStore.prototype.listPresentationModelIds = function () {
+				return this.presentationModels.keySet().slice(0);
+			};
+
+			ClientModelStore.prototype.listPresentationModels = function () {
+				return this.presentationModels.values();
+			};
+
+			ClientModelStore.prototype.findPresentationModelById = function (id) {
+				return this.presentationModels.get(id);
+			};
+
+			ClientModelStore.prototype.findAllPresentationModelByType = function (type) {
+				if (!type || !this.presentationModelsPerType.containsKey(type)) {
+					return [];
+				}
+				return this.presentationModelsPerType.get(type).slice(0);
+			};
+
+			ClientModelStore.prototype.deleteAllPresentationModelOfType = function (presentationModelType) {
+				var _this = this;
+				var presentationModels = this.findAllPresentationModelByType(presentationModelType);
+				presentationModels.forEach(function (pm) {
+					_this.deletePresentationModel(pm, false);
+				});
+				this.clientDolphin.getClientConnector().send(new dpmoftn.dolphin.DeletedAllPresentationModelsOfTypeNotification(presentationModelType), undefined);
+			};
+
+			ClientModelStore.prototype.deletePresentationModel = function (model, notify) {
+				if (!model) {
+					return;
+				}
+				if (this.containsPresentationModel(model.id)) {
+					this.remove(model);
+					if (!notify || model.clientSideOnly) {
+						return;
+					}
+					this.clientDolphin.getClientConnector().send(new dpmn.dolphin.DeletedPresentationModelNotification(model.id), null);
+				}
+			};
+
+			ClientModelStore.prototype.containsPresentationModel = function (id) {
+				return this.presentationModels.containsKey(id);
+			};
+
+			ClientModelStore.prototype.addAttributeById = function (attribute) {
+				if (!attribute || this.attributesPerId.containsKey(attribute.id)) {
+					return;
+				}
+				this.attributesPerId.put(attribute.id, attribute);
+			};
+
+			ClientModelStore.prototype.removeAttributeById = function (attribute) {
+				if (!attribute || !this.attributesPerId.containsKey(attribute.id)) {
+					return;
+				}
+				this.attributesPerId.remove(attribute.id);
+			};
+
+			ClientModelStore.prototype.findAttributeById = function (id) {
+				return this.attributesPerId.get(id);
+			};
+
+			ClientModelStore.prototype.addAttributeByQualifier = function (attribute) {
+				if (!attribute || !attribute.getQualifier()) {
+					return;
+				}
+				var attributes = this.attributesPerQualifier.get(attribute.getQualifier());
+				if (!attributes) {
+					attributes = [];
+					this.attributesPerQualifier.put(attribute.getQualifier(), attributes);
+				}
+				if (!(attributes.indexOf(attribute) > -1)) {
+					attributes.push(attribute);
+				}
+			};
+
+			ClientModelStore.prototype.removeAttributeByQualifier = function (attribute) {
+				if (!attribute || !attribute.getQualifier()) {
+					return;
+				}
+				var attributes = this.attributesPerQualifier.get(attribute.getQualifier());
+				if (!attributes) {
+					return;
+				}
+				if (attributes.length > -1) {
+					attributes.splice(attributes.indexOf(attribute), 1);
+				}
+				if (attributes.length === 0) {
+					this.attributesPerQualifier.remove(attribute.getQualifier());
+				}
+			};
+
+			ClientModelStore.prototype.findAllAttributesByQualifier = function (qualifier) {
+				if (!qualifier || !this.attributesPerQualifier.containsKey(qualifier)) {
+					return [];
+				}
+				return this.attributesPerQualifier.get(qualifier).slice(0);
+			};
+
+			ClientModelStore.prototype.onModelStoreChange = function (eventHandler) {
+				this.modelStoreChangeBus.onEvent(eventHandler);
+			};
+			return ClientModelStore;
+		})();
+		dolphin.ClientModelStore = ClientModelStore;
+	})(exports.dolphin || (exports.dolphin = {}));
+	var dolphin = exports.dolphin;
 });
 

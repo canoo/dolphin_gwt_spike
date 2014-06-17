@@ -9,15 +9,9 @@ import java.util.List;
 public class ClientDolphin {
 
     private final ClientDolphinJS clientDolphinJS;
-    private final ClientAttributeJS clientAttributeModule;
 
-    public ClientDolphin(ClientDolphinJS clientDolphinJS, final ClientAttributeJS clientAttributeModule) {
-        this.clientDolphinJS = clientDolphinJS;
-		this.clientAttributeModule = clientAttributeModule;
-    }
-
-    public void send(String commandName){
-		clientDolphinJS.send(commandName);
+    public ClientDolphin(ClientDolphinJS clientDolphinJS) {
+		this.clientDolphinJS = clientDolphinJS;
     }
 
     public void send(String commandName, final OnFinishedHandler handler){
@@ -34,14 +28,31 @@ public class ClientDolphin {
 		});
     }
 
+	/** new Attribute with tag 'VALUE' */
+    public ClientAttribute attribute(String propertyName, String qualifier, String value) {
+		ClientAttributeJS clientAttributeJS = clientDolphinJS.attribute(propertyName, qualifier, value);
+		return new ClientAttribute(clientAttributeJS);
+	}
+
+    public ClientAttribute attribute(String propertyName, String qualifier, String value, String tag) {
+		ClientAttributeJS clientAttributeJS = clientDolphinJS.attribute(propertyName, qualifier, value, tag);
+		return new ClientAttribute(clientAttributeJS);
+	}
+
     public PresentationModel presentationModel(String id, String type, String... clientAttributePropertyNames) {
 
-        JsArray jsAttributes = ClientAttributeJS.createArray().cast();
-        for (String propertyName : clientAttributePropertyNames) {
-            jsAttributes.push(ClientAttributeJS.newClientAttributeJS(clientAttributeModule, propertyName));
-        }
+		List<ClientAttribute> clientAttributes = new ArrayList<ClientAttribute>();
+		for (String propertyName : clientAttributePropertyNames) {
+			ClientAttribute clientAttribute = this.attribute(propertyName, null, null);
+			clientAttributes.add(clientAttribute);
+		}
 
-		PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(clientDolphinJS, id, type, jsAttributes);
+        JsArray jsAttributes = ClientAttributeJS.createArray().cast();
+		for (ClientAttribute clientAttribute : clientAttributes) {
+            jsAttributes.push(clientAttribute.getClientAttributeJS());
+		}
+
+		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, type, jsAttributes);
 		return new PresentationModel(presentationModelJS);
     }
 

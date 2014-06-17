@@ -8,7 +8,11 @@ which should automatically open a new tab in your browser showing the HTML page 
 
 Concepts
 ========
-Binding Java JS
+- JavaScript files which got loaded by require.js and thus served as a module (also just another JavaScript object)
+  can be cast to a GWT-Java Object of type 'JavaScriptObject'. Example: 'DolphinLoaderJS.java' loads 'OpenDolphin.js' via require.js
+  and then passes it as first parameter to 'DolphinBaseStarter::start(...)' casting it to type 'OpenDolphinJS.java' (which extends 'JavaScriptObject').
+
+Binding Java <-> JS
 - from <ABC>.java to <ABC>JS.java
   e.g.: Dolphin.java -> DolphinJS.java
 
@@ -63,16 +67,23 @@ Application Bootstrap:
   -> MainApplication.java
   -> DolphinLoaderJS
   -> (via JS) DolphinBaseStarter::start
+     -> new Dolphin()
+        -> DolphinJS.newDolphinJS(...)
+        -> clientDolphin = new ClientDolphin
   -> DolphinStarter::start
   -> MainApplication$DolphinStarter::start
 
 - Note: the instruction '<script src="require.js"/>' causes require.js to get loaded by the browser.
   This is not visible by with 'view source' command of the browser. Use 'inspect element' instead and take a look at the <head> element.
 
+Other Notes:
+============
+- modifications of original open-dolphin.js code are marked with: OD-GWT
 
 TODO:
 =====
 - probably unused (check by deletion): /home/sven/canoo/git/dolphin_gwt_spike/src/main/java/com/canoo/opendolphin/public/config.js
+- BasePresentationModel.findAttributeByPropertyNameAndTag: should throw IllegArgException if 'propertyName' or 'tag' is null ?
 
 Temporary notes (just that we do not forget them):
 ===================================================

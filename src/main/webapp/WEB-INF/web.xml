@@ -19,6 +19,6 @@
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>InvalidateSessionServlet</servlet-name>
-		<url-pattern>invalidatesession</url-pattern>
+		<url-pattern>dolphin/invalidate</url-pattern>
 	</servlet-mapping>
 </web-app>
