@@ -26,18 +26,23 @@ repositories {
 dependencies {
 	compile ("org.codehaus.groovy:groovy-all:2.2.1") {force = true} // needed bc. of dependency-conflict between open-dolphin and (? groovy-all of gradle when running jetty ?)
 	compile 'org.open-dolphin:dolphin-server:0.10'
-	compile 'com.google.gwt:gwt-servlet:2.5.1' // explicit dependency just for IntelliJ since the IDE does not pick up the dependency from the gwt plugin
+	compile ('com.google.gwt:gwt-servlet:2.6.0') {force = true} // explicit dependency just for IntelliJ since the IDE does not pick up the dependency from the gwt plugin
 }
 
 gwt {
-	gwtVersion='2.5.1'
+//	gwtVersion='2.5.1'
+	gwtVersion='2.6.0'
 //	gwtVersion='2.6.0' // 2.6.0 does not seem to work
 	modules 'com.canoo.dolphingwtspike.mainApplication.MainApplication'
 	modules 'com.canoo.opendolphin.OpenDolphin'
 
-    dev {
-        port=8080
-    }
+//    dev {
+//        port=8080
+//    }
+
+	superDev {
+		noPrecompile=true
+	}
 }
 
 task jettyDraftWar(type: JettyRunWar) {
@@ -47,3 +52,11 @@ task jettyDraftWar(type: JettyRunWar) {
 }
 // debugging options for jetty (did not work)
 // export GRADLE_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,address=9999,server=y,suspend=n"
+
+
+afterEvaluate {
+	tasks.gwtSuperDev {
+		classpath = gwt.src + classpath
+		src = project.files()
+	}
+}
