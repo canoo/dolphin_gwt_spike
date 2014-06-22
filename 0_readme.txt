@@ -12,9 +12,7 @@ Then point browser to:
   http://localhost:8080/dolphin_gwt_spike/MainApplication.html
 press 'Dev Mode On' and press the compile button appearing in the browser window. The the Application page is supposed to appear and working.
 
-
-This opens a littel swing gui. Press the button 'Launch Default Browser'
-which should automatically open a new tab in your browser showing the HTML page of the gwt app.
+When you change server side code like TutorialAction.java you need to restart the ./gradlew jettyDraftWar command.
 
 Concepts
 ========
