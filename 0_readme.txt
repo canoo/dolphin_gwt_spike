@@ -1,7 +1,17 @@
 Running the application
 =======================
-on commandline:
-- ./gradlew gwtDev
+open two commandline terminals in the project's folder:
+- in the first one invoke ./gradlew jettyDraftWar
+- in the second one invoke ./gradlew gwtSuperDev
+
+On first usage open browser at:
+  http://localhost:9876/
+and drag and drop the two scriptlet buttons 'Dev Mode On' and 'Dev Mode Off' to your browsers toolbar.
+
+Then point browser to:
+  http://localhost:8080/dolphin_gwt_spike/MainApplication.html
+press 'Dev Mode On' and press the compile button appearing in the browser window. The the Application page is supposed to appear and working.
+
 
 This opens a littel swing gui. Press the button 'Launch Default Browser'
 which should automatically open a new tab in your browser showing the HTML page of the gwt app.
