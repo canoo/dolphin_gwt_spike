@@ -11,6 +11,7 @@ public class MainView {
 	private Button serverModificationButton;
 	private Label helpLabel;
 	private Button addServerDataButton;
+	private Button devButton;
 
 	public MainView initialize() {
 		textBox = new TextBox();
@@ -23,6 +24,7 @@ public class MainView {
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
 		addServerDataButton = new Button("Add Server Data");
+		devButton = new Button("Dev Button");
 
 		// Assume that the host HTML has elements defined whose
 		// IDs are "slot1", "slot2".  In a real app, you probably would not want
@@ -40,6 +42,8 @@ public class MainView {
 		RootPanel.get("slot1").add(help2Label);
 		RootPanel.get("slot1").add(addServerDataButton);
 		RootPanel.get("slot1").add(listDiv);
+
+		RootPanel.get("slot1").add(devButton);
 
 		return this;
 	}
@@ -70,5 +74,9 @@ public class MainView {
 
 	public Button getAddServerDataButton() {
 		return addServerDataButton;
+	}
+
+	public Button getDevButton() {
+		return devButton;
 	}
 }

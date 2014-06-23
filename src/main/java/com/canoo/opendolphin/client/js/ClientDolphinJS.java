@@ -42,11 +42,14 @@ public class ClientDolphinJS extends JavaScriptObject
 		return this.presentationModel(pmId, type, clientAttributesJS);
 	}-*/;
 
-	public final native ClientModelStoreJS getClientModelStoreJS() /*-{
+	public final native ClientModelStoreJS getClientModelStore() /*-{
 		return this.getClientModelStore();
 	}-*/;
-	public final native void setClientModelStoreJS(ClientModelStoreJS clientModelStoreJS) /*-{
+	public final native void setClientModelStore(ClientModelStoreJS clientModelStoreJS) /*-{
 		return this.setClientModelStore(clientModelStoreJS);
+	}-*/;
+	public final native String[] listPresentationModelIds() /*-{
+		return this.listPresentationModelIds();
 	}-*/;
 
 }

@@ -4,6 +4,7 @@ import com.canoo.opendolphin.client.js.*;
 import com.google.gwt.core.client.JsArray;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ClientDolphin {
@@ -55,9 +56,14 @@ public class ClientDolphin {
     }
 
     public ClientModelStore getClientModelStore() {
-        return new ClientModelStore(clientDolphinJS.getClientModelStoreJS());
+        return new ClientModelStore(clientDolphinJS.getClientModelStore());
     }
 
+
+	public List<String> listPresentationModelIds() {
+		String[] pmIds = clientDolphinJS.listPresentationModelIds();
+		return Arrays.asList(pmIds);
+	}
 
 	private static class OnFinishedHandlerAdapter implements OnFinishedHandlerJS {
 		private final OnFinishedHandler handler;
