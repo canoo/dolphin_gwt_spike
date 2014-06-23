@@ -43,11 +43,7 @@ public class MainApplication implements EntryPoint {
 
 				// 5: Load initial data into PMs:
 				new PMLoader().load(pmContext);
-				pmContext.sendCommand(PMConstants.CMD_LOAD_INITIAL, new OnFinishedHandler() {
-					@Override
-					public void handlePresentationModels(List<PresentationModel> pms) {
-					}
-				});
+				pmContext.clientDolphin.send(PMConstants.CMD_LOAD_INITIAL);
 			}
 		});
 
