@@ -22,6 +22,10 @@ public class PresentationModel {
 		}
 	}
 
+	public String getId() {
+		return pmJS.getId();
+	}
+
 	public String getPresentationModelType() {
 		return pmJS.getPresentationModelType();
 	}

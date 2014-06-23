@@ -12,7 +12,7 @@ public class PMContext {
 		this.clientDolphin = clientDolphin;
 
 		// create named PM with attributes on the client side
-		String type = null;
+		String type = "pm_type_1";
 		pm = clientDolphin.presentationModel(PMConstants.PM_ID, type, PMConstants.TEXT_ATTR_ID, PMConstants.RANGE_ATTR_ID);
 		return this;
 	}

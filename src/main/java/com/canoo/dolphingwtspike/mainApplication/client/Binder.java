@@ -75,10 +75,10 @@ public class Binder {
 		});
 		view.getDevButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				List<String> strings = pmContext.clientDolphin.listPresentationModelIds();
-				JSLogger.log("** number of pmIds: " + strings.size());
-				for (String pmId : strings) {
-					JSLogger.log("pmId = " + pmId);
+				List<PresentationModel> pms = pmContext.clientDolphin.listPresentationModels();
+				JSLogger.log("** number of pmIds: " + pms.size());
+				for (PresentationModel pm: pms) {
+					JSLogger.log("pmId, type = " + pm.getId() + ", " + pm.getPresentationModelType());
 				}
 
 			}

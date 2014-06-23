@@ -65,6 +65,16 @@ public class ClientDolphin {
 		return Arrays.asList(pmIds);
 	}
 
+	public List<PresentationModel> listPresentationModels() {
+		PresentationModelJS[] pms = clientDolphinJS.listPresentationModels();
+
+		List<PresentationModel> result = new ArrayList<PresentationModel>(pms.length);
+		for (PresentationModelJS pm : pms) {
+			result.add(new PresentationModel(pm));
+		}
+		return result;
+	}
+
 	private static class OnFinishedHandlerAdapter implements OnFinishedHandlerJS {
 		private final OnFinishedHandler handler;
 

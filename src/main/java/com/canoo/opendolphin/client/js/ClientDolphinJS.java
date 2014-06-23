@@ -51,6 +51,9 @@ public class ClientDolphinJS extends JavaScriptObject
 	public final native String[] listPresentationModelIds() /*-{
 		return this.listPresentationModelIds();
 	}-*/;
+	public final native PresentationModelJS[] listPresentationModels() /*-{
+		return this.listPresentationModels();
+	}-*/;
 
 }
 
