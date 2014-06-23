@@ -1,11 +1,14 @@
 todo:
 =====
-- provide all clientdolphin APIs in gwt adapter.
+- provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
+- provide all clientdolphin APIs in gwt adapter: ClientAttribute
+- provide all clientdolphin APIs in gwt adapter: ClientModelStore
 
 
 wip:
 ====
-- cleanup
+- provide all clientdolphin APIs in gwt adapter: clientDolphin
 
 done:
 =====
+- cleanup

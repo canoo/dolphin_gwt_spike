@@ -22,6 +22,12 @@ public class ClientDolphinJS extends JavaScriptObject
 			}
 		});
 	}-*/;
+	public final native void sendEmpty(OnFinishedHandlerJS handler) /*-{
+		this.sendEmpty({onFinished: function (pms)  {
+			handler.@com.canoo.opendolphin.client.js.OnFinishedHandlerJS::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)
+		}
+		});
+	}-*/;
 
 	public final native ClientAttributeJS attribute(String propertyName, String qualifier, String value) /*-{
 		var result = this.attribute(propertyName, qualifier, value);

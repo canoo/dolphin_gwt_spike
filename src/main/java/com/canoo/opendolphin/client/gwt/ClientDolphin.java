@@ -19,17 +19,11 @@ public class ClientDolphin {
 	}
 
     public void send(String commandName, final OnFinishedHandler handler) {
-		clientDolphinJS.send(commandName, new OnFinishedHandlerJS() {
-			@Override
-			public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {
-				List<PresentationModel> pms = new ArrayList<PresentationModel>(jsPMs.length());
-				for (int i = 0; i < jsPMs.length(); i++) {
-					pms.add(new PresentationModel(jsPMs.get(i)));
-				}
+		clientDolphinJS.send(commandName, new OnFinishedHandlerAdapter(handler));
+    }
 
-				handler.handlePresentationModels(pms);
-			}
-		});
+    public void sendEmpty(final OnFinishedHandler handler) {
+		clientDolphinJS.sendEmpty(new OnFinishedHandlerAdapter(handler));
     }
 
 	/** new Attribute with tag 'VALUE' */
@@ -65,4 +59,21 @@ public class ClientDolphin {
     }
 
 
+	private static class OnFinishedHandlerAdapter implements OnFinishedHandlerJS {
+		private final OnFinishedHandler handler;
+
+		public OnFinishedHandlerAdapter(OnFinishedHandler handler) {
+			this.handler = handler;
+		}
+
+		@Override
+		public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {
+			List<PresentationModel> pms = new ArrayList<PresentationModel>(jsPMs.length());
+			for (int i = 0; i < jsPMs.length(); i++) {
+				pms.add(new PresentationModel(jsPMs.get(i)));
+			}
+
+			handler.handlePresentationModels(pms);
+		}
+	}
 }
