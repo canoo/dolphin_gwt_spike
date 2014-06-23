@@ -14,7 +14,11 @@ public class ClientDolphin {
 		this.clientDolphinJS = clientDolphinJS;
     }
 
-    public void send(String commandName, final OnFinishedHandler handler){
+    public void send(String commandName) {
+		clientDolphinJS.send(commandName);
+	}
+
+    public void send(String commandName, final OnFinishedHandler handler) {
 		clientDolphinJS.send(commandName, new OnFinishedHandlerJS() {
 			@Override
 			public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {

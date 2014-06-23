@@ -13,6 +13,9 @@ public class ClientDolphinJS extends JavaScriptObject
 		return this();
 	}-*/;
 
+	public final native void send(String commandName) /*-{
+		this.send(commandName);
+	}-*/;
 	public final native void send(String commandName, OnFinishedHandlerJS handler) /*-{
 		this.send(commandName, {onFinished: function (pms)  {
 			handler.@com.canoo.opendolphin.client.js.OnFinishedHandlerJS::handlePresentationModels(Lcom/google/gwt/core/client/JsArray;)(pms)

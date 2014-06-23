@@ -41,12 +41,7 @@ public class Binder {
 		// send echo command on button click:
 		view.getServerModificationButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
-				// TODO: use version without OnFinishedHandler:
-				pmContext.sendCommand(PMConstants.CMD_ECHO, new OnFinishedHandler() {
-					@Override
-					public void handlePresentationModels(List<PresentationModel> pms) {
-					}
-				});
+				pmContext.clientDolphin.send(PMConstants.CMD_ECHO);
 				// Just to demonstrate findAttributeById
 				JSLogger.log("*** Attribute Value from ModelStore = " + pmContext.findAttribute(pmContext.getTextAttribute().getId()).getValue());
 			}

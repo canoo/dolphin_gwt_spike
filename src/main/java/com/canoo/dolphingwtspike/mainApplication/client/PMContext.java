@@ -5,7 +5,7 @@ import com.canoo.opendolphin.client.gwt.*;
 
 public class PMContext {
 
-	private ClientDolphin clientDolphin;
+	ClientDolphin clientDolphin;
 	private PresentationModel pm = null;
 
 	public PMContext initialize(ClientDolphin clientDolphin) {
