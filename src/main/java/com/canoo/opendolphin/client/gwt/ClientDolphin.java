@@ -67,7 +67,16 @@ public class ClientDolphin {
 
 	public List<PresentationModel> listPresentationModels() {
 		PresentationModelJS[] pms = clientDolphinJS.listPresentationModels();
+		return pmJSArrayAsPMList(pms);
+	}
+	public List<PresentationModel> findAllPresentationModelByType(String pmType) {
+		PresentationModelJS[] pms = clientDolphinJS.findAllPresentationModelByType(pmType);
+		return pmJSArrayAsPMList(pms);
+	}
 
+	// --- private routines ---
+
+	private List<PresentationModel> pmJSArrayAsPMList(PresentationModelJS[] pms) {
 		List<PresentationModel> result = new ArrayList<PresentationModel>(pms.length);
 		for (PresentationModelJS pm : pms) {
 			result.add(new PresentationModel(pm));
