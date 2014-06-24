@@ -79,6 +79,10 @@ public class ClientDolphin {
 		return pm == null ? null : new PresentationModel(pm);
 	}
 
+	public void deletePresentationModel(PresentationModel pm) {
+		clientDolphinJS.deletePresentationModel(pm.pmJS);
+	}
+
 	// --- private routines ---
 
 	private List<PresentationModel> pmJSArrayAsPMList(PresentationModelJS[] pms) {

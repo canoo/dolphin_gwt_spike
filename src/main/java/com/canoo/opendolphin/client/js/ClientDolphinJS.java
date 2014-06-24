@@ -61,5 +61,8 @@ public class ClientDolphinJS extends JavaScriptObject
 		var pm = this.findPresentationModelById(pmId);
 		return (pm === undefined) ? null : pm;
 	}-*/;
+	public final native void deletePresentationModel(PresentationModelJS pmJS) /*-{
+		this.deletePresentationModel(pmJS);
+	}-*/;
 }
 

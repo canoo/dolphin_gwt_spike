@@ -9,7 +9,7 @@ import java.util.List;
 
 // todo: rename as ClientPresentationModel
 public class PresentationModel {
-	private final PresentationModelJS pmJS;
+	final PresentationModelJS pmJS;
 
 	private final List<ClientAttribute> attributes = new ArrayList<ClientAttribute>();
 

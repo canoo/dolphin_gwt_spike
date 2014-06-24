@@ -76,24 +76,46 @@ public class Binder {
 		view.getDevButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 
-				// findAllPresentationModelByType:
-				List<PresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelByType("pm_type_1");
-				JSLogger.log("** findAllPresentationModelByType: number of pmIds: " + pms.size());
-				for (int i = 0; i < pms.size(); i++) {
-					PresentationModel pm = pms.get(i);
-					JSLogger.log("   pm " + i + ": id: " + pm.getId() + ", type: " + pm.getPresentationModelType() );
-				}
-
-				// findPresentationModelById:
-				PresentationModel pm = pmContext.clientDolphin.findPresentationModelById(PMConstants.PM_ID);
-				JSLogger.log("** findPresentationModelById('" + PMConstants.PM_ID + "'): " + (pm == null ? "-" : pm.getId()) );
-				pm = pmContext.clientDolphin.findPresentationModelById("nonExistingPmId");
-				JSLogger.log("** findPresentationModelById('nonExistingPmId'): " + (pm == null ? "-" : pm.getId()) );
+				findAllPresentationModelByType(pmContext);
+				findPresentationModelById(pmContext);
+				deletePM(pmContext);
 
 			}
 		});
 
+	}
 
+	private void findAllPresentationModelByType(PMContext pmContext) {
+		List<PresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelByType("pm_type_1");
+		JSLogger.log("** findAllPresentationModelByType: number of pmIds: " + pms.size());
+		for (int i = 0; i < pms.size(); i++) {
+			PresentationModel pm = pms.get(i);
+			JSLogger.log("   pm " + i + ": id: " + pm.getId() + ", type: " + pm.getPresentationModelType() );
+		}
+	}
 
+	private void findPresentationModelById(PMContext pmContext) {
+		PresentationModel pm = pmContext.clientDolphin.findPresentationModelById(PMConstants.PM_ID);
+		JSLogger.log("** findPresentationModelById('" + PMConstants.PM_ID + "'): " + (pm == null ? "-" : pm.getId()));
+		pm = pmContext.clientDolphin.findPresentationModelById("nonExistingPmId");
+		JSLogger.log("** findPresentationModelById('nonExistingPmId'): " + (pm == null ? "-" : pm.getId()) );
+	}
+
+	private void deletePM(PMContext pmContext) {
+		PresentationModel pm;
+		JSLogger.log("** deletePresentationModel: create presentationModel 'pmToDelete':");
+		pm = pmContext.clientDolphin.findPresentationModelById("pmToDelete");
+		JSLogger.log("   findPresentationModelById('pmToDelete'): " + (pm == null ? "-" : pm.getId()) );
+
+		JSLogger.log("   creating presentationModel('pmToDelete')" );
+		pm = pmContext.clientDolphin.presentationModel("pmToDelete", null, PMConstants.TEXT_ATTR_ID, PMConstants.RANGE_ATTR_ID);
+
+		pm = pmContext.clientDolphin.findPresentationModelById("pmToDelete");
+		JSLogger.log("   findPresentationModelById('pmToDelete'): " + (pm == null ? "-" : pm.getId()) );
+
+		JSLogger.log("   deletePresentationModel('pmToDelete'): " );
+		pmContext.clientDolphin.deletePresentationModel(pm);
+		pm = pmContext.clientDolphin.findPresentationModelById("pmToDelete");
+		JSLogger.log("   findPresentationModelById('pmToDelete'): " + (pm == null ? "-" : pm.getId()) );
 	}
 }
