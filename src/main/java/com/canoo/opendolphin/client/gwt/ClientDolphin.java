@@ -82,6 +82,9 @@ public class ClientDolphin {
 	public void deletePresentationModel(PresentationModel pm) {
 		clientDolphinJS.deletePresentationModel(pm.pmJS);
 	}
+	public void deleteAllPresentationModelOfType(String pmType) {
+		clientDolphinJS.deleteAllPresentationModelOfType(pmType);
+	}
 
 	// --- private routines ---
 

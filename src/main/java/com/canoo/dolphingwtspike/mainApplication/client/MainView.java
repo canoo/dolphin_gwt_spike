@@ -24,7 +24,7 @@ public class MainView {
 
 		Label help2Label = new Label("Click to get new content from the server side, bound to a list.");
 		addServerDataButton = new Button("Add Server Data");
-		devButton = new Button("Dev Button");
+		devButton = new Button("Test ClientDolphin API (see browser console output)");
 
 		// Assume that the host HTML has elements defined whose
 		// IDs are "slot1", "slot2".  In a real app, you probably would not want

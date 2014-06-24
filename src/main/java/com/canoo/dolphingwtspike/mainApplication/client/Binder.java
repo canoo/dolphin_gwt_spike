@@ -79,6 +79,7 @@ public class Binder {
 				findAllPresentationModelByType(pmContext);
 				findPresentationModelById(pmContext);
 				deletePM(pmContext);
+				deleteAllPresentationModelsByType(pmContext);
 
 			}
 		});
@@ -117,5 +118,28 @@ public class Binder {
 		pmContext.clientDolphin.deletePresentationModel(pm);
 		pm = pmContext.clientDolphin.findPresentationModelById("pmToDelete");
 		JSLogger.log("   findPresentationModelById('pmToDelete'): " + (pm == null ? "-" : pm.getId()) );
+	}
+	private void deleteAllPresentationModelsByType(PMContext pmContext) {
+		PresentationModel pm;
+		JSLogger.log("--- deletePresentationModel: create presentationModel 'pmToDelete' ---");
+		String pmId = "pmToDelete";
+		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		assertEquals("findPresentationModelById() at start does not find anything", null, pm);
+
+		String my_pm_type = "my_pm_type";
+		pm = pmContext.clientDolphin.presentationModel(pmId, my_pm_type, PMConstants.TEXT_ATTR_ID, PMConstants.RANGE_ATTR_ID);
+		assertEquals("clientDolphin.presentationModel() works", pmId, pm.getId());
+
+		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		assertEquals("newly created PM is findable", pmId, pm.getId());
+
+		pmContext.clientDolphin.deleteAllPresentationModelOfType(my_pm_type);
+		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		assertEquals("findPresentationModelById() after deleteAllPresentationModelOfType() does not find anything", null, pm);
+	}
+
+	private void assertEquals(String message, Object expected, Object actual) {
+		boolean condition = (expected == null && actual == null) || expected.equals(actual);
+		JSLogger.log((condition ? "OK" : "NOK") + ": " + message );
 	}
 }
