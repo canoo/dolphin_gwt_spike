@@ -75,11 +75,20 @@ public class Binder {
 		});
 		view.getDevButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
+
+				// findAllPresentationModelByType:
 				List<PresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelByType("pm_type_1");
-				JSLogger.log("** number of pmIds: " + pms.size());
-				for (PresentationModel pm: pms) {
-					JSLogger.log("pmId, type = " + pm.getId() + ", " + pm.getPresentationModelType());
+				JSLogger.log("** findAllPresentationModelByType: number of pmIds: " + pms.size());
+				for (int i = 0; i < pms.size(); i++) {
+					PresentationModel pm = pms.get(i);
+					JSLogger.log("   pm " + i + ": id: " + pm.getId() + ", type: " + pm.getPresentationModelType() );
 				}
+
+				// findPresentationModelById:
+				PresentationModel pm = pmContext.clientDolphin.findPresentationModelById(PMConstants.PM_ID);
+				JSLogger.log("** findPresentationModelById('" + PMConstants.PM_ID + "'): " + (pm == null ? "-" : pm.getId()) );
+				pm = pmContext.clientDolphin.findPresentationModelById("nonExistingPmId");
+				JSLogger.log("** findPresentationModelById('nonExistingPmId'): " + (pm == null ? "-" : pm.getId()) );
 
 			}
 		});
