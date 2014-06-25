@@ -67,5 +67,8 @@ public class ClientDolphinJS extends JavaScriptObject
 	public final native void deleteAllPresentationModelsOfType(String pmType) /*-{
 		this.deleteAllPresentationModelOfType(pmType);
 	}-*/;
+	public final native void tag(PresentationModelJS pmJS, String propertyName, Object value, String tag) /*-{
+		this.tag(pmJS, propertyName, value, tag);
+	}-*/;
 }
 

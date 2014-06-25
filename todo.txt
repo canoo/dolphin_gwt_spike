@@ -1,5 +1,6 @@
 todo:
 =====
+- provide all variants of clientDolphin.presentationModel API
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - provide all clientdolphin APIs in gwt adapter: ClientAttribute
 - provide all clientdolphin APIs in gwt adapter: ClientModelStore

@@ -22,5 +22,11 @@ public class PresentationModelJS extends JavaScriptObject
 	public final native JsArray<ClientAttributeJS> getClientAttributes()/*-{
 		return this.attributes;
 	}-*/;
+	public final native ClientAttributeJS getAt(String propertyName)/*-{
+		return this.getAt(propertyName, undefined);
+	}-*/;
+	public final native ClientAttributeJS getAt(String propertyName, String tag)/*-{
+		return this.getAt(propertyName, tag);
+	}-*/;
 
 }

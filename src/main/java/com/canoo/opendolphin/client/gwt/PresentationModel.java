@@ -35,15 +35,12 @@ public class PresentationModel {
 	}
 
 	public ClientAttribute getAt(String propertyName) {
-		for (ClientAttribute attribute : attributes) {
-			if (propertyName.equals(attribute.getPropertyName())) return attribute;
-		}
-		return null;
+		ClientAttributeJS attributeJS = pmJS.getAt(propertyName);
+		return new ClientAttribute(attributeJS); // TODO: is it OK to return a new instance of ClientAttribute? pro: reuse of open-dolphin code, contra: new instance
 	}
+
 	public ClientAttribute getAt(String propertyName, String tag) {
-		for (ClientAttribute attribute : attributes) {
-			if (propertyName.equals(attribute.getPropertyName()) && tag.equals(attribute.getTag())) return attribute;
-		}
-		return null;
+		ClientAttributeJS attributeJS = pmJS.getAt(propertyName, tag);
+		return new ClientAttribute(attributeJS); // TODO: see comment in getAt(String propertyName)
 	}
 }
