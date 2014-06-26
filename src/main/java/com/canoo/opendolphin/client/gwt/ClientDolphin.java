@@ -96,6 +96,12 @@ public class ClientDolphin {
 		ClientAttributeJS attributeJS = clientDolphinJS.attribute(propertyName, qualifier, value, tag);
 		return new ClientAttribute(attributeJS);
 	}
+	public void startPushListening(String pushActionName, String releaseActionName) {
+		clientDolphinJS.startPushListening(pushActionName, releaseActionName);
+	}
+	public void stopPushListening() {
+		clientDolphinJS.stopPushListening();
+	}
 
 	// --- private routines ---
 

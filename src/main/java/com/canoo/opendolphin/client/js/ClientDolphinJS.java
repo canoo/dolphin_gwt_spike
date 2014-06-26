@@ -77,5 +77,11 @@ public class ClientDolphinJS extends JavaScriptObject
 	public final native ClientAttributeJS attribute(String propertyName, String qualifier, Object value, String tag) /*-{
 		return this.attribute(propertyName, qualifier, value, tag);
 	}-*/;
+	public final native void startPushListening(String pushActionName, String releaseActionName) /*-{
+		this.startPushListening(pushActionName, releaseActionName);
+	}-*/;
+	public final native void stopPushListening() /*-{
+		this.stopPushListening();
+	}-*/;
 }
 
