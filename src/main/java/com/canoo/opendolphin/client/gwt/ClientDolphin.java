@@ -74,6 +74,10 @@ public class ClientDolphin {
 		return pmJSArrayAsPMList(pms);
 	}
 
+	public PresentationModel getAt(String pmId) {
+		PresentationModelJS pmJS = clientDolphinJS.getAt(pmId);
+		return pmJS == null ? null : new PresentationModel(pmJS);
+	}
 	public PresentationModel findPresentationModelById(String pmId) {
 		PresentationModelJS pm = clientDolphinJS.findPresentationModelById(pmId);
 		return pm == null ? null : new PresentationModel(pm);

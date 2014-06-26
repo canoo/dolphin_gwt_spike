@@ -57,6 +57,10 @@ public class ClientDolphinJS extends JavaScriptObject
 	public final native PresentationModelJS[] findAllPresentationModelByType(String pmType) /*-{
 		return this.findAllPresentationModelByType(pmType);
 	}-*/;
+	public final native PresentationModelJS getAt(String pmId) /*-{
+		var pm = this.getAt(pmId);
+		return (pm === undefined) ? null : pm;
+	}-*/;
 	public final native PresentationModelJS findPresentationModelById(String pmId) /*-{
 		var pm = this.findPresentationModelById(pmId);
 		return (pm === undefined) ? null : pm;
