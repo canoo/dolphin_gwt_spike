@@ -153,12 +153,12 @@ public class Binder {
 	}
 
 	private void findAllPresentationModelByType_test(PMContext pmContext) {
-		JSLogger.log("--- findAllPresentationModelByType ---");
+		JSLogger.log("--- findAllPresentationModelsByType ---");
 		String pmType = "pm_type_1";
 
-		List<PresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelByType(pmType);
-		assertEquals("findAllPresentationModelByType() returns one result", 1, pms.size());
-		assertEquals("findAllPresentationModelByType()[0] is of correct type", pmType, pms.get(0).getPresentationModelType());
+		List<PresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelsByType(pmType);
+		assertEquals("findAllPresentationModelsByType() returns one result", 1, pms.size());
+		assertEquals("findAllPresentationModelsByType()[0] is of correct type", pmType, pms.get(0).getPresentationModelType());
 	}
 	private void deletePM_test(PMContext pmContext) {
 		JSLogger.log("--- deletePresentationModel ---");
