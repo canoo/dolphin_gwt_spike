@@ -9,13 +9,8 @@ public class ClientModelStoreJS extends JavaScriptObject
 	}
 
 	public final native ClientAttributeJS findAttributeById(String attributeId) /*-{
-
-		var list = this.findAttributesByFilter(function (attr) {
-			return (attr.id == attributeId)
-		});
-		var attribute = list[0];
-
-		return attribute;
+		var result = this.findAttributeById(attributeId);
+		return (result === undefined) ? null : result;
 	}-*/;
 
 }

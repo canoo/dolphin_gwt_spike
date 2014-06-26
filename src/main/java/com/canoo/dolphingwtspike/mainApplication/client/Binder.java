@@ -83,6 +83,7 @@ public class Binder {
 		view.getDevButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 
+				createClientAttribute_test(pmContext);
 				createPresentationModel_test(pmContext);
 				findPresentationModelById_test(pmContext);
 				findAllPresentationModelByType_test(pmContext);
@@ -93,6 +94,14 @@ public class Binder {
 			}
 		});
 
+	}
+
+	private void createClientAttribute_test(PMContext pmContext) {
+		JSLogger.log("--- attribute ---");
+
+		String attributeId = "attribute_id";
+		ClientAttribute attribute = pmContext.clientDolphin.getClientModelStore().findAttributeById(attributeId);
+		assertNull("findAttributeById() at start does not find anything", attribute);
 	}
 
 	private void createPresentationModel_test(PMContext pmContext) {

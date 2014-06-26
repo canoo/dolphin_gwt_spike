@@ -70,5 +70,8 @@ public class ClientDolphinJS extends JavaScriptObject
 	public final native void tag(PresentationModelJS pmJS, String propertyName, Object value, String tag) /*-{
 		this.tag(pmJS, propertyName, value, tag);
 	}-*/;
+	public final native ClientAttributeJS attribute(String propertyName, String qualifier, Object value, String tag) /*-{
+		return this.attribute(propertyName, qualifier, value, tag);
+	}-*/;
 }
 

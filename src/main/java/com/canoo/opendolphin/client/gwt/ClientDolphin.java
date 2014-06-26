@@ -88,6 +88,10 @@ public class ClientDolphin {
 	public void tag(PresentationModel pm, String propertyName, Object value, String tag) {
 		clientDolphinJS.tag(pm.pmJS, propertyName, value, tag);
 	}
+	public ClientAttribute attribute(String propertyName, String qualifier, Object value, String tag) {
+		ClientAttributeJS attributeJS = clientDolphinJS.attribute(propertyName, qualifier, value, tag);
+		return new ClientAttribute(attributeJS);
+	}
 
 	// --- private routines ---
 

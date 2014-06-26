@@ -13,7 +13,7 @@ public class ClientModelStore {
 
     public ClientAttribute findAttributeById(String id) {
 		ClientAttributeJS clientAttributeJS = clientModelStoreJS.findAttributeById(id);
-		return new ClientAttribute(clientAttributeJS);
+		return clientAttributeJS == null ? null : new ClientAttribute(clientAttributeJS);
     }
 
 }
