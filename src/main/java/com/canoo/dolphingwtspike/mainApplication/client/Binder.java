@@ -16,9 +16,7 @@ import com.google.gwt.user.client.ui.Label;
 
 import java.util.List;
 
-import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.assertEquals;
-import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.assertNull;
-import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.assertTrue;
+import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.*;
 import static com.canoo.dolphingwtspike.mainApplication.shared.PMConstants.RANGE_ATTR_ID;
 import static com.canoo.dolphingwtspike.mainApplication.shared.PMConstants.TEXT_ATTR_ID;
 
@@ -100,8 +98,20 @@ public class Binder {
 		JSLogger.log("--- attribute ---");
 
 		String attributeId = "attribute_id";
+		String propertyName = "my_propertyName";
+		String qualifier = "my_qualifier";
+		String tag = "my_tag";
+		String value = "my_value";
+
 		ClientAttribute attribute = pmContext.clientDolphin.getClientModelStore().findAttributeById(attributeId);
 		assertNull("findAttributeById() at start does not find anything", attribute);
+
+		attribute = pmContext.clientDolphin.attribute(propertyName, qualifier, value, tag);
+		assertNotNull("attribute() returns not null", attribute);
+		assertNotNull("attribute.id is not null", attribute.getId());
+		assertEquals("attribute.value correct", value, attribute.getValue());
+		assertEquals("attribute.qualifier correct", qualifier, attribute.getQualifier());
+		assertEquals("attribute.tag correct", tag, attribute.getTag());
 	}
 
 	private void createPresentationModel_test(PMContext pmContext) {

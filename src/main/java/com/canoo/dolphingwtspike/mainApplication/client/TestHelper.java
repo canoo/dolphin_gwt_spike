@@ -26,6 +26,10 @@ public class TestHelper {
 		JSLogger.log((obj == null ? "OK" : "NOK") + ": " + message );
 	}
 
+	public static void assertNotNull(String message, Object obj) {
+		JSLogger.log((obj != null ? "OK" : "NOK") + ": " + message );
+	}
+
 	public static void assertTrue(String message, Boolean condition) {
 		JSLogger.log((condition ? "OK" : "NOK") + ": " + message );
 	}
