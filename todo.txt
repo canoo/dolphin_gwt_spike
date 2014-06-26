@@ -1,6 +1,5 @@
 todo:
 =====
-- provide all variants of clientDolphin.presentationModel API
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - provide all clientdolphin APIs in gwt adapter: ClientAttribute
 - provide all clientdolphin APIs in gwt adapter: ClientModelStore
@@ -9,8 +8,9 @@ todo:
 
 wip:
 ====
-- provide all clientdolphin APIs in gwt adapter: clientDolphin
+- provide all variants of clientDolphin.presentationModel API
 
 done:
 =====
+- provide all clientdolphin APIs in gwt adapter: clientDolphin
 - cleanup
