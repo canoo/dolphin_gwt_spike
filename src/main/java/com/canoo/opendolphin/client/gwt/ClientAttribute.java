@@ -14,6 +14,10 @@ public class ClientAttribute {
 		return clientAttributeJS;
 	}
 
+	public ClientAttribute copy() {
+        return new ClientAttribute( clientAttributeJS.copy() );
+    }
+
 	public String getId() {
         return clientAttributeJS.getId();
     }

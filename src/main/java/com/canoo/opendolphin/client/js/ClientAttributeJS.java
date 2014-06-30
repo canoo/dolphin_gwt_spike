@@ -11,6 +11,9 @@ public class ClientAttributeJS extends JavaScriptObject
 		return new clientAttributeModule(propertyName);
 	}-*/;
 
+	public final native ClientAttributeJS copy()/*-{
+		return this.copy();
+	}-*/;
 	public final native String getId()/*-{
 		return this.id;
 	}-*/;
