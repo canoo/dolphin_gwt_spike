@@ -33,6 +33,9 @@ public class TestHelper {
 	public static void assertTrue(String message, Boolean condition) {
 		JSLogger.log((condition ? "OK" : "NOK") + ": " + message );
 	}
+	public static void assertFalse(String message, Boolean condition) {
+		JSLogger.log(( ! condition ? "OK" : "NOK") + ": " + message );
+	}
 
 	public static void assertTrueSilent(String message, Boolean condition) {
 		if (!condition) {

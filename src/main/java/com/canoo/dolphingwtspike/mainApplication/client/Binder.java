@@ -91,7 +91,9 @@ public class Binder {
 				tag_test(pmContext);
 
 				client_attribute_create_test(pmContext);
+				client_attribute_setValue_test(pmContext);
 				client_attribute_copy_test(pmContext);
+				client_attribute_isDirty_test(pmContext);
 
 			}
 		});
@@ -103,22 +105,42 @@ public class Binder {
 	private void client_attribute_create_test(PMContext pmContext) {
 		JSLogger.log("--- client_attribute_create ---");
 
-		String my_property = "my_property";
+		String my_property = "my_property_create";
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		assertNotNull("new attribute created", ca);
 		assertEquals("qualifier set", "qualifier", ca.getQualifier());
 		assertEquals("value set", "value", ca.getValue());
 	}
+	private void client_attribute_setValue_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_setValue ---");
+
+		String my_property = "my_property_setValue";
+		String newValue = "newValue";
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+		ca.setValue(newValue);
+		assertEquals("value set", newValue, ca.getValue());
+	}
 
 	private void client_attribute_copy_test(PMContext pmContext) {
 		JSLogger.log("--- client_attribute_copy ---");
 
-		String my_property = "my_property2";
+		String my_property = "my_property_copy";
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		ClientAttribute ca2 = ca.copy();
 		assertNotNull("attribute copied", ca2);
 		assertEquals("qualifier copied", ca.getQualifier(), ca2.getQualifier());
 		assertEquals("value copied", ca.getValue(), ca2.getValue());
+	}
+	private void client_attribute_isDirty_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_copy ---");
+
+		String my_property = "my_property3";
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+		assertFalse("not dirty after creation", ca.isDirty());
+
+		ca.setValue("newValue");
+		assertTrue("dirty after setValue", ca.isDirty());
 	}
 
 	// === ClientDolphin ===

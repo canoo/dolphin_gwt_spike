@@ -41,6 +41,10 @@ public class ClientAttribute {
         clientAttributeJS.setValue(value);
     }
 
+	public boolean isDirty() {
+		return clientAttributeJS.isDirty();
+	}
+
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
         clientAttributeJS.addAttributeValueChangeHandler( handler);
     }
