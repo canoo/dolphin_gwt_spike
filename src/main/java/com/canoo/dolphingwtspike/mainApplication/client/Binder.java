@@ -95,6 +95,7 @@ public class Binder {
 				client_attribute_copy_test(pmContext);
 				client_attribute_isDirty_test(pmContext);
 				client_attribute_baseValue_test(pmContext);
+				client_attribute_presentationModel_test(pmContext);
 
 			}
 		});
@@ -160,6 +161,20 @@ public class Binder {
 
 		ca.rebase();
 		assertEquals("basevalue has new value after rebase", newValue, ca.getBaseValue());
+	}
+	private void client_attribute_presentationModel_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_presentationModel ---");
+
+		String my_property = "my_property_presentationModel";
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+		assertNull("no PM on standalone attribute", ca.getPresentationModel());
+
+		PresentationModel pm = pmContext.clientDolphin.presentationModel("pm_ClientAttribute_pm");
+		ca.setPresentationModel(pm);
+		PresentationModel pm2 = ca.getPresentationModel();
+		assertNotNull("PM set on attribute", pm2);
+		assertEquals( "...and have the same ids", pm.getId(), pm2.getId());
 	}
 
 	// === ClientDolphin ===

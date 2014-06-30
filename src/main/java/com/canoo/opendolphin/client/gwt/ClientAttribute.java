@@ -1,6 +1,8 @@
 package com.canoo.opendolphin.client.gwt;
 
 import com.canoo.opendolphin.client.js.ClientAttributeJS;
+import com.canoo.opendolphin.client.js.JSLogger;
+import com.canoo.opendolphin.client.js.PresentationModelJS;
 
 public class ClientAttribute {
 
@@ -50,7 +52,13 @@ public class ClientAttribute {
 	public void reset() {
 		clientAttributeJS.reset();
 	}
-
+	public PresentationModel getPresentationModel() {
+		PresentationModelJS pmJS = clientAttributeJS.getPresentationModel();
+		return pmJS == null ? null : new PresentationModel(pmJS);
+	}
+	public void setPresentationModel(PresentationModel pm) {
+		clientAttributeJS.setPresentationModel(pm.pmJS);
+	}
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
         clientAttributeJS.addAttributeValueChangeHandler( handler);
     }
