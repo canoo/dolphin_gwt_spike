@@ -94,6 +94,7 @@ public class Binder {
 				client_attribute_setValue_test(pmContext);
 				client_attribute_copy_test(pmContext);
 				client_attribute_isDirty_test(pmContext);
+				client_attribute_baseValue_test(pmContext);
 
 			}
 		});
@@ -120,6 +121,9 @@ public class Binder {
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		ca.setValue(newValue);
 		assertEquals("value set", newValue, ca.getValue());
+
+		ca.reset();
+		assertEquals("value has old value after reset", "value", ca.getValue());
 	}
 
 	private void client_attribute_copy_test(PMContext pmContext) {
@@ -133,14 +137,29 @@ public class Binder {
 		assertEquals("value copied", ca.getValue(), ca2.getValue());
 	}
 	private void client_attribute_isDirty_test(PMContext pmContext) {
-		JSLogger.log("--- client_attribute_copy ---");
+		JSLogger.log("--- client_attribute_isDirty ---");
 
-		String my_property = "my_property3";
+		String my_property = "my_property_isDirty";
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		assertFalse("not dirty after creation", ca.isDirty());
 
 		ca.setValue("newValue");
 		assertTrue("dirty after setValue", ca.isDirty());
+	}
+	private void client_attribute_baseValue_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_baseValue ---");
+
+		String my_property = "my_property_baseValue";
+		String newValue = "newValue";
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+		assertEquals("basevalue at creation", "value", ca.getBaseValue());
+
+		ca.setValue(newValue);
+		assertEquals("basevalue not modified after setValue", "value", ca.getBaseValue());
+
+		ca.rebase();
+		assertEquals("basevalue has new value after rebase", newValue, ca.getBaseValue());
 	}
 
 	// === ClientDolphin ===
