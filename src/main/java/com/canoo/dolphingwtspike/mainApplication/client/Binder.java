@@ -134,11 +134,17 @@ public class Binder {
 		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
 		assertEquals("findPresentationModelById() at start does not find anything", null, pm);
 
-		pm = pmContext.clientDolphin.presentationModel(pmId, my_pm_type, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		pm = pmContext.clientDolphin.presentationModelWithType(pmId, my_pm_type, TEXT_ATTR_ID, RANGE_ATTR_ID);
 		assertEquals("clientDolphin.presentationModel() works (pmId)", pmId, pm.getId());
 		assertEquals("clientDolphin.presentationModel() works (pmType)", my_pm_type, pm.getPresentationModelType());
 		assertEquals("attribute's value is null", null, pm.getAt(TEXT_ATTR_ID).getValue() );
 
+		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		assertEquals("newly created PM is findable", pmId, pm.getId());
+
+		pmId = "pm_2";
+		pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		assertEquals("clientDolphin.presentationModel() works (pmId)", pmId, pm.getId());
 		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
 		assertEquals("newly created PM is findable", pmId, pm.getId());
 	}
@@ -165,7 +171,7 @@ public class Binder {
 
 		PresentationModel pm;
 		String pmId = "pmToDelete";
-		pm = pmContext.clientDolphin.presentationModel(pmId, null, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, TEXT_ATTR_ID, RANGE_ATTR_ID);
 
 		pmContext.clientDolphin.deletePresentationModel(pm);
 		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
@@ -178,7 +184,7 @@ public class Binder {
 		String pmId = "pmToDelete";
 		String my_pm_type = "my_pm_type";
 
-		pm = pmContext.clientDolphin.presentationModel(pmId, my_pm_type, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		pm = pmContext.clientDolphin.presentationModelWithType(pmId, my_pm_type, TEXT_ATTR_ID, RANGE_ATTR_ID);
 
 		pmContext.clientDolphin.deleteAllPresentationModelsOfType(my_pm_type);
 		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
@@ -190,7 +196,7 @@ public class Binder {
 
 		String pmId = "pmTagId";
 
-		pm = pmContext.clientDolphin.presentationModel(pmId, null, TEXT_ATTR_ID);
+		pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, TEXT_ATTR_ID);
 		ClientAttribute attribute = pm.getAt(TEXT_ATTR_ID);
 		assertNull("new attribute's value is null", attribute.getValue());
 

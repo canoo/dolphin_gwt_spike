@@ -38,7 +38,11 @@ public class ClientDolphin {
 		return new ClientAttribute(clientAttributeJS);
 	}
 
-    public PresentationModel presentationModel(String id, String type, String... clientAttributePropertyNames) {
+    public PresentationModel presentationModel(String id, String... attributeNames) {
+		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, attributeNames);
+		return new PresentationModel(presentationModelJS);
+	}
+    public PresentationModel presentationModelWithType(String id, String type, String... clientAttributePropertyNames) {
 
 		List<ClientAttribute> clientAttributes = new ArrayList<ClientAttribute>();
 		for (String propertyName : clientAttributePropertyNames) {

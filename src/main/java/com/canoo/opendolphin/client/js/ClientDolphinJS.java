@@ -38,6 +38,9 @@ public class ClientDolphinJS extends JavaScriptObject
 		return result;
 	}-*/;
 
+	public final native PresentationModelJS presentationModel(String pmId, String[] attributeNames) /*-{
+		return this.presentationModel(pmId, attributeNames);
+	}-*/;
 	public final native PresentationModelJS presentationModel(String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
 		return this.presentationModel(pmId, type, clientAttributesJS);
 	}-*/;
