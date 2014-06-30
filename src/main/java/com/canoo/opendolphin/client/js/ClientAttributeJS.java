@@ -39,6 +39,12 @@ public class ClientAttributeJS extends JavaScriptObject
 	public final native boolean isDirty()/*-{
 		return this.isDirty();
 	}-*/;
+	public final native void rebase()/*-{
+		return this.rebase();
+	}-*/;
+	public final native void reset()/*-{
+		return this.reset();
+	}-*/;
 
 	public final native void addAttributeValueChangeHandler(AttributeValueChangeHandler handler) /*-{
 		this.onValueChange(function (data) {

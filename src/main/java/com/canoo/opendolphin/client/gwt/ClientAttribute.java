@@ -44,6 +44,12 @@ public class ClientAttribute {
 	public boolean isDirty() {
 		return clientAttributeJS.isDirty();
 	}
+	public void rebase() {
+		clientAttributeJS.rebase();
+	}
+	public void reset() {
+		clientAttributeJS.reset();
+	}
 
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
         clientAttributeJS.addAttributeValueChangeHandler( handler);
