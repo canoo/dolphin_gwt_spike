@@ -89,6 +89,7 @@ public class Binder {
 				deletePM_test(pmContext);
 				deleteAllPresentationModelsByType_test(pmContext);
 				tag_test(pmContext);
+				client_attribute_create_test(pmContext);
 
 			}
 		});
@@ -206,6 +207,36 @@ public class Binder {
 
 		assertEquals("tagging attribute worked", tagValue, pm.getAt(TEXT_ATTR_ID, tag_name).getValue());
 	}
+	private void client_attribute_create_test(PMContext pmContext) {
+		ClientAttribute ca;
+		JSLogger.log("--- client_attribute_create ---");
+
+		String my_property = "my_property";
+		ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+		assertNotNull("new attribute created", ca);
+		assertEquals("qualifier set", "qualifier", ca.getQualifier());
+		assertEquals("value set", "value", ca.getValue());
+	}
+
+/*
+	private void client_attribute_copy_test(PMContext pmContext) {
+		ClientAttribute ca;
+		JSLogger.log("--- client_attribute_copy ---");
+
+		String my_property = "my_property";
+		ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+		assertNotNull("new attribute created", ca);
+
+		ClientAttribute attribute = ca.getAt(TEXT_ATTR_ID);
+		assertNull("new attribute's value is null", attribute.getValue());
+
+		String tag_name = "message_tag";
+		String tagValue = "some message";
+		pmContext.clientDolphin.tag(ca, TEXT_ATTR_ID, tagValue, tag_name);
+
+		assertEquals("tagging attribute worked", tagValue, ca.getAt(TEXT_ATTR_ID, tag_name).getValue());
+	}
+*/
 
 	// ----------------
 
