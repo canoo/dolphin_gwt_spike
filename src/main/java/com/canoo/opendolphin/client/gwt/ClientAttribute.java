@@ -64,8 +64,11 @@ public class ClientAttribute {
 	public void setQualifier(String qualifier) {
 		clientAttributeJS.setQualifier(qualifier);
 	}
-    public void addValueChangedHandler(AttributeValueChangeHandler handler) {
+    public void addValueChangedHandler(AttributeChangeHandler handler) {
         clientAttributeJS.addAttributeValueChangeHandler(handler);
+    }
+    public void addQualifierChangeHandler(AttributeChangeHandler handler) {
+        clientAttributeJS.addQualifierChangeHandler(handler);
     }
 
 }

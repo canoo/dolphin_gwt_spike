@@ -1,7 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
-import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
+import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
 import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
@@ -30,9 +30,9 @@ public class Binder {
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		pmContext.getTextAttribute().addValueChangedHandler(new AttributeValueChangeHandler() {
+		pmContext.getTextAttribute().addValueChangedHandler(new AttributeChangeHandler() {
 			@Override
-			public void handleValueChange(final String oldValue, final String newValue) {
+			public void handleChange(final String oldValue, final String newValue) {
 				view.getLabel().setText(newValue);
 				view.getTextBox().setText(newValue);
 			}
@@ -54,9 +54,9 @@ public class Binder {
 			}
 		});
 
-		pmContext.getRangeAttribute().addValueChangedHandler(new AttributeValueChangeHandler() {
+		pmContext.getRangeAttribute().addValueChangedHandler(new AttributeChangeHandler() {
 			@Override
-			public void handleValueChange(final String oldValue, final String newValue) {
+			public void handleChange(final String oldValue, final String newValue) {
 				view.getRangeLabel().setText(newValue);
 			}
 		});

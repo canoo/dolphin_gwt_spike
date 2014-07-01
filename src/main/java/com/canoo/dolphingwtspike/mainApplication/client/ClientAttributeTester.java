@@ -1,6 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.gwt.AttributeValueChangeHandler;
+import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
 import com.canoo.opendolphin.client.gwt.ClientAttribute;
 import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
@@ -20,6 +20,7 @@ public class ClientAttributeTester {
 		client_attribute_presentationModel_test(pmContext);
 		client_attribute_setQualifier_test(pmContext);
 		client_attribute_onValueChange_test(pmContext);
+		client_attribute_onQualifierChange_test(pmContext);
 	}
 
 	private static void client_attribute_create_test(PMContext pmContext) {
@@ -121,9 +122,9 @@ public class ClientAttributeTester {
 		final String[] actuals = new String[2];
 
 
-		ca.addValueChangedHandler(new AttributeValueChangeHandler() {
+		ca.addValueChangedHandler(new AttributeChangeHandler() {
 			@Override
-			public void handleValueChange(final String oldValue, final String newValue) {
+			public void handleChange(final String oldValue, final String newValue) {
 				actuals[0] = oldValue;
 				actuals[1] = newValue;
 			}
@@ -131,6 +132,27 @@ public class ClientAttributeTester {
 		ca.setValue("new value");
 		assertEquals("received old value", "value", actuals[0]);
 		assertEquals("received new value", "new value", actuals[1]);
+	}
+	private static void client_attribute_onQualifierChange_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_onQualifierChange ---");
+
+		String my_property = "my_property_onQualifierChange";
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+
+		final String[] actuals = new String[2];
+
+
+		ca.addQualifierChangeHandler(new AttributeChangeHandler() {
+			@Override
+			public void handleChange(final String oldValue, final String newValue) {
+				actuals[0] = oldValue;
+				actuals[1] = newValue;
+			}
+		});
+		ca.setQualifier("new qualifier");
+		assertEquals("received old value", "qualifier", actuals[0]);
+		assertEquals("received new value", "new qualifier", actuals[1]);
 	}
 
 }
