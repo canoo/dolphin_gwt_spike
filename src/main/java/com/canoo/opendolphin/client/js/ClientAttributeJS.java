@@ -1,6 +1,7 @@
 package com.canoo.opendolphin.client.js;
 
 import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
+import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class ClientAttributeJS extends JavaScriptObject
@@ -64,6 +65,11 @@ public class ClientAttributeJS extends JavaScriptObject
 	public final native void addQualifierChangeHandler(AttributeChangeHandler handler) /*-{
 		this.onQualifierChange(function (data) {
 			handler.@com.canoo.opendolphin.client.gwt.AttributeChangeHandler::handleChange(Ljava/lang/String;Ljava/lang/String;)(data.oldValue, data.newValue);
+		});
+	}-*/;
+	public final native void addDirtyChangeHandler(BooleanChangeHandler handler) /*-{
+		this.onDirty(function (data) {
+			handler.@com.canoo.opendolphin.client.gwt.BooleanChangeHandler::handleChange(ZZ)(data.oldValue, data.newValue);
 		});
 	}-*/;
 

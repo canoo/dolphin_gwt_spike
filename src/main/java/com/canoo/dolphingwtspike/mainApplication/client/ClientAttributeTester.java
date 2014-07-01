@@ -1,6 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
+import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
 import com.canoo.opendolphin.client.gwt.ClientAttribute;
 import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
@@ -21,6 +22,7 @@ public class ClientAttributeTester {
 		client_attribute_setQualifier_test(pmContext);
 		client_attribute_onValueChange_test(pmContext);
 		client_attribute_onQualifierChange_test(pmContext);
+		client_attribute_onDirtyChange_test(pmContext);
 	}
 
 	private static void client_attribute_create_test(PMContext pmContext) {
@@ -153,6 +155,26 @@ public class ClientAttributeTester {
 		ca.setQualifier("new qualifier");
 		assertEquals("received old value", "qualifier", actuals[0]);
 		assertEquals("received new value", "new qualifier", actuals[1]);
+	}
+	private static void client_attribute_onDirtyChange_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_onDirtyChange ---");
+
+		String my_property = "my_property_onDirtyChange";
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+
+		final Boolean[] actuals = new Boolean[2];
+
+		ca.addDirtyChangeHandler(new BooleanChangeHandler() {
+			@Override
+			public void handleChange(final boolean oldValue, final boolean newValue) {
+				actuals[0] = oldValue;
+				actuals[1] = newValue;
+			}
+		});
+		ca.setValue("some value");
+		assertEquals("old dirty false", false, actuals[0]);
+		assertEquals("new dirty true", true, actuals[1]);
 	}
 
 }

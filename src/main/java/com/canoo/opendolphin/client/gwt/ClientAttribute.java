@@ -70,5 +70,8 @@ public class ClientAttribute {
     public void addQualifierChangeHandler(AttributeChangeHandler handler) {
         clientAttributeJS.addQualifierChangeHandler(handler);
     }
+    public void addDirtyChangeHandler(BooleanChangeHandler handler) {
+        clientAttributeJS.addDirtyChangeHandler(handler);
+    }
 
 }
