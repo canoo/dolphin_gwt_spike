@@ -59,6 +59,9 @@ public class ClientAttribute {
 	public void setPresentationModel(PresentationModel pm) {
 		clientAttributeJS.setPresentationModel(pm.pmJS);
 	}
+	public void setQualifier(String qualifier) {
+		clientAttributeJS.setQualifier(qualifier);
+	}
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
         clientAttributeJS.addAttributeValueChangeHandler( handler);
     }

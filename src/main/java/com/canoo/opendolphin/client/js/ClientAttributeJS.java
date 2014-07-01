@@ -52,6 +52,9 @@ public class ClientAttributeJS extends JavaScriptObject
 	public final native void setPresentationModel(PresentationModelJS pmJS) /*-{
 		this.setPresentationModel(pmJS);
 	}-*/;
+	public final native void setQualifier(String qualifier) /*-{
+		this.setQualifier(qualifier);
+	}-*/;
 
 	public final native void addAttributeValueChangeHandler(AttributeValueChangeHandler handler) /*-{
 		this.onValueChange(function (data) {
