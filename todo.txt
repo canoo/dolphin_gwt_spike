@@ -5,6 +5,8 @@ todo:
 - provide all clientdolphin APIs in gwt adapter: ClientModelStore
 - separate client and server parts into separate projects/multi module build (client,server,shared) ?
 - combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances ?
+- Binding API ?
+- which APIs are public and which are not ?
 
 wip:
 ====

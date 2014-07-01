@@ -37,9 +37,9 @@ public class Binder {
 		// bind 'label' to 'textAttribute':
 		pmContext.getTextAttribute().addValueChangedHandler(new AttributeValueChangeHandler() {
 			@Override
-			public void handleValueChange(final String value) {
-				view.getLabel().setText(value);
-				view.getTextBox().setText(value);
+			public void handleValueChange(final String oldValue, final String newValue) {
+				view.getLabel().setText(newValue);
+				view.getTextBox().setText(newValue);
 			}
 		});
 
@@ -61,8 +61,8 @@ public class Binder {
 
 		pmContext.getRangeAttribute().addValueChangedHandler(new AttributeValueChangeHandler() {
 			@Override
-			public void handleValueChange(final String value) {
-				view.getRangeLabel().setText(value);
+			public void handleValueChange(final String oldValue, final String newValue) {
+				view.getRangeLabel().setText(newValue);
 			}
 		});
 
@@ -81,6 +81,8 @@ public class Binder {
 		view.getDevButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 
+				JSLogger.log("===== ClientDolphin =====");
+
 				presentation_model_getAt_test(pmContext);
 				createClientAttribute_test(pmContext);
 				createPresentationModel_test(pmContext);
@@ -90,6 +92,8 @@ public class Binder {
 				deleteAllPresentationModelsByType_test(pmContext);
 				tag_test(pmContext);
 
+				JSLogger.log("===== ClientAttribute =====");
+
 				client_attribute_create_test(pmContext);
 				client_attribute_setValue_test(pmContext);
 				client_attribute_copy_test(pmContext);
@@ -97,6 +101,7 @@ public class Binder {
 				client_attribute_baseValue_test(pmContext);
 				client_attribute_presentationModel_test(pmContext);
 				client_attribute_setQualifier_test(pmContext);
+				client_attribute_onValueChange_test(pmContext);
 
 			}
 		});
@@ -111,6 +116,7 @@ public class Binder {
 		String my_property = "my_property_create";
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		assertNotNull("new attribute created", ca);
+		assertEquals("propertyName set", my_property, ca.getPropertyName());
 		assertEquals("qualifier set", "qualifier", ca.getQualifier());
 		assertEquals("value set", "value", ca.getValue());
 	}
@@ -187,6 +193,28 @@ public class Binder {
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		ca.setQualifier(newQualifer);
 		assertEquals("qualifier set", newQualifer, ca.getQualifier());
+	}
+
+	private void client_attribute_onValueChange_test(PMContext pmContext) {
+		JSLogger.log("--- client_attribute_onValueChange ---");
+
+		String my_property = "my_property_onValueChange";
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
+
+		final String[] actuals = new String[2];
+
+
+		ca.addValueChangedHandler(new AttributeValueChangeHandler() {
+			@Override
+			public void handleValueChange(final String oldValue, final String newValue) {
+				actuals[0] = oldValue;
+				actuals[1] = newValue;
+			}
+		});
+		ca.setValue("new value");
+		assertEquals("received old value", "value", actuals[0]);
+		assertEquals("received new value", "new value", actuals[1]);
 	}
 
 	// === ClientDolphin ===

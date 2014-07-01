@@ -1,12 +1,14 @@
 package com.canoo.opendolphin.client.gwt;
 
 import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.JSLogger;
 import com.canoo.opendolphin.client.js.PresentationModelJS;
 
 public class ClientAttribute {
 
-    private final ClientAttributeJS clientAttributeJS;
+	// todo (Sven 01.07.14): should the following routines be part of the public API? :
+	// public void setBaseValue(Object baseValue)
+
+	private final ClientAttributeJS clientAttributeJS;
 
     public ClientAttribute(ClientAttributeJS clientAttributeJS) {
         this.clientAttributeJS = clientAttributeJS;
@@ -63,7 +65,7 @@ public class ClientAttribute {
 		clientAttributeJS.setQualifier(qualifier);
 	}
     public void addValueChangedHandler(AttributeValueChangeHandler handler) {
-        clientAttributeJS.addAttributeValueChangeHandler( handler);
+        clientAttributeJS.addAttributeValueChangeHandler(handler);
     }
 
 }
