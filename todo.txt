@@ -1,8 +1,7 @@
 todo:
 =====
+- provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
-- provide all clientdolphin APIs in gwt adapter: ClientAttribute
-- provide all clientdolphin APIs in gwt adapter: ClientModelStore
 - separate client and server parts into separate projects/multi module build (client,server,shared) ?
 - combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances ?
 - Binding API ?
@@ -10,10 +9,11 @@ todo:
 
 wip:
 ====
-- provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
+- provide all clientdolphin APIs in gwt adapter: ClientModelStore
 
 done:
 =====
+- provide all clientdolphin APIs in gwt adapter: ClientAttribute
 - provide all variants of clientDolphin.presentationModel API
 - provide all clientdolphin APIs in gwt adapter: clientDolphin
 - cleanup

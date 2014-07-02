@@ -79,6 +79,8 @@ public class Binder {
 
 				ClientDolphinTester.testClientDolphinRoutines(pmContext);
 				ClientAttributeTester.testClientAttributeRoutines(pmContext);
+				ClientModelStoreTester.testAll(pmContext);
+				ClientPresentationModelTester.testAll(pmContext);
 
 			}
 		});

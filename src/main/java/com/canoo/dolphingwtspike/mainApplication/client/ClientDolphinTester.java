@@ -27,13 +27,13 @@ public class ClientDolphinTester {
 	}
 
 	private static void presentation_model_getAt_test(PMContext pmContext) {
-		JSLogger.log("--- Test: PresentationModel.getAt() ---");
+		JSLogger.log("--- clientDolphin.getAt() ---");
 
 		PresentationModel pm = pmContext.clientDolphin.getAt(PMConstants.PM_ID);
 		assertNotNull("getAt(PMConstants.PM_ID) finds PM", pm);
 		assertEquals("getAt(PMConstants.PM_ID) with expected id", PMConstants.PM_ID, pm.getId());
 
-		pm = pmContext.clientDolphin.getAt("not existing pmid");
+		pm = pmContext.clientDolphin.getAt("non existing pmid");
 		assertNull("getAt(PMConstants.PM_ID) does not find non existing PM", pm);
 	}
 
