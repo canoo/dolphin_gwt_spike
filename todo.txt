@@ -1,6 +1,8 @@
 todo:
 =====
+- add ClientDolphin.addAttributeToModel()
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
+- support push
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
 - separate client and server parts into separate projects/multi module build (client,server,shared) ?
 - combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances ?

@@ -34,6 +34,7 @@ public class ClientAttributeTester {
 		assertEquals("propertyName set", my_property, ca.getPropertyName());
 		assertEquals("qualifier set", "qualifier", ca.getQualifier());
 		assertEquals("value set", "value", ca.getValue());
+		assertNotNull("id not null", ca.getId());
 	}
 
 	private static void client_attribute_setValue_test(PMContext pmContext) {

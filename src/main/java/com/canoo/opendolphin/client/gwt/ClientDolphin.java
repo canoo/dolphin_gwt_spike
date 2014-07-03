@@ -39,8 +39,7 @@ public class ClientDolphin {
 	}
 
     public PresentationModel presentationModel(String id, String... attributeNames) {
-		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, attributeNames);
-		return new PresentationModel(presentationModelJS);
+		return this.presentationModelWithType(id, null, attributeNames);
 	}
     public PresentationModel presentationModelWithType(String id, String type, String... clientAttributePropertyNames) {
 
@@ -49,15 +48,17 @@ public class ClientDolphin {
 			ClientAttribute clientAttribute = this.attribute(propertyName, null, null);
 			clientAttributes.add(clientAttribute);
 		}
-
-        JsArray jsAttributes = ClientAttributeJS.createArray().cast();
+		return this.presentationModelWithType(id, type, clientAttributes.toArray(new ClientAttribute[clientAttributes.size()]));
+    }
+	public PresentationModel presentationModelWithType(String id, String type, ClientAttribute... clientAttributes) {
+		JsArray jsAttributes = ClientAttributeJS.createArray().cast();
 		for (ClientAttribute clientAttribute : clientAttributes) {
-            jsAttributes.push(clientAttribute.getClientAttributeJS());
+			jsAttributes.push(clientAttribute.getClientAttributeJS());
 		}
 
 		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, type, jsAttributes);
 		return new PresentationModel(presentationModelJS);
-    }
+	}
 
     public ClientModelStore getClientModelStore() {
         return new ClientModelStore(clientDolphinJS.getClientModelStore());
@@ -100,6 +101,11 @@ public class ClientDolphin {
 		ClientAttributeJS attributeJS = clientDolphinJS.attribute(propertyName, qualifier, value, tag);
 		return new ClientAttribute(attributeJS);
 	}
+
+	public ClientAttribute findAttributeById(String id) {
+		return getClientModelStore().findAttributeById(id);
+	}
+
 	public void startPushListening(String pushActionName, String releaseActionName) {
 		clientDolphinJS.startPushListening(pushActionName, releaseActionName);
 	}

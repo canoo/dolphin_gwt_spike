@@ -18,6 +18,7 @@ public class ClientDolphinTester {
 
 		presentation_model_getAt_test(pmContext);
 		createClientAttribute_test(pmContext);
+		findAttributeById_test(pmContext);
 		createPresentationModel_test(pmContext);
 		findPresentationModelById_test(pmContext);
 		findAllPresentationModelByType_test(pmContext);
@@ -40,51 +41,71 @@ public class ClientDolphinTester {
 	private static void createClientAttribute_test(PMContext pmContext) {
 		JSLogger.log("--- attribute ---");
 
-		String attributeId = "attribute_id";
 		String propertyName = "my_propertyName";
 		String qualifier = "my_qualifier";
 		String tag = "my_tag";
 		String value = "my_value";
 
-		ClientAttribute attribute = pmContext.clientDolphin.getClientModelStore().findAttributeById(attributeId);
-		assertNull("findAttributeById() at start does not find anything", attribute);
-
-		attribute = pmContext.clientDolphin.attribute(propertyName, qualifier, value, tag);
+		ClientAttribute attribute = pmContext.clientDolphin.attribute(propertyName, qualifier, value, tag);
 		assertNotNull("attribute() returns not null", attribute);
 		assertNotNull("attribute.id is not null", attribute.getId());
 		assertEquals("attribute.value correct", value, attribute.getValue());
 		assertEquals("attribute.qualifier correct", qualifier, attribute.getQualifier());
 		assertEquals("attribute.tag correct", tag, attribute.getTag());
 	}
+	private static void findAttributeById_test(PMContext pmContext) {
+		JSLogger.log("--- findAttributeById ---");
+
+		String propertyName = "my_propertyName";
+		String qualifier = "my_qualifier";
+		String tag = "my_tag";
+		String value = "my_value";
+
+		ClientAttribute attribute0 = pmContext.clientDolphin.attribute(propertyName, qualifier, value, tag);
+		ClientAttribute foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
+		assertNull("findAttributeById() not successful (bc. not bound to pm yet)", foundAttribute);
+
+		String pmId = "findAttributeById_pmId";
+		PresentationModel pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, attribute0);
+		foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
+
+		assertEquals("attribute.id correct", attribute0.getId(), foundAttribute.getId());
+		assertEquals("attribute.value correct", attribute0.getValue(), foundAttribute.getValue() );
+		assertEquals("attribute.qualifier correct", attribute0.getQualifier(), foundAttribute.getQualifier());
+		assertEquals("attribute.tag correct", attribute0.getTag(), foundAttribute.getTag());
+	}
 
 	private static void createPresentationModel_test(PMContext pmContext) {
 		JSLogger.log("--- createPresentationModel ---");
 
-		PresentationModel pm;
-		String pmId = "pmToCreate";
+		String pmId = "presentationModelWithType_pmId";
 		String my_pm_type = "my_pm_type";
-		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
+
+		PresentationModel pm = pmContext.clientDolphin.findPresentationModelById(pmId);
 		assertEquals("findPresentationModelById() at start does not find anything", null, pm);
 
 		pm = pmContext.clientDolphin.presentationModelWithType(pmId, my_pm_type, TEXT_ATTR_ID, RANGE_ATTR_ID);
 		assertEquals("clientDolphin.presentationModel() works (pmId)", pmId, pm.getId());
 		assertEquals("clientDolphin.presentationModel() works (pmType)", my_pm_type, pm.getPresentationModelType());
-		assertEquals("attribute's value is null", null, pm.getAt(TEXT_ATTR_ID).getValue() );
+		ClientAttribute foundAttribute = pm.getAt(TEXT_ATTR_ID);
+		assertEquals("attribute's value is null", null, foundAttribute.getValue() );
+		assertNotNull("attribute's id is not null", foundAttribute.getId());
 
-		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
-		assertEquals("newly created PM is findable", pmId, pm.getId());
-
-		pmId = "pm_2";
+		pmId = "presentationModel_pmId";
 		pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
 		assertEquals("clientDolphin.presentationModel() works (pmId)", pmId, pm.getId());
-		pm = pmContext.clientDolphin.findPresentationModelById(pmId);
-		assertEquals("newly created PM is findable", pmId, pm.getId());
+
+		foundAttribute = pm.getAt(TEXT_ATTR_ID);
+		assertNull("attribute's value is null", foundAttribute.getValue());
+		assertNotNull("attribute's id is not null", foundAttribute.getId());
 	}
 
 	private static void findPresentationModelById_test(PMContext pmContext) {
 		JSLogger.log("--- findPresentationModelById ---");
-		PresentationModel pm = pmContext.clientDolphin.findPresentationModelById(PMConstants.PM_ID);
-		assertTrue("well known pm exists", pm != null);
+		String pmId = "findPresentationModelById_pmId";
+		PresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		PresentationModel foundPm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		assertTrue("created pm is findable", foundPm != null);
 
 		pm = pmContext.clientDolphin.findPresentationModelById("nonExistingPmId");
 		assertTrue("unknown pm does not exists", pm == null);

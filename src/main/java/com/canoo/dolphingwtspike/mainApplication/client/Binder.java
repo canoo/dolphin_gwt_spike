@@ -43,7 +43,7 @@ public class Binder {
 			public void onClick(final ClickEvent event) {
 				pmContext.clientDolphin.send(PMConstants.CMD_ECHO);
 				// Just to demonstrate findAttributeById
-				JSLogger.log("*** Attribute Value from ModelStore = " + pmContext.findAttribute(pmContext.getTextAttribute().getId()).getValue());
+				JSLogger.log("*** Attribute Value from ModelStore = " + pmContext.clientDolphin.findAttributeById(pmContext.getTextAttribute().getId()).getValue());
 			}
 		});
 
@@ -77,8 +77,8 @@ public class Binder {
 
 			public void onClick(final ClickEvent event) {
 
-				ClientDolphinTester.testClientDolphinRoutines(pmContext);
 				ClientAttributeTester.testClientAttributeRoutines(pmContext);
+				ClientDolphinTester.testClientDolphinRoutines(pmContext);
 				ClientModelStoreTester.testAll(pmContext);
 				ClientPresentationModelTester.testAll(pmContext);
 

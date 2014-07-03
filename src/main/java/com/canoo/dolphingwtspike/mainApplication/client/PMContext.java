@@ -17,10 +17,6 @@ public class PMContext {
 		return this;
 	}
 
-	public ClientAttribute findAttribute(String attrId) {
-		return clientDolphin.getClientModelStore().findAttributeById(attrId);
-
-	}
 	public ClientAttribute getTextAttribute() {
        return pm.getAt(PMConstants.TEXT_ATTR_ID);
 	}
