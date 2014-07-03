@@ -23,7 +23,8 @@ public class PresentationModelJS extends JavaScriptObject
 		return this.attributes;
 	}-*/;
 	public final native ClientAttributeJS getAt(String propertyName)/*-{
-		return this.getAt(propertyName, undefined);
+		var js = this.getAt(propertyName, undefined);
+		return js === undefined ? null : js;
 	}-*/;
 	public final native ClientAttributeJS getAt(String propertyName, String tag)/*-{
 		return this.getAt(propertyName, tag);

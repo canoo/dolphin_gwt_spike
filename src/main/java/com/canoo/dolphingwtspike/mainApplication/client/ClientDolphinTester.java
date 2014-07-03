@@ -25,6 +25,7 @@ public class ClientDolphinTester {
 		deletePM_test(pmContext);
 		deleteAllPresentationModelsByType_test(pmContext);
 		tag_test(pmContext);
+		addAttributeToModel_test(pmContext);
 	}
 
 	private static void presentation_model_getAt_test(PMContext pmContext) {
@@ -163,4 +164,20 @@ public class ClientDolphinTester {
 		assertEquals("tagging attribute worked", tagValue, pm.getAt(TEXT_ATTR_ID, tag_name).getValue());
 	}
 
+	private static void addAttributeToModel_test(PMContext pmContext) {
+		JSLogger.log("--- addAttributeToModel ---");
+
+		String pmId = "addAttributeToModel_pmId";
+		String propertyName = "my_prop";
+
+		PresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		ClientAttribute foundAttribute = pm.getAt(propertyName);
+		assertNull("attribute not on pm yet", foundAttribute);
+
+		ClientAttribute ca = pmContext.clientDolphin.attribute(propertyName, "qualifier", "value");
+		pmContext.clientDolphin.addAttributeToModel(pm, ca);
+		foundAttribute = pm.getAt(propertyName);
+		assertNotNull("attribute attached to pm", foundAttribute);
+		assertNotNull("attribute has Id", foundAttribute.getId());
+	}
 }

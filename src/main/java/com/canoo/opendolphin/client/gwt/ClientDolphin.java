@@ -106,6 +106,9 @@ public class ClientDolphin {
 		return getClientModelStore().findAttributeById(id);
 	}
 
+	public void addAttributeToModel(PresentationModel pm, ClientAttribute attribute) {
+		clientDolphinJS.addAttributeToModel(pm.pmJS, attribute.getClientAttributeJS());
+	}
 	public void startPushListening(String pushActionName, String releaseActionName) {
 		clientDolphinJS.startPushListening(pushActionName, releaseActionName);
 	}

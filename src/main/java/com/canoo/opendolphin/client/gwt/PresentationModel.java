@@ -36,7 +36,7 @@ public class PresentationModel {
 
 	public ClientAttribute getAt(String propertyName) {
 		ClientAttributeJS attributeJS = pmJS.getAt(propertyName);
-		return new ClientAttribute(attributeJS); // TODO: is it OK to return a new instance of ClientAttribute? pro: reuse of open-dolphin code, contra: new instance
+		return attributeJS == null ? null : new ClientAttribute(attributeJS); // TODO: is it OK to return a new instance of ClientAttribute? pro: reuse of open-dolphin code, contra: new instance
 	}
 
 	public ClientAttribute getAt(String propertyName, String tag) {
