@@ -81,7 +81,6 @@ public class ClientDolphinJS extends JavaScriptObject
 		return this.attribute(propertyName, qualifier, value, tag);
 	}-*/;
 	public final native void addAttributeToModel(PresentationModelJS pmJS, ClientAttributeJS attributeJS) /*-{
-		console.log("1");
 		this.addAttributeToModel(pmJS, attributeJS);
 	}-*/;
 	public final native void startPushListening(String pushActionName, String releaseActionName) /*-{
