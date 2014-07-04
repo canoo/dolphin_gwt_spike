@@ -2,6 +2,8 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.ClientAttribute;
+import com.canoo.opendolphin.client.gwt.ModelStoreChangeEventType;
+import com.canoo.opendolphin.client.gwt.ModelStoreChangeHandler;
 import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
 
@@ -26,6 +28,7 @@ public class ClientDolphinTester {
 		deleteAllPresentationModelsByType_test(pmContext);
 		tag_test(pmContext);
 		addAttributeToModel_test(pmContext);
+		addModelStoreListener_test(pmContext);
 	}
 
 	private static void presentation_model_getAt_test(PMContext pmContext) {
@@ -179,5 +182,33 @@ public class ClientDolphinTester {
 		foundAttribute = pm.getAt(propertyName);
 		assertNotNull("attribute attached to pm", foundAttribute);
 		assertNotNull("attribute has Id", foundAttribute.getId());
+	}
+
+	private static void addModelStoreListener_test(PMContext pmContext) {
+		JSLogger.log("--- addModelStoreListener ---");
+
+		String pmId = "addModelStoreListener_pmId";
+		String propertyName = "my_prop";
+
+		final String[] actuals = new String[2];
+
+		pmContext.clientDolphin.addModelStoreListener(new ModelStoreChangeHandler() {
+			@Override
+			public void handleChange(ModelStoreChangeEventType changeType, PresentationModel pm) {
+				actuals[0] = changeType.getTypeValue();
+				actuals[1] = pm.getId();
+			}
+		});
+		PresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		assertEquals("ADDED event received", "ADDED", actuals[0]);
+		assertEquals("added pm received", pmId, actuals[1]);
+
+		// clean actuals for next test:
+		actuals[0] = "";
+		actuals[1] = "";
+
+		pmContext.clientDolphin.deletePresentationModel(pm);
+		assertEquals("REMOVED event received", "REMOVED", actuals[0]);
+		assertEquals("removed pm received", pmId, actuals[1]);
 	}
 }

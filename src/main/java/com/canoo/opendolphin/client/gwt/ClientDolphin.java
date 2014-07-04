@@ -109,6 +109,11 @@ public class ClientDolphin {
 	public void addAttributeToModel(PresentationModel pm, ClientAttribute attribute) {
 		clientDolphinJS.addAttributeToModel(pm.pmJS, attribute.getClientAttributeJS());
 	}
+
+	public void addModelStoreListener(ModelStoreChangeHandler handler) {
+		getClientModelStore().addModelStoreListener(handler);
+	}
+
 	public void startPushListening(String pushActionName, String releaseActionName) {
 		clientDolphinJS.startPushListening(pushActionName, releaseActionName);
 	}

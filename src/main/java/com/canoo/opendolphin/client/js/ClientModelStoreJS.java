@@ -13,5 +13,10 @@ public class ClientModelStoreJS extends JavaScriptObject
 		return (result === undefined) ? null : result;
 	}-*/;
 
+	public final native void addModelStoreListener(ModelStoreChangeHandlerJS handler) /*-{
+		this.onModelStoreChange(function (event)  {
+			handler.@com.canoo.opendolphin.client.js.ModelStoreChangeHandlerJS::handleChange(Ljava/lang/String;Lcom/canoo/opendolphin/client/js/PresentationModelJS;)(event.eventType, event.clientPresentationModel);
+		} );
+	}-*/;
 }
 

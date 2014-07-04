@@ -1,7 +1,6 @@
 package com.canoo.opendolphin.client.gwt;
 
-import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.ClientModelStoreJS;
+import com.canoo.opendolphin.client.js.*;
 
 public class ClientModelStore {
 
@@ -16,4 +15,24 @@ public class ClientModelStore {
 		return clientAttributeJS == null ? null : new ClientAttribute(clientAttributeJS);
     }
 
+
+	public void addModelStoreListener(ModelStoreChangeHandler handler) {
+		clientModelStoreJS.addModelStoreListener(new ModelStoreChangeHandlerAdapter(handler));
+	}
+
+// === private stuff ===
+
+	private static class ModelStoreChangeHandlerAdapter implements ModelStoreChangeHandlerJS {
+		private final ModelStoreChangeHandler handler;
+
+		public ModelStoreChangeHandlerAdapter(ModelStoreChangeHandler handler) {
+			this.handler = handler;
+		}
+
+		@Override
+		public void handleChange(String changeType, PresentationModelJS pmJS) {
+			ModelStoreChangeEventType ct = ModelStoreChangeEventType.fromTypeValue(changeType);
+			handler.handleChange(ct, new PresentationModel(pmJS));
+		}
+	}
 }
