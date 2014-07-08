@@ -32,5 +32,8 @@ public class ClientPresentationModelJS extends JavaScriptObject
 	public final native boolean isDirty()/*-{
 		return this.isDirty();
 	}-*/;
+	public final native boolean rebase()/*-{
+		return this.rebase();
+	}-*/;
 
 }

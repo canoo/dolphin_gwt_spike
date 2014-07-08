@@ -45,4 +45,7 @@ public class ClientPresentationModel {
 	public boolean isDirty() {
 		return pmJS.isDirty();
 	}
+	public void rebase() {
+		pmJS.rebase();
+	}
 }
