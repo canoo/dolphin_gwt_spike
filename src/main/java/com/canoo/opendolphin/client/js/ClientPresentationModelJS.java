@@ -3,11 +3,11 @@ package com.canoo.opendolphin.client.js;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
-public class PresentationModelJS extends JavaScriptObject
+public class ClientPresentationModelJS extends JavaScriptObject
 {
-	protected PresentationModelJS(){}
+	protected ClientPresentationModelJS(){}
 
-	public static final native PresentationModelJS newPresentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
+	public static final native ClientPresentationModelJS newPresentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
 		return clientDolphin.presentationModel(pmId, type, clientAttributesJS);
 	}-*/;
 

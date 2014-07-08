@@ -30,7 +30,7 @@ public class ClientModelStore {
 		}
 
 		@Override
-		public void handleChange(String changeType, PresentationModelJS pmJS) {
+		public void handleChange(String changeType, ClientPresentationModelJS pmJS) {
 			ModelStoreChangeEventType ct = ModelStoreChangeEventType.fromTypeValue(changeType);
 			handler.handleChange(ct, new ClientPresentationModel(pmJS));
 		}

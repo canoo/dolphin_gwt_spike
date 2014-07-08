@@ -38,10 +38,10 @@ public class ClientDolphinJS extends JavaScriptObject
 		return result;
 	}-*/;
 
-	public final native PresentationModelJS presentationModel(String pmId, String[] attributeNames) /*-{
+	public final native ClientPresentationModelJS presentationModel(String pmId, String[] attributeNames) /*-{
 		return this.presentationModel(pmId, attributeNames);
 	}-*/;
-	public final native PresentationModelJS presentationModel(String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
+	public final native ClientPresentationModelJS presentationModel(String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
 		return this.presentationModel(pmId, type, clientAttributesJS);
 	}-*/;
 
@@ -54,33 +54,33 @@ public class ClientDolphinJS extends JavaScriptObject
 	public final native String[] listPresentationModelIds() /*-{
 		return this.listPresentationModelIds();
 	}-*/;
-	public final native PresentationModelJS[] listPresentationModels() /*-{
+	public final native ClientPresentationModelJS[] listPresentationModels() /*-{
 		return this.listPresentationModels();
 	}-*/;
-	public final native PresentationModelJS[] findAllPresentationModelsByType(String pmType) /*-{
+	public final native ClientPresentationModelJS[] findAllPresentationModelsByType(String pmType) /*-{
 		return this.findAllPresentationModelByType(pmType);
 	}-*/;
-	public final native PresentationModelJS getAt(String pmId) /*-{
+	public final native ClientPresentationModelJS getAt(String pmId) /*-{
 		var pm = this.getAt(pmId);
 		return (pm === undefined) ? null : pm;
 	}-*/;
-	public final native PresentationModelJS findPresentationModelById(String pmId) /*-{
+	public final native ClientPresentationModelJS findPresentationModelById(String pmId) /*-{
 		var pm = this.findPresentationModelById(pmId);
 		return (pm === undefined) ? null : pm;
 	}-*/;
-	public final native void deletePresentationModel(PresentationModelJS pmJS) /*-{
+	public final native void deletePresentationModel(ClientPresentationModelJS pmJS) /*-{
 		this.deletePresentationModel(pmJS);
 	}-*/;
 	public final native void deleteAllPresentationModelsOfType(String pmType) /*-{
 		this.deleteAllPresentationModelOfType(pmType);
 	}-*/;
-	public final native void tag(PresentationModelJS pmJS, String propertyName, Object value, String tag) /*-{
+	public final native void tag(ClientPresentationModelJS pmJS, String propertyName, Object value, String tag) /*-{
 		this.tag(pmJS, propertyName, value, tag);
 	}-*/;
 	public final native ClientAttributeJS attribute(String propertyName, String qualifier, Object value, String tag) /*-{
 		return this.attribute(propertyName, qualifier, value, tag);
 	}-*/;
-	public final native void addAttributeToModel(PresentationModelJS pmJS, ClientAttributeJS attributeJS) /*-{
+	public final native void addAttributeToModel(ClientPresentationModelJS pmJS, ClientAttributeJS attributeJS) /*-{
 		this.addAttributeToModel(pmJS, attributeJS);
 	}-*/;
 	public final native void startPushListening(String pushActionName, String releaseActionName) /*-{

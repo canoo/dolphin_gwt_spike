@@ -25,18 +25,18 @@ Binding Java <-> JS
   e.g.: Dolphin.java -> DolphinJS.java
 
 - ClientDolphin.presentationModel()  (ClientDolphin.java):
-    PresentationModelJS presentationModelJS = PresentationModelJS.newPresentationModelJS(...)
-    return new PresentationModel(presentationModelJS)
+    ClientPresentationModelJS presentationModelJS = ClientPresentationModelJS.newPresentationModelJS(...)
+    return new ClientPresentationModel(presentationModelJS)
 
 - public class PresentationModel {
-  	private final PresentationModelJS pmJS;
+  	private final ClientPresentationModelJS pmJS;
   	...
   }
-- public class PresentationModelJS extends JavaScriptObject
+- public class ClientPresentationModelJS extends JavaScriptObject
   {
   	...
 
-  	public static final native PresentationModelJS newPresentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
+  	public static final native ClientPresentationModelJS newPresentationModelJS(ClientDolphinJS clientDolphin, String pmId, String type, JsArray<ClientAttributeJS> clientAttributesJS) /*-{
   		return clientDolphin.presentationModel(pmId, type, clientAttributesJS);
   	}-*/;
 

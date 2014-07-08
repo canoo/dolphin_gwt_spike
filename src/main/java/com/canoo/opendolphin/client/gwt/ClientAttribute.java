@@ -1,7 +1,7 @@
 package com.canoo.opendolphin.client.gwt;
 
 import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.PresentationModelJS;
+import com.canoo.opendolphin.client.js.ClientPresentationModelJS;
 
 public class ClientAttribute {
 
@@ -55,7 +55,7 @@ public class ClientAttribute {
 		clientAttributeJS.reset();
 	}
 	public ClientPresentationModel getPresentationModel() {
-		PresentationModelJS pmJS = clientAttributeJS.getPresentationModel();
+		ClientPresentationModelJS pmJS = clientAttributeJS.getPresentationModel();
 		return pmJS == null ? null : new ClientPresentationModel(pmJS);
 	}
 	public void setPresentationModel(ClientPresentationModel pm) {

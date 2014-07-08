@@ -46,11 +46,11 @@ public class ClientAttributeJS extends JavaScriptObject
 	public final native void reset()/*-{
 		return this.reset();
 	}-*/;
-	public final native PresentationModelJS getPresentationModel()/*-{
+	public final native ClientPresentationModelJS getPresentationModel()/*-{
 		var pm = this.getPresentationModel();
 		return pm === undefined ? null : pm;
 	}-*/;
-	public final native void setPresentationModel(PresentationModelJS pmJS) /*-{
+	public final native void setPresentationModel(ClientPresentationModelJS pmJS) /*-{
 		this.setPresentationModel(pmJS);
 	}-*/;
 	public final native void setQualifier(String qualifier) /*-{

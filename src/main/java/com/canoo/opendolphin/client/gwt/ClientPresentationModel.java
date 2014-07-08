@@ -1,18 +1,18 @@
 package com.canoo.opendolphin.client.gwt;
 
 import com.canoo.opendolphin.client.js.ClientAttributeJS;
-import com.canoo.opendolphin.client.js.PresentationModelJS;
+import com.canoo.opendolphin.client.js.ClientPresentationModelJS;
 import com.google.gwt.core.client.JsArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClientPresentationModel {
-	final PresentationModelJS pmJS;
+	final ClientPresentationModelJS pmJS;
 
 	private final List<ClientAttribute> attributes = new ArrayList<ClientAttribute>();
 
-	public ClientPresentationModel(final PresentationModelJS pmJS) {
+	public ClientPresentationModel(final ClientPresentationModelJS pmJS) {
 		this.pmJS = pmJS;
 		JsArray<ClientAttributeJS> clientAttributesJS = pmJS.getClientAttributes();
 		for (int i = 0; i < clientAttributesJS.length(); i++) {

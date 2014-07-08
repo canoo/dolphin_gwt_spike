@@ -56,7 +56,7 @@ public class ClientDolphin {
 			jsAttributes.push(clientAttribute.getClientAttributeJS());
 		}
 
-		PresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, type, jsAttributes);
+		ClientPresentationModelJS presentationModelJS = clientDolphinJS.presentationModel(id, type, jsAttributes);
 		return new ClientPresentationModel(presentationModelJS);
 	}
 
@@ -71,20 +71,20 @@ public class ClientDolphin {
 	}
 
 	public List<ClientPresentationModel> listPresentationModels() {
-		PresentationModelJS[] pms = clientDolphinJS.listPresentationModels();
+		ClientPresentationModelJS[] pms = clientDolphinJS.listPresentationModels();
 		return pmJSArrayAsPMList(pms);
 	}
 	public List<ClientPresentationModel> findAllPresentationModelsByType(String pmType) {
-		PresentationModelJS[] pms = clientDolphinJS.findAllPresentationModelsByType(pmType);
+		ClientPresentationModelJS[] pms = clientDolphinJS.findAllPresentationModelsByType(pmType);
 		return pmJSArrayAsPMList(pms);
 	}
 
 	public ClientPresentationModel getAt(String pmId) {
-		PresentationModelJS pmJS = clientDolphinJS.getAt(pmId);
+		ClientPresentationModelJS pmJS = clientDolphinJS.getAt(pmId);
 		return pmJS == null ? null : new ClientPresentationModel(pmJS);
 	}
 	public ClientPresentationModel findPresentationModelById(String pmId) {
-		PresentationModelJS pm = clientDolphinJS.findPresentationModelById(pmId);
+		ClientPresentationModelJS pm = clientDolphinJS.findPresentationModelById(pmId);
 		return pm == null ? null : new ClientPresentationModel(pm);
 	}
 
@@ -123,9 +123,9 @@ public class ClientDolphin {
 
 	// --- private routines ---
 
-	private List<ClientPresentationModel> pmJSArrayAsPMList(PresentationModelJS[] pms) {
+	private List<ClientPresentationModel> pmJSArrayAsPMList(ClientPresentationModelJS[] pms) {
 		List<ClientPresentationModel> result = new ArrayList<ClientPresentationModel>(pms.length);
-		for (PresentationModelJS pm : pms) {
+		for (ClientPresentationModelJS pm : pms) {
 			result.add(new ClientPresentationModel(pm));
 		}
 		return result;
@@ -139,7 +139,7 @@ public class ClientDolphin {
 		}
 
 		@Override
-		public void handlePresentationModels(final JsArray<PresentationModelJS> jsPMs) {
+		public void handlePresentationModels(final JsArray<ClientPresentationModelJS> jsPMs) {
 			List<ClientPresentationModel> pms = new ArrayList<ClientPresentationModel>(jsPMs.length());
 			for (int i = 0; i < jsPMs.length(); i++) {
 				pms.add(new ClientPresentationModel(jsPMs.get(i)));
