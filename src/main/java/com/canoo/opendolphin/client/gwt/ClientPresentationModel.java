@@ -48,4 +48,8 @@ public class ClientPresentationModel {
 	public void rebase() {
 		pmJS.rebase();
 	}
+
+	public void addDirtyChangeHandler(BooleanChangeHandler booleanChangeHandler) {
+		pmJS.addDirtyChangeHandler(booleanChangeHandler);
+	}
 }

@@ -1,5 +1,6 @@
 package com.canoo.opendolphin.client.js;
 
+import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 
@@ -34,6 +35,11 @@ public class ClientPresentationModelJS extends JavaScriptObject
 	}-*/;
 	public final native boolean rebase()/*-{
 		return this.rebase();
+	}-*/;
+	public final native void addDirtyChangeHandler(BooleanChangeHandler handler) /*-{
+		this.onDirty(function (data) {
+			handler.@com.canoo.opendolphin.client.gwt.BooleanChangeHandler::handleChange(ZZ)(data.oldValue, data.newValue);
+		});
 	}-*/;
 
 }
