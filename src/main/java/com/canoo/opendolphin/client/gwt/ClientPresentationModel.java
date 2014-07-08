@@ -42,4 +42,7 @@ public class ClientPresentationModel {
 		ClientAttributeJS attributeJS = pmJS.getAt(propertyName, tag);
 		return new ClientAttribute(attributeJS); // TODO: see comment in getAt(String propertyName)
 	}
+	public boolean isDirty() {
+		return pmJS.isDirty();
+	}
 }

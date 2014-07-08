@@ -29,5 +29,8 @@ public class ClientPresentationModelJS extends JavaScriptObject
 	public final native ClientAttributeJS getAt(String propertyName, String tag)/*-{
 		return this.getAt(propertyName, tag);
 	}-*/;
+	public final native boolean isDirty()/*-{
+		return this.isDirty();
+	}-*/;
 
 }
