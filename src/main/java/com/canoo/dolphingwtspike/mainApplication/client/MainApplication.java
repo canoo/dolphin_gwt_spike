@@ -2,14 +2,10 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.ClientDolphin;
-import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
-import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.DolphinLoaderJS;
 import com.canoo.opendolphin.client.gwt.DolphinStarter;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-
-import java.util.List;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>

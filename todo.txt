@@ -1,6 +1,5 @@
 todo:
 =====
-- check packages: gwt.ModelStoreChangeHandler, js.OnFinishedHandler
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - support push
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
@@ -11,11 +10,11 @@ todo:
 
 wip:
 ====
-- modelstore listeners via ClientDolphin API
 
 done:
 =====
-- provide all clientdolphin APIs in gwt adapter: ClientModelStore
+- modelstore listeners via ClientDolphin API
+- provide all clientdolphin APIs in gwt adapter: ClientModelStore (not done since ModelStore should not be published)
 - add ClientDolphin.addAttributeToModel()
 - provide all clientdolphin APIs in gwt adapter: ClientAttribute
 - provide all variants of clientDolphin.presentationModel API

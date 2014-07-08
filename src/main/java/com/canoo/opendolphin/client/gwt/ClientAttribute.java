@@ -54,11 +54,11 @@ public class ClientAttribute {
 	public void reset() {
 		clientAttributeJS.reset();
 	}
-	public PresentationModel getPresentationModel() {
+	public ClientPresentationModel getPresentationModel() {
 		PresentationModelJS pmJS = clientAttributeJS.getPresentationModel();
-		return pmJS == null ? null : new PresentationModel(pmJS);
+		return pmJS == null ? null : new ClientPresentationModel(pmJS);
 	}
-	public void setPresentationModel(PresentationModel pm) {
+	public void setPresentationModel(ClientPresentationModel pm) {
 		clientAttributeJS.setPresentationModel(pm.pmJS);
 	}
 	public void setQualifier(String qualifier) {

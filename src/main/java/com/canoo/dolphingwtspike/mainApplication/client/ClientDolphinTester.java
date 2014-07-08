@@ -2,9 +2,9 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.ClientAttribute;
+import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.gwt.ModelStoreChangeEventType;
 import com.canoo.opendolphin.client.gwt.ModelStoreChangeHandler;
-import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class ClientDolphinTester {
 	private static void presentation_model_getAt_test(PMContext pmContext) {
 		JSLogger.log("--- clientDolphin.getAt() ---");
 
-		PresentationModel pm = pmContext.clientDolphin.getAt(PMConstants.PM_ID);
+		ClientPresentationModel pm = pmContext.clientDolphin.getAt(PMConstants.PM_ID);
 		assertNotNull("getAt(PMConstants.PM_ID) finds PM", pm);
 		assertEquals("getAt(PMConstants.PM_ID) with expected id", PMConstants.PM_ID, pm.getId());
 
@@ -70,7 +70,7 @@ public class ClientDolphinTester {
 		assertNull("findAttributeById() not successful (bc. not bound to pm yet)", foundAttribute);
 
 		String pmId = "findAttributeById_pmId";
-		PresentationModel pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, attribute0);
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, attribute0);
 		foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
 
 		assertEquals("attribute.id correct", attribute0.getId(), foundAttribute.getId());
@@ -85,7 +85,7 @@ public class ClientDolphinTester {
 		String pmId = "presentationModelWithType_pmId";
 		String my_pm_type = "my_pm_type";
 
-		PresentationModel pm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		ClientPresentationModel pm = pmContext.clientDolphin.findPresentationModelById(pmId);
 		assertEquals("findPresentationModelById() at start does not find anything", null, pm);
 
 		pm = pmContext.clientDolphin.presentationModelWithType(pmId, my_pm_type, TEXT_ATTR_ID, RANGE_ATTR_ID);
@@ -107,8 +107,8 @@ public class ClientDolphinTester {
 	private static void findPresentationModelById_test(PMContext pmContext) {
 		JSLogger.log("--- findPresentationModelById ---");
 		String pmId = "findPresentationModelById_pmId";
-		PresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
-		PresentationModel foundPm = pmContext.clientDolphin.findPresentationModelById(pmId);
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		ClientPresentationModel foundPm = pmContext.clientDolphin.findPresentationModelById(pmId);
 		assertTrue("created pm is findable", foundPm != null);
 
 		pm = pmContext.clientDolphin.findPresentationModelById("nonExistingPmId");
@@ -119,7 +119,7 @@ public class ClientDolphinTester {
 		JSLogger.log("--- findAllPresentationModelsByType ---");
 		String pmType = "pm_type_1";
 
-		List<PresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelsByType(pmType);
+		List<ClientPresentationModel> pms = pmContext.clientDolphin.findAllPresentationModelsByType(pmType);
 		assertEquals("findAllPresentationModelsByType() returns one result", 1, pms.size());
 		assertEquals("findAllPresentationModelsByType()[0] is of correct type", pmType, pms.get(0).getPresentationModelType());
 	}
@@ -127,7 +127,7 @@ public class ClientDolphinTester {
 	private static void deletePM_test(PMContext pmContext) {
 		JSLogger.log("--- deletePresentationModel ---");
 
-		PresentationModel pm;
+		ClientPresentationModel pm;
 		String pmId = "pmToDelete";
 		pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, TEXT_ATTR_ID, RANGE_ATTR_ID);
 
@@ -137,7 +137,7 @@ public class ClientDolphinTester {
 	}
 
 	private static void deleteAllPresentationModelsByType_test(PMContext pmContext) {
-		PresentationModel pm;
+		ClientPresentationModel pm;
 		JSLogger.log("--- deleteAllPresentationModelsByType ---");
 
 		String pmId = "pmToDelete";
@@ -151,7 +151,7 @@ public class ClientDolphinTester {
 	}
 
 	private static void tag_test(PMContext pmContext) {
-		PresentationModel pm;
+		ClientPresentationModel pm;
 		JSLogger.log("--- tag ---");
 
 		String pmId = "pmTagId";
@@ -173,7 +173,7 @@ public class ClientDolphinTester {
 		String pmId = "addAttributeToModel_pmId";
 		String propertyName = "my_prop";
 
-		PresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
 		ClientAttribute foundAttribute = pm.getAt(propertyName);
 		assertNull("attribute not on pm yet", foundAttribute);
 
@@ -194,12 +194,12 @@ public class ClientDolphinTester {
 
 		pmContext.clientDolphin.addModelStoreListener(new ModelStoreChangeHandler() {
 			@Override
-			public void handleChange(ModelStoreChangeEventType changeType, PresentationModel pm) {
+			public void handleChange(ModelStoreChangeEventType changeType, ClientPresentationModel pm) {
 				actuals[0] = changeType.getTypeValue();
 				actuals[1] = pm.getId();
 			}
 		});
-		PresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
 		assertEquals("ADDED event received", "ADDED", actuals[0]);
 		assertEquals("added pm received", pmId, actuals[1]);
 

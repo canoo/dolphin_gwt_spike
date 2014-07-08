@@ -7,13 +7,12 @@ import com.google.gwt.core.client.JsArray;
 import java.util.ArrayList;
 import java.util.List;
 
-// todo: rename as ClientPresentationModel
-public class PresentationModel {
+public class ClientPresentationModel {
 	final PresentationModelJS pmJS;
 
 	private final List<ClientAttribute> attributes = new ArrayList<ClientAttribute>();
 
-	public PresentationModel(final PresentationModelJS pmJS) {
+	public ClientPresentationModel(final PresentationModelJS pmJS) {
 		this.pmJS = pmJS;
 		JsArray<ClientAttributeJS> clientAttributesJS = pmJS.getClientAttributes();
 		for (int i = 0; i < clientAttributesJS.length(); i++) {

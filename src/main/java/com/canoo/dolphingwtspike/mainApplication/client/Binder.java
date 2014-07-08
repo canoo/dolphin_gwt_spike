@@ -2,8 +2,8 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
+import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
-import com.canoo.opendolphin.client.gwt.PresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -65,8 +65,8 @@ public class Binder {
 			public void onClick(final ClickEvent event) {
 				pmContext.sendCommand(PMConstants.CMD_ADD, new OnFinishedHandler() {
 					@Override
-					public void handlePresentationModels(final List<PresentationModel> pms) {
-						for (PresentationModel pm : pms) {
+					public void handlePresentationModels(final List<ClientPresentationModel> pms) {
+						for (ClientPresentationModel pm : pms) {
 							view.getListDiv().add(new Label(pm.getPresentationModelType() + ": " + pm.getAttributes().get(0).getValue()));
 						}
 					}

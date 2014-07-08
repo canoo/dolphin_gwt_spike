@@ -3,7 +3,7 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
 import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
 import com.canoo.opendolphin.client.gwt.ClientAttribute;
-import com.canoo.opendolphin.client.gwt.PresentationModel;
+import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.js.JSLogger;
 
 import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.*;
@@ -97,9 +97,9 @@ public class ClientAttributeTester {
 		ClientAttribute ca = pmContext.clientDolphin.attribute(my_property, "qualifier", "value");
 		assertNull("no PM on standalone attribute", ca.getPresentationModel());
 
-		PresentationModel pm = pmContext.clientDolphin.presentationModel("pm_ClientAttribute_pm");
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel("pm_ClientAttribute_pm");
 		ca.setPresentationModel(pm);
-		PresentationModel pm2 = ca.getPresentationModel();
+		ClientPresentationModel pm2 = ca.getPresentationModel();
 		assertNotNull("PM set on attribute", pm2);
 		assertEquals( "...and have the same ids", pm.getId(), pm2.getId());
 	}

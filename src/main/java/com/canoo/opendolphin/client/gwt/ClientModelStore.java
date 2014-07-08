@@ -32,7 +32,7 @@ public class ClientModelStore {
 		@Override
 		public void handleChange(String changeType, PresentationModelJS pmJS) {
 			ModelStoreChangeEventType ct = ModelStoreChangeEventType.fromTypeValue(changeType);
-			handler.handleChange(ct, new PresentationModel(pmJS));
+			handler.handleChange(ct, new ClientPresentationModel(pmJS));
 		}
 	}
 }
