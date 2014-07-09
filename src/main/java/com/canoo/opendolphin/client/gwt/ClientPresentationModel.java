@@ -48,6 +48,10 @@ public class ClientPresentationModel {
 	public ClientAttribute findAttributeByPropertyNameAndTag(String propertyName, String tag) {
 		return getAt(propertyName, tag);
 	}
+	public ClientAttribute findAttributeById(String id) {
+		ClientAttributeJS attributeJS = pmJS.findAttributeById(id);
+		return new ClientAttribute(attributeJS); // TODO: see comment in getAt(String propertyName)
+	}
 	public boolean isDirty() {
 		return pmJS.isDirty();
 	}

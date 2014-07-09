@@ -25,7 +25,7 @@ public class ClientAttribute {
 	public String getId() {
         return clientAttributeJS.getId();
     }
-	public final  String getPropertyName() {
+	public final String getPropertyName() {
 		return clientAttributeJS.getPropertyName();
 	}
 	public final  String getBaseValue() {

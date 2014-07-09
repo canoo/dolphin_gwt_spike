@@ -1,6 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
+import com.canoo.opendolphin.client.gwt.ClientAttribute;
 import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.gwt.PresentationModelInvalidationHandler;
 import com.canoo.opendolphin.client.js.JSLogger;
@@ -16,6 +17,7 @@ class ClientPresentationModelTester {
 		rebase_test(pmContext);
 		onDirtyChange_test(pmContext);
 		addInvalidationHandler_test(pmContext);
+		findAttributeById_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -108,6 +110,17 @@ class ClientPresentationModelTester {
 
 		pm2.getAt(propertyName).setValue("some value");
 		assertEquals("second pm invalidated", pm2.getId(), pms[0].getId());
+	}
+	private static void findAttributeById_test(PMContext pmContext) {
+		JSLogger.log("--- findAttributeById ---");
+
+		String pmId = "clientPM_findAttributeById_pmId";
+		String propertyName = "my_prop";
+
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, propertyName);
+		ClientAttribute ca = pm.getAt(propertyName);
+		String foundId = pm.findAttributeById(ca.getId()).getId();
+		assertEquals("attribute findable by id", ca.getId(), foundId);
 	}
 
 }
