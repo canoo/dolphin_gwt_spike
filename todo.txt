@@ -3,9 +3,7 @@ todo:
 - ClientPresentationModel.syncWith()
 - ClientPresentationModel.findAttributeById()
 - ClientPresentationModel.findAttributeByQualifier()
-- ClientPresentationModel.findAttributeByPropertyNameAndTag()
 - ClientPresentationModel.findAllAttributesByPropertyName()
-- ClientPresentationModel.findAttributeByPropertyName()
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - support push
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
@@ -19,6 +17,8 @@ wip:
 
 done:
 =====
+- ClientPresentationModel.findAttributeByPropertyName()
+- ClientPresentationModel.findAttributeByPropertyNameAndTag()
 - ClientPresentationModel.onInvalidated()
 - ClientPresentationModel.onDirty()
 - modelstore listeners via ClientDolphin API
