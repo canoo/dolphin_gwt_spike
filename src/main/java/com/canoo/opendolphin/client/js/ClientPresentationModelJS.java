@@ -41,5 +41,10 @@ public class ClientPresentationModelJS extends JavaScriptObject
 			handler.@com.canoo.opendolphin.client.gwt.BooleanChangeHandler::handleChange(ZZ)(data.oldValue, data.newValue);
 		});
 	}-*/;
+	public final native void addInvalidationHandler(PresentationModelInvalidationHandlerJS handler) /*-{
+		this.onInvalidated(function (data) {
+			handler.@com.canoo.opendolphin.client.js.PresentationModelInvalidationHandlerJS::handleChange(Lcom/canoo/opendolphin/client/js/ClientPresentationModelJS;)(data.source);
+		});
+	}-*/;
 
 }

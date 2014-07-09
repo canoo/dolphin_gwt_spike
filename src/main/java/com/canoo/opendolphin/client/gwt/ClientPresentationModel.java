@@ -52,4 +52,8 @@ public class ClientPresentationModel {
 	public void addDirtyChangeHandler(BooleanChangeHandler booleanChangeHandler) {
 		pmJS.addDirtyChangeHandler(booleanChangeHandler);
 	}
+	public void addInvalidationHandler(PresentationModelInvalidationHandler handler) {
+		pmJS.addInvalidationHandler(new PresentationModelInvalidationHandlerAdapter(handler));
+	}
+
 }

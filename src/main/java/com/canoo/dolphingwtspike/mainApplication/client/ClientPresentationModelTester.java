@@ -2,6 +2,7 @@ package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
 import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
+import com.canoo.opendolphin.client.gwt.PresentationModelInvalidationHandler;
 import com.canoo.opendolphin.client.js.JSLogger;
 
 import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.*;
@@ -14,6 +15,7 @@ class ClientPresentationModelTester {
 		isDirty_test(pmContext);
 		rebase_test(pmContext);
 		onDirtyChange_test(pmContext);
+		addInvalidationHandler_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -76,6 +78,36 @@ class ClientPresentationModelTester {
 		pm.getAt(propertyName).setValue(null);
 		assertEquals("old dirty true", true, actuals[0]);
 		assertEquals("new dirty false", false, actuals[1]);
+	}
+	private static void addInvalidationHandler_test(PMContext pmContext) {
+		JSLogger.log("--- addInvalidationHandler ---");
+
+		String pmId = "clientPM_addInvalidationHandler_pmId";
+		String pmId2 = "clientPM_addInvalidationHandler_pmId2";
+		String propertyName = "my_prop";
+
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, propertyName);
+		ClientPresentationModel pm2 = pmContext.clientDolphin.presentationModel(pmId2, propertyName);
+
+		final ClientPresentationModel[] pms = new ClientPresentationModel[1];
+
+		PresentationModelInvalidationHandler invalidationHandler = new PresentationModelInvalidationHandler() {
+
+			@Override
+			public void handleChange(ClientPresentationModel pm) {
+				pms[0] = pm;
+			}
+		};
+		pm.addInvalidationHandler(invalidationHandler);
+		pm2.addInvalidationHandler(invalidationHandler);
+
+		assertNull("no pm yet", pms[0]);
+		assertNotNull("at found", pm.getAt(propertyName));
+		pm.getAt(propertyName).setValue("some value");
+		assertEquals("first pm invalidated", pm.getId(), pms[0].getId());
+
+		pm2.getAt(propertyName).setValue("some value");
+		assertEquals("second pm invalidated", pm2.getId(), pms[0].getId());
 	}
 
 }
