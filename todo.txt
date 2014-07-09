@@ -1,7 +1,6 @@
 todo:
 =====
 - ClientPresentationModel.syncWith()
-- ClientPresentationModel.findAttributeByQualifier()
 - ClientPresentationModel.findAllAttributesByPropertyName()
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - support push
@@ -16,6 +15,7 @@ wip:
 
 done:
 =====
+- ClientPresentationModel.findAttributeByQualifier()
 - ClientPresentationModel.findAttributeById()
 - ClientPresentationModel.findAttributeByPropertyName()
 - ClientPresentationModel.findAttributeByPropertyNameAndTag()

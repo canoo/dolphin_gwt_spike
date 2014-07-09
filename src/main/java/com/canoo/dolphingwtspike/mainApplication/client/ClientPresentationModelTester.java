@@ -18,6 +18,7 @@ class ClientPresentationModelTester {
 		onDirtyChange_test(pmContext);
 		addInvalidationHandler_test(pmContext);
 		findAttributeById_test(pmContext);
+		findAttributeByQualifier_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -121,6 +122,20 @@ class ClientPresentationModelTester {
 		ClientAttribute ca = pm.getAt(propertyName);
 		String foundId = pm.findAttributeById(ca.getId()).getId();
 		assertEquals("attribute findable by id", ca.getId(), foundId);
+	}
+	private static void findAttributeByQualifier_test(PMContext pmContext) {
+		JSLogger.log("--- findAttributeByQualifier ---");
+
+		String pmId = "clientPM_findAttributeByQualifier_pmId";
+		String propertyName = "my_prop";
+		String qualifier = "my_qualifier";
+
+		ClientAttribute attribute = pmContext.clientDolphin.attribute(propertyName, qualifier, "value");
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId);
+		pmContext.clientDolphin.addAttributeToModel(pm, attribute);
+
+		String foundId = pm.findAttributeByQualifier(qualifier).getId();
+		assertEquals("attribute findable by id", attribute.getId(), foundId);
 	}
 
 }

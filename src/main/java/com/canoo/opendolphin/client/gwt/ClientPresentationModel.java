@@ -52,6 +52,10 @@ public class ClientPresentationModel {
 		ClientAttributeJS attributeJS = pmJS.findAttributeById(id);
 		return new ClientAttribute(attributeJS); // TODO: see comment in getAt(String propertyName)
 	}
+	public ClientAttribute findAttributeByQualifier(String qualifier) {
+		ClientAttributeJS attributeJS = pmJS.findAttributeByQualifier(qualifier);
+		return new ClientAttribute(attributeJS); // TODO: see comment in getAt(String propertyName)
+	}
 	public boolean isDirty() {
 		return pmJS.isDirty();
 	}
