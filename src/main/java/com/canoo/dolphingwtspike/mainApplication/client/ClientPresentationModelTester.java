@@ -25,6 +25,7 @@ class ClientPresentationModelTester {
 		findAllAttributesByPropertyName_test(pmContext);
 		syncWith_test(pmContext);
 		syncWith_qualifier_test(pmContext);
+		errorhandling_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -221,9 +222,9 @@ class ClientPresentationModelTester {
 		assertNull("targetPM.propertyName1(tag2) still has old value", targetPM.getAt(propertyName1, tag2).getValue());
 	}
 	private static void errorhandling_test(PMContext pmContext) {
-		JSLogger.log("--- findAllAttributesByPropertyName ---");
+		JSLogger.log("--- errorhandling ---");
 
-		String pmId = "clientPM_findAllAttributesByPropertyName_pmId";
+		String pmId = "clientPM_errorhandling_pmId";
 		String propertyName = "my_prop1";
 		String qualifier = "my_qualifier";
 		String tag1 = "my_tag1";
@@ -234,9 +235,12 @@ class ClientPresentationModelTester {
 		pmContext.clientDolphin.addAttributeToModel(pm, attribute1);
 		ClientAttribute attribute2 = pmContext.clientDolphin.attribute(propertyName, qualifier, "value", tag2);
 
-		// throws error: throw new Error("There already is an attribute with qualifier: " + attribute.getQualifier() + " in presentation model with id: " + this.id);
-		// todo (Sven 10.07.14): how can it be handled?
-		pmContext.clientDolphin.addAttributeToModel(pm, attribute2);
+		try {
+			pmContext.clientDolphin.addAttributeToModel(pm, attribute2);
+			JSLogger.log("NOK: exception expected");
+		} catch (Exception e) {
+			assertTrue("caught expected exception", e.getMessage().contains("Error: There already is an attribute with qualifier: " + qualifier + " in presentation model with id: " + pmId + ""));
+		}
 
 	}
 
