@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
+define(["require", "exports", "dolphin/Command"], function(require, exports, cmd) {
     (function (dolphin) {
         var PresentationModelResetedCommand = (function (_super) {
             __extends(PresentationModelResetedCommand, _super);
@@ -12,7 +12,7 @@ define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
                 _super.call(this);
                 this.pmId = pmId;
                 this.id = 'PresentationModelReseted';
-                this.className = "org.opendolphin.core.comm.PresentationModelResetedCommand";
+                this.className = "org.opendolphin.core.dolphin.PresentationModelResetedCommand";
             }
             return PresentationModelResetedCommand;
         })(cmd.dolphin.Command);

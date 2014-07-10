@@ -1,4 +1,4 @@
-define(["require", "exports", 'comm/ClientDolphin', 'comm/ClientModelStore', 'comm/ClientConnector', 'comm/NoTransmitter', 'comm/HttpTransmitter'], function(require, exports, dol, mst, cc, ntm, htm) {
+define(["require", "exports", 'dolphin/ClientDolphin', 'dolphin/ClientModelStore', 'dolphin/ClientConnector', 'dolphin/NoTransmitter', 'dolphin/HttpTransmitter'], function(require, exports, dol, mst, cc, ntm, htm) {
     /**
     * JS-friendly facade to avoid too many dependencies in plain JS code.
     * The name of this file is also used for the initial lookup of the

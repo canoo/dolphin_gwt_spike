@@ -1,4 +1,4 @@
-define(["require", "exports", "comm/EventBus", "comm/Tag"], function(require, exports, bus, tags) {
+define(["require", "exports", "dolphin/EventBus", "dolphin/Tag"], function(require, exports, bus, tags) {
     (function (dolphin) {
         var presentationModelInstanceCount = 0;
 

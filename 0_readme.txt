@@ -52,9 +52,9 @@ Binding Java <-> JS
        	}-*/;
       -> Dolphin.js:
          define([
-             'comm/ClientDolphin',
-             'comm/ClientModelStore',
-             'comm/HttpClientConnector'
+             'dolphin/ClientDolphin',
+             'dolphin/ClientModelStore',
+             'dolphin/HttpClientConnector'
          ], function (ClientDolphin, ClientModelStore, HttpClientConnector) {
 
              return function(serverUrl) { // <========= call from DolphinJS.java receiving 'url'

@@ -1,4 +1,4 @@
-define(["require", "exports", "comm/NamedCommand", "comm/SignalCommand", "comm/EmptyNotification", "comm/ClientPresentationModel", "comm/ClientAttribute", "comm/AttributeCreatedNotification"], function(require, exports, namedCmd, signlCmd, emptyNot, pm, ca, acn) {
+define(["require", "exports", "dolphin/NamedCommand", "dolphin/SignalCommand", "dolphin/EmptyNotification", "dolphin/ClientPresentationModel", "dolphin/ClientAttribute", "dolphin/AttributeCreatedNotification"], function(require, exports, namedCmd, signlCmd, emptyNot, pm, ca, acn) {
 	(function (dolphin) {
 		var ClientDolphin = (function () {
 			function ClientDolphin() {

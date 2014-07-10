@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "comm/Command", "comm/Tag"], function(require, exports, cmd, tags) {
+define(["require", "exports", "dolphin/Command", "dolphin/Tag"], function(require, exports, cmd, tags) {
     (function (dolphin) {
         var AttributeCreatedNotification = (function (_super) {
             __extends(AttributeCreatedNotification, _super);
@@ -18,7 +18,7 @@ define(["require", "exports", "comm/Command", "comm/Tag"], function(require, exp
                 this.qualifier = qualifier;
                 this.tag = tag;
                 this.id = 'AttributeCreated';
-                this.className = "org.opendolphin.core.comm.AttributeCreatedNotification";
+                this.className = "org.opendolphin.core.dolphin.AttributeCreatedNotification";
             }
             return AttributeCreatedNotification;
         })(cmd.dolphin.Command);

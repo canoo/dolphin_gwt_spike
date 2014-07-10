@@ -1,4 +1,4 @@
-define(["require", "exports", "comm/ClientPresentationModel", "comm/CommandBatcher", "comm/Codec", "comm/ClientAttribute", "comm/Tag"], function(require, exports, cpm, cb, cod, ca, tags) {
+define(["require", "exports", "dolphin/ClientPresentationModel", "dolphin/CommandBatcher", "dolphin/Codec", "dolphin/ClientAttribute", "dolphin/Tag"], function(require, exports, cpm, cb, cod, ca, tags) {
     (function (dolphin) {
         var ClientConnector = (function () {
             function ClientConnector(transmitter, clientDolphin, slackMS) {

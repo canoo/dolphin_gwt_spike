@@ -1,20 +1,20 @@
 todo:
 =====
-- provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
-- support push
+- change name of 'comm' package
+- add errorhandling (how?)
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
 - separate client and server parts into separate projects/multi module build (client,server,shared) ?
 - combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances ?
 - Binding/fluent API ?
 - which APIs are public and which are not ?
-- change name of 'comm' package
-- add errorhandling (how?)
 
 wip:
 ====
 
 done:
 =====
+- support push
+- provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - ClientPresentationModel.syncWith()
 - ClientPresentationModel.findAllAttributesByPropertyName()
 - ClientPresentationModel.findAttributeByQualifier()

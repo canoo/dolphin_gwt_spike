@@ -4,14 +4,14 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
+define(["require", "exports", "dolphin/Command"], function(require, exports, cmd) {
     (function (dolphin) {
         var EmptyNotification = (function (_super) {
             __extends(EmptyNotification, _super);
             function EmptyNotification() {
                 _super.call(this);
                 this.id = "Empty";
-                this.className = "org.opendolphin.core.comm.EmptyNotification";
+                this.className = "org.opendolphin.core.dolphin.EmptyNotification";
             }
             return EmptyNotification;
         })(cmd.dolphin.Command);

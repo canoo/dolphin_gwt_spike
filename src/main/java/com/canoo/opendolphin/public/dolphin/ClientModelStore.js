@@ -1,4 +1,4 @@
-define(["require", "exports", "comm/CreatePresentationModelCommand", "comm/ValueChangedCommand", "comm/ChangeAttributeMetadataCommand", "comm/Attribute", "comm/Map", "comm/DeletedAllPresentationModelsOfTypeNotification", "comm/EventBus", "comm/DeletedPresentationModelNotification", "comm/BaseValueChangedCommand"], function(require, exports, createPMCmd, valueChangedCmd, changeAttMD, attr, map, dpmoftn, bus, dpmn, bvcc) {
+define(["require", "exports", "dolphin/CreatePresentationModelCommand", "dolphin/ValueChangedCommand", "dolphin/ChangeAttributeMetadataCommand", "dolphin/Attribute", "dolphin/Map", "dolphin/DeletedAllPresentationModelsOfTypeNotification", "dolphin/EventBus", "dolphin/DeletedPresentationModelNotification", "dolphin/BaseValueChangedCommand"], function(require, exports, createPMCmd, valueChangedCmd, changeAttMD, attr, map, dpmoftn, bus, dpmn, bvcc) {
 	(function (dolphin) {
 		(function (Type) {
 			Type[Type["ADDED"] = 'ADDED'] = "ADDED";

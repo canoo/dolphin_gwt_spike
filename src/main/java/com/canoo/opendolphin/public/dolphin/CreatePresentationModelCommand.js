@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
 	__.prototype = b.prototype;
 	d.prototype = new __();
 };
-define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
+define(["require", "exports", "dolphin/Command"], function(require, exports, cmd) {
 	(function (dolphin) {
 		var CreatePresentationModelCommand = (function (_super) {
 			__extends(CreatePresentationModelCommand, _super);
@@ -13,7 +13,7 @@ define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
 				this.attributes = [];
 				this.clientSideOnly = false;
 				this.id = "CreatePresentationModel";
-				this.className = "org.opendolphin.core.comm.CreatePresentationModelCommand";
+				this.className = "org.opendolphin.core.dolphin.CreatePresentationModelCommand";
 				this.pmId = presentationModel.id;
 				this.pmType = presentationModel.presentationModelType;
 

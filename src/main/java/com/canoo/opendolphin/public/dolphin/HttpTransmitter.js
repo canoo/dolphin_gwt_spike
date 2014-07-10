@@ -1,4 +1,4 @@
-define(["require", "exports", "comm/Codec"], function(require, exports, cod) {
+define(["require", "exports", "dolphin/Codec"], function(require, exports, cod) {
     (function (dolphin) {
         var HttpTransmitter = (function () {
             function HttpTransmitter(url, reset) {

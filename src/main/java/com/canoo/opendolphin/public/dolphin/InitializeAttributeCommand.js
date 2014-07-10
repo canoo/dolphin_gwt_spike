@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "comm/Command", "comm/Tag"], function(require, exports, cmd, tags) {
+define(["require", "exports", "dolphin/Command", "dolphin/Tag"], function(require, exports, cmd, tags) {
     (function (dolphin) {
         var InitializeAttributeCommand = (function (_super) {
             __extends(InitializeAttributeCommand, _super);
@@ -18,7 +18,7 @@ define(["require", "exports", "comm/Command", "comm/Tag"], function(require, exp
                 this.newValue = newValue;
                 this.tag = tag;
                 this.id = 'InitializeAttribute';
-                this.className = "org.opendolphin.core.comm.InitializeAttributeCommand";
+                this.className = "org.opendolphin.core.dolphin.InitializeAttributeCommand";
             }
             return InitializeAttributeCommand;
         })(cmd.dolphin.Command);

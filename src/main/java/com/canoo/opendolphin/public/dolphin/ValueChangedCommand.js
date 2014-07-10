@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
+define(["require", "exports", "dolphin/Command"], function(require, exports, cmd) {
     (function (dolphin) {
         var ValueChangedCommand = (function (_super) {
             __extends(ValueChangedCommand, _super);
@@ -14,7 +14,7 @@ define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
                 this.oldValue = oldValue;
                 this.newValue = newValue;
                 this.id = "ValueChanged";
-                this.className = "org.opendolphin.core.comm.ValueChangedCommand";
+                this.className = "org.opendolphin.core.dolphin.ValueChangedCommand";
             }
             return ValueChangedCommand;
         })(cmd.dolphin.Command);

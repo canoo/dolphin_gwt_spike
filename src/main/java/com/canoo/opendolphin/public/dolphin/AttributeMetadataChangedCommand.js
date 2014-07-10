@@ -4,7 +4,7 @@ var __extends = this.__extends || function (d, b) {
     __.prototype = b.prototype;
     d.prototype = new __();
 };
-define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
+define(["require", "exports", "dolphin/Command"], function(require, exports, cmd) {
     (function (dolphin) {
         var AttributeMetadataChangedCommand = (function (_super) {
             __extends(AttributeMetadataChangedCommand, _super);
@@ -14,7 +14,7 @@ define(["require", "exports", "comm/Command"], function(require, exports, cmd) {
                 this.metadataName = metadataName;
                 this.value = value;
                 this.id = 'AttributeMetadataChanged';
-                this.className = "org.opendolphin.core.comm.AttributeMetadataChangedCommand";
+                this.className = "org.opendolphin.core.dolphin.AttributeMetadataChangedCommand";
             }
             return AttributeMetadataChangedCommand;
         })(cmd.dolphin.Command);

@@ -1,4 +1,4 @@
-define(["require", "exports", "comm/ValueChangedCommand"], function(require, exports, vcc) {
+define(["require", "exports", "dolphin/ValueChangedCommand"], function(require, exports, vcc) {
     (function (dolphin) {
         /** A Batcher that does no batching but merely takes the first element of the queue as the single item in the batch */
         var NoCommandBatcher = (function () {
@@ -49,7 +49,7 @@ define(["require", "exports", "comm/ValueChangedCommand"], function(require, exp
                 } else {
                     batch.push(candidate);
                 }
-                if (!candidate.handler && !(candidate.command['className'] == "org.opendolphin.core.comm.NamedCommand") && !(candidate.command['className'] == "org.opendolphin.core.comm.EmptyNotification")) {
+                if (!candidate.handler && !(candidate.command['className'] == "org.opendolphin.core.dolphin.NamedCommand") && !(candidate.command['className'] == "org.opendolphin.core.dolphin.EmptyNotification")) {
                     this.processNext(queue, batch); // then we can proceed with batching
                 }
             };
