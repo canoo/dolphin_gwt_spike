@@ -6,6 +6,9 @@ import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.gwt.PresentationModelInvalidationHandler;
 import com.canoo.opendolphin.client.js.JSLogger;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.*;
 
 class ClientPresentationModelTester {
@@ -19,6 +22,7 @@ class ClientPresentationModelTester {
 		addInvalidationHandler_test(pmContext);
 		findAttributeById_test(pmContext);
 		findAttributeByQualifier_test(pmContext);
+		findAllAttributesByPropertyName_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -136,6 +140,48 @@ class ClientPresentationModelTester {
 
 		String foundId = pm.findAttributeByQualifier(qualifier).getId();
 		assertEquals("attribute findable by id", attribute.getId(), foundId);
+	}
+	private static void findAllAttributesByPropertyName_test(PMContext pmContext) {
+		JSLogger.log("--- findAllAttributesByPropertyName ---");
+
+		String pmId = "clientPM_findAllAttributesByPropertyName_pmId";
+		String propertyName = "my_prop1";
+		String qualifier1 = "my_qualifier1";
+		String qualifier2 = "my_qualifier2";
+		String tag1 = "my_tag1";
+		String tag2 = "my_tag2";
+
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId);
+		ClientAttribute attribute1 = pmContext.clientDolphin.attribute(propertyName, qualifier1, "value", tag1);
+		pmContext.clientDolphin.addAttributeToModel(pm, attribute1);
+		ClientAttribute attribute2 = pmContext.clientDolphin.attribute(propertyName, qualifier2, "value", tag2);
+		pmContext.clientDolphin.addAttributeToModel(pm, attribute2);
+
+		List<ClientAttribute> attributes = pm.findAllAttributesByPropertyName(propertyName);
+		assertEquals("2 attributes found", 2, attributes.size());
+		List<String> tags = Arrays.asList(attributes.get(0).getTag(), attributes.get(1).getTag());
+		assertTrue(tag1 + " found", tags.contains(tag1));
+		assertTrue(tag2 + " found", tags.contains(tag2));
+
+	}
+	private static void errorhandling_test(PMContext pmContext) {
+		JSLogger.log("--- findAllAttributesByPropertyName ---");
+
+		String pmId = "clientPM_findAllAttributesByPropertyName_pmId";
+		String propertyName = "my_prop1";
+		String qualifier = "my_qualifier";
+		String tag1 = "my_tag1";
+		String tag2 = "my_tag2";
+
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId);
+		ClientAttribute attribute1 = pmContext.clientDolphin.attribute(propertyName, qualifier, "value", tag1);
+		pmContext.clientDolphin.addAttributeToModel(pm, attribute1);
+		ClientAttribute attribute2 = pmContext.clientDolphin.attribute(propertyName, qualifier, "value", tag2);
+
+		// throws error: throw new Error("There already is an attribute with qualifier: " + attribute.getQualifier() + " in presentation model with id: " + this.id);
+		// todo (Sven 10.07.14): how can it be handled?
+		pmContext.clientDolphin.addAttributeToModel(pm, attribute2);
+
 	}
 
 }

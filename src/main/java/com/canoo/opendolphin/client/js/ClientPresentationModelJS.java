@@ -36,6 +36,9 @@ public class ClientPresentationModelJS extends JavaScriptObject
 	public final native ClientAttributeJS findAttributeByQualifier(String qualifier)/*-{
 		return this.findAttributeByQualifier(qualifier);
 	}-*/;
+	public final native JsArray<ClientAttributeJS> findAllAttributesByPropertyName(String propertyName)/*-{
+		return this.findAllAttributesByPropertyName(propertyName);
+	}-*/;
 	public final native boolean isDirty()/*-{
 		return this.isDirty();
 	}-*/;

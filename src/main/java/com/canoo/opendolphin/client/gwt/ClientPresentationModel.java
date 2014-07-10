@@ -56,6 +56,10 @@ public class ClientPresentationModel {
 		ClientAttributeJS attributeJS = pmJS.findAttributeByQualifier(qualifier);
 		return new ClientAttribute(attributeJS); // TODO: see comment in getAt(String propertyName)
 	}
+	public List<ClientAttribute> findAllAttributesByPropertyName(String propertyName) {
+		JsArray<ClientAttributeJS> jsAttributes = pmJS.findAllAttributesByPropertyName(propertyName);
+		return clientAttributesFromJSAttributes(jsAttributes);
+	}
 	public boolean isDirty() {
 		return pmJS.isDirty();
 	}
@@ -68,6 +72,17 @@ public class ClientPresentationModel {
 	}
 	public void addInvalidationHandler(PresentationModelInvalidationHandler handler) {
 		pmJS.addInvalidationHandler(new PresentationModelInvalidationHandlerAdapter(handler));
+	}
+
+	// === private ===
+
+	private List<ClientAttribute> clientAttributesFromJSAttributes(JsArray<ClientAttributeJS> jsAttributes) {
+		final List<ClientAttribute> result = new ArrayList<ClientAttribute>();
+		for (int i = 0; i < jsAttributes.length(); i++) {
+			ClientAttributeJS clientAttributeJS = jsAttributes.get(i);
+			result.add(new ClientAttribute(clientAttributeJS));
+		}
+		return result;
 	}
 
 }
