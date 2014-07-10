@@ -56,4 +56,7 @@ public class ClientPresentationModelJS extends JavaScriptObject
 		});
 	}-*/;
 
+	public final native void syncWith(ClientPresentationModelJS pmJS) /*-{
+		this.syncWith(pmJS);
+	}-*/;
 }

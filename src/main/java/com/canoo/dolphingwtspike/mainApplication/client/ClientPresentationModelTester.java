@@ -23,6 +23,8 @@ class ClientPresentationModelTester {
 		findAttributeById_test(pmContext);
 		findAttributeByQualifier_test(pmContext);
 		findAllAttributesByPropertyName_test(pmContext);
+		syncWith_test(pmContext);
+		syncWith_qualifier_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -163,6 +165,60 @@ class ClientPresentationModelTester {
 		assertTrue(tag1 + " found", tags.contains(tag1));
 		assertTrue(tag2 + " found", tags.contains(tag2));
 
+	}
+	private static void syncWith_test(PMContext pmContext) {
+		JSLogger.log("--- syncWith ---");
+
+		String pmId1 = "clientPM_syncWith_pmId1";
+		String pmId2 = "clientPM_syncWith_pmId2";
+		String propertyName1 = "my_prop1";
+		String propertyName2 = "my_prop2";
+
+		ClientPresentationModel sourcePM = pmContext.clientDolphin.presentationModel(pmId1, propertyName1, propertyName2);
+		ClientPresentationModel targetPM = pmContext.clientDolphin.presentationModel(pmId2, propertyName1, propertyName2);
+
+		sourcePM.getAt(propertyName1).setValue("v1");
+		sourcePM.getAt(propertyName2).setValue("v2");
+
+		assertNull("targetPM.propertyName1 still null", targetPM.getAt(propertyName1).getValue());
+		assertNull("targetPM.propertyName2 still null", targetPM.getAt(propertyName2).getValue());
+
+		// when:
+		targetPM.syncWith(sourcePM);
+
+		// then:
+		assertEquals("targetPM.propertyName1 == sourcePM.propertyName1", sourcePM.getAt(propertyName1).getValue(), targetPM.getAt(propertyName1).getValue());
+		assertEquals("targetPM.propertyName2 == sourcePM.propertyName2", sourcePM.getAt(propertyName2).getValue(), targetPM.getAt(propertyName2).getValue());
+
+	}
+	private static void syncWith_qualifier_test(PMContext pmContext) {
+		JSLogger.log("--- syncWith_qualifier ---");
+
+		String pmId1 = "clientPM_syncWith_qualifier_pmId1";
+		String pmId2 = "clientPM_syncWith_qualifier_pmId2";
+		String propertyName1 = "my_prop1";
+		String tag1 = "tag1";
+		String tag2 = "tag2";
+
+		ClientPresentationModel sourcePM = pmContext.clientDolphin.presentationModel(pmId1);
+
+		ClientAttribute att1 = pmContext.clientDolphin.attribute(propertyName1, null, null, tag1);
+		pmContext.clientDolphin.addAttributeToModel(sourcePM, att1);
+
+		ClientPresentationModel targetPM = pmContext.clientDolphin.presentationModel(pmId2);
+		ClientAttribute att21 = pmContext.clientDolphin.attribute(propertyName1, null, null, tag1);
+		ClientAttribute att22 = pmContext.clientDolphin.attribute(propertyName1, null, null, tag2);
+		pmContext.clientDolphin.addAttributeToModel(targetPM, att21);
+		pmContext.clientDolphin.addAttributeToModel(targetPM, att22);
+
+		sourcePM.getAt(propertyName1, tag1).setValue("v1");
+
+		// when:
+		targetPM.syncWith(sourcePM);
+
+		// then:
+		assertEquals("targetPM.propertyName1(tag1) == sourcePM.propertyName1(tag1)", sourcePM.getAt(propertyName1, tag1).getValue(), targetPM.getAt(propertyName1, tag1).getValue());
+		assertNull("targetPM.propertyName1(tag2) still has old value", targetPM.getAt(propertyName1, tag2).getValue());
 	}
 	private static void errorhandling_test(PMContext pmContext) {
 		JSLogger.log("--- findAllAttributesByPropertyName ---");

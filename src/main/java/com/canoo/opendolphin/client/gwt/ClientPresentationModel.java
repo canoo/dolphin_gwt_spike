@@ -67,6 +67,10 @@ public class ClientPresentationModel {
 		pmJS.rebase();
 	}
 
+	public void syncWith(ClientPresentationModel pm) {
+		pmJS.syncWith(pm.pmJS);
+	}
+
 	public void addDirtyChangeHandler(BooleanChangeHandler booleanChangeHandler) {
 		pmJS.addDirtyChangeHandler(booleanChangeHandler);
 	}

@@ -1,6 +1,5 @@
 todo:
 =====
-- ClientPresentationModel.syncWith()
 - provide all clientdolphin APIs in gwt adapter: ClientPresentationModel
 - support push
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
@@ -16,6 +15,7 @@ wip:
 
 done:
 =====
+- ClientPresentationModel.syncWith()
 - ClientPresentationModel.findAllAttributesByPropertyName()
 - ClientPresentationModel.findAttributeByQualifier()
 - ClientPresentationModel.findAttributeById()
