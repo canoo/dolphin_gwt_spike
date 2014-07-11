@@ -7,14 +7,15 @@ todo (next version):
 
 todo:
 =====
-- separate client and server parts into separate projects/multi module build (client,server,shared) ?
 
 
 wip:
 ====
+- publish open-dolphin-gwt module to bintray
 
 done:
 =====
+- moved open-dolphin-gwt into separate module
 - add errorhandling
 - change name of 'comm' package
 - support push
