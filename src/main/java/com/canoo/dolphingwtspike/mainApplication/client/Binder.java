@@ -42,8 +42,6 @@ public class Binder {
 		view.getServerModificationButton().addClickHandler(new ClickHandler() {
 			public void onClick(final ClickEvent event) {
 				pmContext.clientDolphin.send(PMConstants.CMD_ECHO);
-				// Just to demonstrate findAttributeById
-				JSLogger.log("*** Attribute Value from ModelStore = " + pmContext.clientDolphin.findAttributeById(pmContext.getTextAttribute().getId()).getValue());
 			}
 		});
 
