@@ -1,6 +1,6 @@
 todo (next version):
 ====================
-- combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances ?
+- update notes.txt
 - Binding/fluent API ?
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
 - which APIs are public and which are not ?
@@ -11,10 +11,11 @@ todo:
 
 wip:
 ====
-- publish open-dolphin-gwt module to bintray
+- combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances
 
 done:
 =====
+- publish open-dolphin-gwt module to bintray
 - moved open-dolphin-gwt into separate module
 - add errorhandling
 - change name of 'comm' package
