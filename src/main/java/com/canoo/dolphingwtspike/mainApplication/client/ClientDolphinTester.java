@@ -20,8 +20,9 @@ public class ClientDolphinTester {
 
 		presentation_model_getAt_test(pmContext);
 		createClientAttribute_test(pmContext);
-		findAttributeById_test(pmContext);
+		attribute_identity_test(pmContext);
 		createPresentationModel_test(pmContext);
+		createPresentationModel2_test(pmContext);
 		findPresentationModelById_test(pmContext);
 		findAllPresentationModelByType_test(pmContext);
 		deletePM_test(pmContext);
@@ -57,21 +58,32 @@ public class ClientDolphinTester {
 		assertEquals("attribute.qualifier correct", qualifier, attribute.getQualifier());
 		assertEquals("attribute.tag correct", tag, attribute.getTag());
 	}
-	private static void findAttributeById_test(PMContext pmContext) {
-		JSLogger.log("--- findAttributeById ---");
+	private static void attribute_identity_test(PMContext pmContext) {
+		JSLogger.log("--- attribute_identity ---");
 
+		String pmId = "attribute_identity_pmId";
 		String propertyName = "my_propertyName";
 		String qualifier = "my_qualifier";
 		String tag = "my_tag";
 		String value = "my_value";
 
 		ClientAttribute attribute0 = pmContext.clientDolphin.attribute(propertyName, qualifier, value, tag);
+		JSLogger.log("a0: " + attribute0);
 		ClientAttribute foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
 		assertNull("findAttributeById() not successful (bc. not bound to pm yet)", foundAttribute);
 
-		String pmId = "findAttributeById_pmId";
 		ClientPresentationModel pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, attribute0);
 		foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
+		JSLogger.log("foundAttribute: " + foundAttribute);
+		if (attribute0 == foundAttribute) {
+			JSLogger.log("*** a0 == foundAttribute");
+		}
+		else if (attribute0.equals(foundAttribute)) {
+			JSLogger.log("*** a0 equals foundAttribute");
+		}
+		else {
+			JSLogger.log("*** a0 != foundAttribute");
+		}
 
 		assertEquals("attribute.id correct", attribute0.getId(), foundAttribute.getId());
 		assertEquals("attribute.value correct", attribute0.getValue(), foundAttribute.getValue() );
@@ -79,6 +91,15 @@ public class ClientDolphinTester {
 		assertEquals("attribute.tag correct", attribute0.getTag(), foundAttribute.getTag());
 	}
 
+	private static void createPresentationModel2_test(PMContext pmContext) {
+		JSLogger.log("--- createPresentationModel2 ---");
+		String pmId = "presentationModelWithType2_pmId";
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		ClientPresentationModel foundPm = pmContext.clientDolphin.findPresentationModelById(pmId);
+
+		JSLogger.log("pm1: " + pm.toString());
+		JSLogger.log("pm2: " + foundPm.toString());
+	}
 	private static void createPresentationModel_test(PMContext pmContext) {
 		JSLogger.log("--- createPresentationModel ---");
 
