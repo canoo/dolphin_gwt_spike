@@ -69,7 +69,6 @@ public class ClientDolphinTester {
 		String value = "my_value";
 
 		ClientAttribute attribute0 = pmContext.clientDolphin.attribute(propertyName, qualifier, value, tag);
-		JSLogger.log("a0: " + attribute0);
 		ClientAttribute foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
 		assertNull("findAttributeById() not successful (bc. not bound to pm yet)", foundAttribute);
 

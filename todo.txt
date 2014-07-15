@@ -3,7 +3,6 @@ todo (next version):
 
 todo:
 =====
-- remove Adapter classes
 - update notes.txt
 - Binding/fluent API ?
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
@@ -12,10 +11,11 @@ todo:
 
 wip:
 ====
-- combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances
 
 done:
 =====
+- remove Adapter classes
+- combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances
 - publish open-dolphin-gwt module to bintray
 - moved open-dolphin-gwt into separate module
 - add errorhandling
