@@ -23,6 +23,7 @@ public class ClientDolphinTester {
 		attribute_identity_test(pmContext);
 		createPresentationModel_test(pmContext);
 		createPresentationModel2_test(pmContext);
+		pm_identity_test(pmContext);
 		findPresentationModelById_test(pmContext);
 		findAllPresentationModelByType_test(pmContext);
 		deletePM_test(pmContext);
@@ -74,21 +75,17 @@ public class ClientDolphinTester {
 
 		ClientPresentationModel pm = pmContext.clientDolphin.presentationModelWithType(pmId, null, attribute0);
 		foundAttribute = pmContext.clientDolphin.findAttributeById(attribute0.getId());
-		JSLogger.log("foundAttribute: " + foundAttribute);
-		if (attribute0 == foundAttribute) {
-			JSLogger.log("*** a0 == foundAttribute");
-		}
-		else if (attribute0.equals(foundAttribute)) {
-			JSLogger.log("*** a0 equals foundAttribute");
-		}
-		else {
-			JSLogger.log("*** a0 != foundAttribute");
-		}
+		assertTrue("foundAttribute same instance as original attribute", foundAttribute == attribute0);
+	}
 
-		assertEquals("attribute.id correct", attribute0.getId(), foundAttribute.getId());
-		assertEquals("attribute.value correct", attribute0.getValue(), foundAttribute.getValue() );
-		assertEquals("attribute.qualifier correct", attribute0.getQualifier(), foundAttribute.getQualifier());
-		assertEquals("attribute.tag correct", attribute0.getTag(), foundAttribute.getTag());
+	private static void pm_identity_test(PMContext pmContext) {
+		JSLogger.log("--- pm_identity ---");
+
+		String pmId = "pm_identity_pmId";
+
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		ClientPresentationModel foundPM = pmContext.clientDolphin.findPresentationModelById(pmId);
+		assertTrue("foundPM same instance as original pm", pm == foundPM);
 	}
 
 	private static void createPresentationModel2_test(PMContext pmContext) {

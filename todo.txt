@@ -1,12 +1,13 @@
 todo (next version):
 ====================
+
+todo:
+=====
+- remove Adapter classes
 - update notes.txt
 - Binding/fluent API ?
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
 - which APIs are public and which are not ?
-
-todo:
-=====
 
 
 wip:
