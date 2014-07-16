@@ -1,9 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
-import com.canoo.opendolphin.client.gwt.ClientAttribute;
-import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
-import com.canoo.opendolphin.client.gwt.PresentationModelInvalidationHandler;
+import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
+import com.canoo.opendolphin.client.gwt.*;
 import com.canoo.opendolphin.client.js.JSLogger;
 
 import java.util.Arrays;
@@ -26,6 +24,7 @@ class ClientPresentationModelTester {
 		syncWith_test(pmContext);
 		syncWith_qualifier_test(pmContext);
 		errorhandling_test(pmContext);
+		create_pm_on_server_test(pmContext);
 	}
 
 	private static void isDirty_test(PMContext pmContext) {
@@ -241,6 +240,23 @@ class ClientPresentationModelTester {
 		} catch (Exception e) {
 			assertTrue("caught expected exception", e.getMessage().contains("Error: There already is an attribute with qualifier: " + qualifier + " in presentation model with id: " + pmId + ""));
 		}
+
+	}
+	private static void create_pm_on_server_test(final PMContext pmContext) {
+		JSLogger.log("--- create_pm_on_server ---");
+
+		pmContext.clientDolphin.send(PMConstants.CMD_CREATE_PM, new OnFinishedHandler() {
+			@Override
+			public void handlePresentationModels(List<ClientPresentationModel> clientPresentationModels) {
+				assertEquals("One PM created on server side", 1, clientPresentationModels.size());
+				for (ClientPresentationModel presentationModel : clientPresentationModels) {
+					assertEquals("expected PM received in OnFinishedHandler", PMConstants.PM_SERVER_SIDE_CREATED, presentationModel.getId());
+
+					ClientPresentationModel pm = pmContext.clientDolphin.getAt(PMConstants.PM_SERVER_SIDE_CREATED);
+					assertNotNull("server side created PM is findable on client side", pm);
+				}
+			}
+		});
 
 	}
 

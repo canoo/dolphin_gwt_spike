@@ -11,6 +11,7 @@ import org.opendolphin.core.server.action.DolphinServerAction;
 import org.opendolphin.core.server.comm.ActionRegistry;
 import org.opendolphin.core.server.comm.CommandHandler;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class TutorialAction extends DolphinServerAction {
@@ -49,6 +50,14 @@ public class TutorialAction extends DolphinServerAction {
 
 				presentationModel.getAt(PMConstants.TEXT_ATTR_ID).setValue("12");
 				presentationModel.getAt(PMConstants.RANGE_ATTR_ID).setValue("40");
+			}
+		});
+
+		actionRegistry.register(PMConstants.CMD_CREATE_PM, new CommandHandler<Command>() {
+			public void handleCommand(Command command, List<Command> response) {
+
+				DTO dto = new DTO(Arrays.asList(new Slot("p1", "v1"), new Slot("p2", "v2") ));
+				final ServerPresentationModel presentationModel = getServerDolphin().presentationModel(PMConstants.PM_SERVER_SIDE_CREATED, null, dto);
 			}
 		});
 	}
