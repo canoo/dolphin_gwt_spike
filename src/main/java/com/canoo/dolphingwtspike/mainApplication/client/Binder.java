@@ -30,7 +30,7 @@ public class Binder {
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		pmContext.getTextAttribute().addValueChangedHandler(new AttributeChangeHandler() {
+		pmContext.getTextAttribute().addValueChangeHandler(new AttributeChangeHandler() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				view.getLabel().setText(newValue);
@@ -52,7 +52,7 @@ public class Binder {
 			}
 		});
 
-		pmContext.getRangeAttribute().addValueChangedHandler(new AttributeChangeHandler() {
+		pmContext.getRangeAttribute().addValueChangeHandler(new AttributeChangeHandler() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				view.getRangeLabel().setText(newValue);

@@ -125,7 +125,7 @@ public class ClientAttributeTester {
 		final String[] actuals = new String[2];
 
 
-		ca.addValueChangedHandler(new AttributeChangeHandler() {
+		ca.addValueChangeHandler(new AttributeChangeHandler() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				actuals[0] = oldValue;
