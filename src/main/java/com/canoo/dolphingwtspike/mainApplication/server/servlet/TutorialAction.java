@@ -60,6 +60,17 @@ public class TutorialAction extends DolphinServerAction {
 				final ServerPresentationModel presentationModel = getServerDolphin().presentationModel(PMConstants.PM_SERVER_SIDE_CREATED, null, dto);
 			}
 		});
+
+		actionRegistry.register(PMConstants.CMD_CREATE_PMS_WITH_TYPE, new CommandHandler<Command>() {
+			public void handleCommand(Command command, List<Command> response) {
+
+				DTO dto = new DTO(Arrays.asList(new Slot("p1", "v1"), new Slot("p2", "v2") ));
+				ServerPresentationModel presentationModel = getServerDolphin().presentationModel("pm-type-id-1", "my-type", dto);
+				presentationModel = getServerDolphin().presentationModel("pm-type-id-2", "my-type", dto);
+			}
+		});
+
+
 	}
 
 }

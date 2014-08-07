@@ -4,7 +4,6 @@ import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
 import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
 import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
-import com.canoo.opendolphin.client.js.JSLogger;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.KeyUpEvent;
@@ -79,10 +78,12 @@ public class Binder {
 				ClientDolphinTester.testClientDolphinRoutines(pmContext);
 				ClientModelStoreTester.testAll(pmContext);
 				ClientPresentationModelTester.testAll(pmContext);
+				OverallTester.testAll(pmContext);
 
 			}
 		});
 
 	}
+
 
 }

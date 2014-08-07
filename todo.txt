@@ -7,13 +7,15 @@ todo:
 - Binding/fluent API ?
 - move //OD-GWT: start change: in ClientDolphin.js back to OpenDolphin
 - which APIs are public and which are not ?
-
+- DTD version in gwt.xml file prüfen
+- dolphin question: client side only PMs auf server seite erzeugen
 
 wip:
 ====
 
 done:
 =====
+- serverseitig PMs mit typ erzeugen und clientseiting (in onfinishedhandler) wieder mit findByType suchen
 - remove Adapter classes
 - combine Xyz and XyzJS files (e.g. ClientAttribute.java and ClientAttributeJS.java) to avoid having to create superfluous new Xyz instances
 - publish open-dolphin-gwt module to bintray

@@ -10,4 +10,5 @@ public class PMConstants {
 	public static final String CMD_ADD      = "org.opendolphin.demo.Tutorial.add";
 	public static final String CMD_LOAD_INITIAL      = "org.opendolphin.demo.Tutorial.loadInitial";
 	public static final String CMD_CREATE_PM      = "org.opendolphin.demo.Tutorial.createPM";
+	public static final String CMD_CREATE_PMS_WITH_TYPE      = "org.opendolphin.demo.Tutorial.createPMsWithType";
 }
