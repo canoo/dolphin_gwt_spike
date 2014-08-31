@@ -22,7 +22,6 @@ public class ClientDolphinTester {
 		createClientAttribute_test(pmContext);
 		attribute_identity_test(pmContext);
 		createPresentationModel_test(pmContext);
-		createPresentationModel2_test(pmContext);
 		pm_identity_test(pmContext);
 		findPresentationModelById_test(pmContext);
 		findAllPresentationModelByType_test(pmContext);
@@ -87,15 +86,6 @@ public class ClientDolphinTester {
 		assertTrue("foundPM same instance as original pm", pm == foundPM);
 	}
 
-	private static void createPresentationModel2_test(PMContext pmContext) {
-		JSLogger.log("--- createPresentationModel2 ---");
-		String pmId = "presentationModelWithType2_pmId";
-		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
-		ClientPresentationModel foundPm = pmContext.clientDolphin.findPresentationModelById(pmId);
-
-		JSLogger.log("pm1: " + pm.toString());
-		JSLogger.log("pm2: " + foundPm.toString());
-	}
 	private static void createPresentationModel_test(PMContext pmContext) {
 		JSLogger.log("--- createPresentationModel ---");
 
