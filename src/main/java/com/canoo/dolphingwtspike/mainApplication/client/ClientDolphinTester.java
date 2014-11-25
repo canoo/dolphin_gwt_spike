@@ -30,6 +30,7 @@ public class ClientDolphinTester {
 		tag_test(pmContext);
 		addAttributeToModel_test(pmContext);
 		addModelStoreListener_test(pmContext);
+		addModelStoreListenerForType_test(pmContext);
 	}
 
 	private static void presentation_model_getAt_test(PMContext pmContext) {
@@ -217,5 +218,43 @@ public class ClientDolphinTester {
 		pmContext.clientDolphin.deletePresentationModel(pm);
 		assertEquals("REMOVED event received", "REMOVED", actuals[0]);
 		assertEquals("removed pm received", pmId, actuals[1]);
+	}
+	private static void addModelStoreListenerForType_test(PMContext pmContext) {
+		JSLogger.log("--- addModelStoreListenerForType ---");
+
+		String pmId = "addModelStoreListenerForType_pmId";
+		String pmType = "myType";
+		String propertyName = "my_prop";
+
+		final String[] actuals = new String[2];
+
+		pmContext.clientDolphin.addModelStoreListenerForType(pmType, new ModelStoreChangeHandler() {
+			@Override
+			public void handleChange(ModelStoreChangeEventType changeType, ClientPresentationModel pm) {
+				actuals[0] = changeType.getTypeValue();
+				actuals[1] = pm.getId();
+			}
+		});
+		ClientPresentationModel pm = pmContext.clientDolphin.presentationModel(pmId, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		assertNull("no ADDED event received", actuals[0]);
+		assertNull("no added pm received", actuals[1]);
+
+		String pmId2 = pmId + "2";
+		pm = pmContext.clientDolphin.presentationModelWithType(pmId2, "unknownType", TEXT_ATTR_ID, RANGE_ATTR_ID);
+		assertNull("no ADDED event received", actuals[0]);
+		assertNull("no added pm received", actuals[1]);
+
+		String pmId3 = pmId + "3";
+		pm = pmContext.clientDolphin.presentationModelWithType(pmId3, pmType, TEXT_ATTR_ID, RANGE_ATTR_ID);
+		assertEquals("ADDED event received", "ADDED", actuals[0]);
+		assertEquals("added pm received", pmId3, actuals[1]);
+
+		// clean actuals for next test:
+		actuals[0] = null;
+		actuals[1] = null;
+
+		pmContext.clientDolphin.deletePresentationModel(pm);
+		assertEquals("REMOVED event received", "REMOVED", actuals[0]);
+		assertEquals("removed pm received", pmId3, actuals[1]);
 	}
 }
