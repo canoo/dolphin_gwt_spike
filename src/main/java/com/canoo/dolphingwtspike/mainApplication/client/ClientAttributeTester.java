@@ -1,9 +1,6 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
-import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
-import com.canoo.opendolphin.client.gwt.BooleanChangeHandler;
-import com.canoo.opendolphin.client.gwt.ClientAttribute;
-import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
+import com.canoo.opendolphin.client.gwt.*;
 import com.canoo.opendolphin.client.js.JSLogger;
 
 import static com.canoo.dolphingwtspike.mainApplication.client.TestHelper.*;
@@ -125,7 +122,7 @@ public class ClientAttributeTester {
 		final String[] actuals = new String[2];
 
 
-		ca.addValueChangeHandler(new AttributeChangeHandler() {
+		ca.addValueChangeHandler(new ChangeHandler<String>() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				actuals[0] = oldValue;
@@ -146,7 +143,7 @@ public class ClientAttributeTester {
 		final String[] actuals = new String[2];
 
 
-		ca.addQualifierChangeHandler(new AttributeChangeHandler() {
+		ca.addQualifierChangeHandler(new ChangeHandler<String>() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				actuals[0] = oldValue;

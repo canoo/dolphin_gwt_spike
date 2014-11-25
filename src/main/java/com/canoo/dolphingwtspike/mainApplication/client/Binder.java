@@ -1,7 +1,7 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
-import com.canoo.opendolphin.client.gwt.AttributeChangeHandler;
+import com.canoo.opendolphin.client.gwt.ChangeHandler;
 import com.canoo.opendolphin.client.gwt.ClientPresentationModel;
 import com.canoo.opendolphin.client.gwt.OnFinishedHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -29,7 +29,7 @@ public class Binder {
 		});
 		// bind 'textBox' to 'textAttribute' bidirectionally
 		// bind 'label' to 'textAttribute':
-		pmContext.getTextAttribute().addValueChangeHandler(new AttributeChangeHandler() {
+		pmContext.getTextAttribute().addValueChangeHandler(new ChangeHandler<String>() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				view.getLabel().setText(newValue);
@@ -51,7 +51,7 @@ public class Binder {
 			}
 		});
 
-		pmContext.getRangeAttribute().addValueChangeHandler(new AttributeChangeHandler() {
+		pmContext.getRangeAttribute().addValueChangeHandler(new ChangeHandler<String>() {
 			@Override
 			public void handleChange(final String oldValue, final String newValue) {
 				view.getRangeLabel().setText(newValue);
