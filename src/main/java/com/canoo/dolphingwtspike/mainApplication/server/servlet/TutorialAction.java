@@ -24,7 +24,12 @@ public class TutorialAction extends DolphinServerAction {
             public void handleCommand(Command command, List<Command> response) {
 				final ServerPresentationModel presentationModel = getServerDolphin().getAt(PMConstants.PM_ID);
                 final ServerAttribute attribute = presentationModel.getAt(PMConstants.TEXT_ATTR_ID);
-                TutorialAction.this.changeValue(attribute, "Server: " + attribute.getValue());
+				String s = (String) attribute.getValue();
+				System.out.println("*** value (" + s.length() + "): " + s);
+				if (s.length() > 30) {
+					throw new RuntimeException("string too long");
+				}
+				TutorialAction.this.changeValue(attribute, "Server: " + s);
             }
         });
 

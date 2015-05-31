@@ -1,10 +1,10 @@
 package com.canoo.dolphingwtspike.mainApplication.client;
 
 import com.canoo.dolphingwtspike.mainApplication.shared.PMConstants;
-import com.canoo.opendolphin.client.gwt.ClientDolphin;
-import com.canoo.opendolphin.client.gwt.OpenDolphin;
+import com.canoo.opendolphin.client.gwt.*;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>
@@ -23,7 +23,19 @@ public class MainApplication implements EntryPoint {
 
 	public void initialize() {
 		// 1: Bootstrap Dolphin:
-		ClientDolphin clientDolphin = OpenDolphin.dolphin(DOLPHIN_URL, true, 0);
+		DolphinErrorHandler errorHandler = new DolphinErrorHandler() {
+			@Override
+			public void handleError(DolphinErrorEvent evt) {
+				Window.alert("Dolphin received an error from the server: kind: '" + evt.kind + "', url: '" + evt.url + "', httpStatus: '" + evt.httpStatus + "', message: '" + evt.message + "\n\nReloading Page");
+				Window.Location.reload();
+			}
+
+		};
+		ClientDolphin clientDolphin = OpenDolphin.makeDolphin()
+			.url(DOLPHIN_URL)
+			.reset(true)
+			.errorHandler(errorHandler)
+			.build();
 
 		// 2: Initialize PMs:
 		PMContext pmContext = new PMContext().initialize(clientDolphin);
